@@ -4,13 +4,20 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import {
   ANALYTICS_SCREEN,
+  CARD_SCREEN,
   HOME_SCREEN,
   PROFILE_SCREEN,
 } from '../constants/screenRoutes';
-import { FontAwesome } from '@expo/vector-icons';
+import {
+  FontAwesome,
+  Foundation,
+  Ionicons,
+  FontAwesome5,
+} from '@expo/vector-icons';
 import { colors, fonts } from '../constants/globalStyles';
 import AnalyticsScreen from '../screens/AnalyticsScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import CardScreen from '../screens/CardScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,20 +27,17 @@ const TabNavigation = () => {
       screenOptions={{
         // animation: 'slide_from_right',
         headerShown: false,
-        tabBarShowLabel: true,
+        tabBarShowLabel: false,
         tabBarHideOnKeyboard: true,
         tabBarStyle: {
           backgroundColor: '#F6F6F9',
           borderTopWidth: 0,
           position: 'absolute',
           bottom: 0,
-          height: 78,
-          paddingHorizontal: 40,
-          paddingBottom: 20,
-          paddingTop: 5,
-        },
-        tabBarLabelStyle: {
-          fontSize: 10,
+          height: 65,
+          paddingHorizontal: 20,
+          paddingBottom: 15,
+          paddingTop: 15,
         },
         tabBarVisibilityAnimationConfig: {
           //   animation: 'slide_from_right',
@@ -46,23 +50,12 @@ const TabNavigation = () => {
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.iconStyle}>
-              <FontAwesome
+              <Foundation
                 name='home'
-                size={18}
-                color={focused ? colors.primary : '#848484'}
+                size={20}
+                color={focused ? colors.primary : colors.gray}
               />
             </View>
-          ),
-          tabBarLabel: ({ focused }) => (
-            <Text
-              style={{
-                color: focused ? colors.primary : '#848484',
-                fontFamily: fonts.primary,
-                fontSize: 12,
-              }}
-            >
-              Home
-            </Text>
           ),
         }}
       />
@@ -72,23 +65,27 @@ const TabNavigation = () => {
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.iconStyle}>
-              <FontAwesome
-                name='list-ol'
+              <Ionicons
+                name='stats-chart-sharp'
                 size={18}
-                color={focused ? colors.primary : '#848484'}
+                color={focused ? colors.primary : colors.gray}
               />
             </View>
           ),
-          tabBarLabel: ({ focused }) => (
-            <Text
-              style={{
-                color: focused ? colors.primary : '#848484',
-                fontFamily: fonts.primary,
-                fontSize: 12,
-              }}
-            >
-              Order
-            </Text>
+        }}
+      />
+      <Tab.Screen
+        name={CARD_SCREEN}
+        component={CardScreen}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View style={styles.iconStyle}>
+              <FontAwesome
+                name='credit-card-alt'
+                size={18}
+                color={focused ? colors.primary : colors.gray}
+              />
+            </View>
           ),
         }}
       />
@@ -98,23 +95,12 @@ const TabNavigation = () => {
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.iconStyle}>
-              <FontAwesome
-                name='user-o'
+              <FontAwesome5
+                name='user-alt'
                 size={18}
-                color={focused ? colors.primary : '#848484'}
+                color={focused ? colors.primary : colors.gray}
               />
             </View>
-          ),
-          tabBarLabel: ({ focused }) => (
-            <Text
-              style={{
-                color: focused ? colors.primary : '#848484',
-                fontFamily: fonts.primary,
-                fontSize: 12,
-              }}
-            >
-              Profile
-            </Text>
           ),
         }}
       />
