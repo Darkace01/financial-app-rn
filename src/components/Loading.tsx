@@ -4,7 +4,7 @@ import React from 'react';
 
 const Loading = () => {
   return (
-    <SafeAreaView className='justify-center items-center '>
+    <SafeAreaView>
       <ActivityIndicator size={'large'} />
     </SafeAreaView>
   );
