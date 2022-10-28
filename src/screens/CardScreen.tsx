@@ -3,11 +3,7 @@ import React from 'react';
 import TopBar from '../components/TopBar';
 
 const CardScreen = () => {
-  return (
-    <View>
-      <TopBar />
-    </View>
-  );
+  return <View></View>;
 };
 
 export default CardScreen;
