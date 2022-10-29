@@ -1,40 +1,70 @@
 import { View, Text, StyleSheet, Image } from 'react-native';
 import React from 'react';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors, fonts } from '../constants/globalStyles';
+import { AntDesign } from '@expo/vector-icons';
 
 const TopBar = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.leftSection}>
-        <Text style={styles.welcomText}>Welcome Back.</Text>
-        <Text style={styles.nameText}>A. Adedamola</Text>
+      <View style={styles.topSection}>
+        <View style={styles.leftSection}>
+          <Text style={styles.welcomText}>Welcome Back.</Text>
+          <Text style={styles.nameText}>A. Adedamola</Text>
+        </View>
+        <View style={styles.rigthSection}>
+          <Image
+            source={require('../../assets/images/profile.jpg')}
+            style={styles.profileImage}
+          />
+        </View>
       </View>
-      <View style={styles.rigthSection}>
-        <MaterialCommunityIcons
-          name='bell'
-          size={20}
-          style={styles.notificationIcon}
-        />
-        <Image
-          source={require('../../assets/images/profile.jpg')}
-          style={styles.profileImage}
-        />
+      <View style={styles.bottomSection}>
+        <View style={styles.addItem}>
+          <AntDesign name='pluscircle' size={16} style={styles.addItemIcon} />
+          <Text style={styles.addItemText}>Add Item</Text>
+        </View>
       </View>
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
+    paddingHorizontal: 20,
+    paddingTop: 60,
+    paddingBottom: 30,
+    backgroundColor: colors.accent,
+  },
+  topSection: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  bottomSection: {
+    marginVertical: 5,
+  },
+  addItem: {
+    flexDirection: 'row',
+    backgroundColor: colors.accent2,
+    width: 90,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    alignItems: 'center',
+  },
+  addItemIcon: {
+    marginRight: 5,
+    color: colors.white,
+  },
+  addItemText: {
+    fontFamily: fonts.primary,
+    fontSize: 10,
+    color: colors.white,
   },
   leftSection: {
     flexDirection: 'column',
     justifyContent: 'flex-end',
   },
   welcomText: {
-    fontSize: 14,
+    fontSize: 10,
     fontWeight: '300',
     fontFamily: fonts.primary,
     color: colors.gray,
@@ -45,10 +75,10 @@ const styles = StyleSheet.create({
     height: 50,
   },
   nameText: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
     fontFamily: fonts.primary,
-    color: colors.dark,
+    color: colors.white,
   },
   notificationIcon: {
     marginRight: 5,
@@ -57,7 +87,7 @@ const styles = StyleSheet.create({
   profileImage: {
     width: 40,
     height: 40,
-    borderRadius: 10,
+    borderRadius: 50,
   },
 });
 export default TopBar;

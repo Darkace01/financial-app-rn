@@ -7,6 +7,8 @@ export const colors = {
   white: '#FFFFFF',
   black: '#000000',
   dark: '#222222',
+  accent: '#5b24cf',
+  accent2: '#A57FF4',
 };
 
 export const fonts = {
