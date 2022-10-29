@@ -9,6 +9,7 @@ export const colors = {
   dark: '#222222',
   accent: '#5b24cf',
   accent2: '#A57FF4',
+  pageBackground: '#D4D4D4',
 };
 
 export const fonts = {
