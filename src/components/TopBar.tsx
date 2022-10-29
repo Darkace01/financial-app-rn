@@ -10,18 +10,22 @@ const TopBar = () => {
         <View style={styles.leftSection}>
           <Text style={styles.welcomText}>Welcome Back.</Text>
           <Text style={styles.nameText}>A. Adedamola</Text>
+          <View style={styles.bottomSection}>
+            <View style={styles.addItem}>
+              <AntDesign
+                name='pluscircle'
+                size={16}
+                style={styles.addItemIcon}
+              />
+              <Text style={styles.addItemText}>Add Item</Text>
+            </View>
+          </View>
         </View>
         <View style={styles.rigthSection}>
           <Image
             source={require('../../assets/images/profile.jpg')}
             style={styles.profileImage}
           />
-        </View>
-      </View>
-      <View style={styles.bottomSection}>
-        <View style={styles.addItem}>
-          <AntDesign name='pluscircle' size={16} style={styles.addItemIcon} />
-          <Text style={styles.addItemText}>Add Item</Text>
         </View>
       </View>
     </View>
@@ -72,7 +76,7 @@ const styles = StyleSheet.create({
   rigthSection: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 50,
+    alignContent: 'center',
   },
   nameText: {
     fontSize: 20,
@@ -85,8 +89,8 @@ const styles = StyleSheet.create({
     color: colors.dark,
   },
   profileImage: {
-    width: 40,
-    height: 40,
+    width: 50,
+    height: 50,
     borderRadius: 50,
   },
 });

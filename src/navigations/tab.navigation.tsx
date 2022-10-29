@@ -75,21 +75,6 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name={CARD_SCREEN}
-        component={CardScreen}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <View style={styles.iconStyle}>
-              <FontAwesome
-                name='credit-card-alt'
-                size={18}
-                color={focused ? colors.primary : colors.gray}
-              />
-            </View>
-          ),
-        }}
-      />
-      <Tab.Screen
         name={PROFILE_SCREEN}
         component={ProfileScreen}
         options={{
