@@ -4,7 +4,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import {
   ANALYTICS_SCREEN,
-  CARD_SCREEN,
   HOME_SCREEN,
   PROFILE_SCREEN,
 } from '../constants/screenRoutes';
@@ -17,7 +16,6 @@ import {
 import { colors, fonts } from '../constants/globalStyles';
 import AnalyticsScreen from '../screens/AnalyticsScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import CardScreen from '../screens/CardScreen';
 
 const Tab = createBottomTabNavigator();
 
