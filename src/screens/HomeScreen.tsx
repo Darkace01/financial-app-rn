@@ -15,9 +15,9 @@ import Chart from '../components/Chart';
 const screenWidth = Dimensions.get('window').width;
 const HomeScreen = () => {
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView className={`bg-[${colors.pageBackground}] h-full w-full`}>
       <TopBar />
-      <View style={styles.chartSection}>
+      <View className='ml-auto mr-auto mt-5 mb-5 w-4/5'>
         <Chart />
       </View>
     </SafeAreaView>
@@ -32,10 +32,6 @@ const styles = StyleSheet.create({
   },
   chartSection: {
     width: screenWidth / 1.1,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginTop: 20,
-    marginBottom: 20,
   },
 });
 

@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import React from 'react';
 import { colors, fonts } from '../constants/globalStyles';
 import { AntDesign } from '@expo/vector-icons';
+import Test from './Test';
 
 const TopBar = () => {
   return (
@@ -9,7 +10,7 @@ const TopBar = () => {
       <View style={styles.topSection}>
         <View style={styles.leftSection}>
           <Text style={styles.welcomText}>Welcome Back.</Text>
-          <Text style={styles.nameText}>A. Adedamola</Text>
+          <Text style={styles.nameText} className="text-blue-500">A. Adedamola</Text>
           <View style={styles.bottomSection}>
             <View style={styles.addItem}>
               <AntDesign
@@ -82,7 +83,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     fontFamily: fonts.primary,
-    color: colors.white,
   },
   notificationIcon: {
     marginRight: 5,

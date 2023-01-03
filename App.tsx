@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import AppNavigation from './src/navigations/navigator';
+import { TailwindProvider } from 'tailwindcss-react-native';
 import {
   useFonts,
   Montserrat_400Regular,
@@ -21,9 +22,9 @@ export default function App() {
   }
 
   return (
-    <>
+    <TailwindProvider>
       <StatusBar style='auto' />
       <AppNavigation />
-    </>
+    </TailwindProvider>
   );
 }
