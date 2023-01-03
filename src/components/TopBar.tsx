@@ -13,7 +13,7 @@ const TopBar = () => {
         </View>
         <View>
           <Text
-            className={`text-xl font-semibold text-[${colors.boldPrimary}]`}
+            className={`text-xl font-semibold text-[${colors.boldPrimary}] font-[${fonts.primary}]`}
           >
             App Name
           </Text>
