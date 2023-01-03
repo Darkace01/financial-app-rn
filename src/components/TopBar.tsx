@@ -6,14 +6,14 @@ import Test from './Test';
 
 const TopBar = () => {
   return (
-    <View className='flex flex-row justify-between mx-auto'>
+    <View className='flex flex-row justify-between mx-auto mb-4'>
       <View className='flex space-x-2 flex-row'>
         <View>
           <Octicons name='dot-fill' size={30} color={colors.boldPrimary} />
         </View>
         <View>
           <Text
-            className={`text-xl font-semibold text-[${colors.boldPrimary}] font-[${fonts.primary}]`}
+            className={`text-xl font-semibold text-[${colors.boldPrimary}] font-[${fonts.font700}]`}
           >
             App Name
           </Text>

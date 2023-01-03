@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import React from 'react';
 import { colors, fonts } from '../constants/globalStyles';
 import { AntDesign } from '@expo/vector-icons';
@@ -6,94 +6,20 @@ import Test from './Test';
 
 const UserBar = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.topSection}>
-        <View style={styles.leftSection}>
-          <Text style={styles.welcomText}>Welcome Back.</Text>
-          <Text style={styles.nameText} className='text-blue-500'>
-            A. Adedamola
-          </Text>
-          <View style={styles.bottomSection}>
-            <View style={styles.addItem}>
-              <AntDesign
-                name='pluscircle'
-                size={16}
-                style={styles.addItemIcon}
-              />
-              <Text style={styles.addItemText}>Add Item</Text>
-            </View>
-          </View>
-        </View>
-        <View style={styles.rigthSection}>
-          <Image
-            source={require('../../assets/images/profile.jpg')}
-            style={styles.profileImage}
-          />
-        </View>
+    <View className='flex flex-row space-x-3 items-center'>
+      <View>
+        <Image
+          source={require('../../assets/images/profile.jpg')}
+          className='w-10 h-10 rounded-full'
+        />
+      </View>
+      <View className='flex flex-row'>
+        <Text className={`text-xl font-bold font-[${fonts.font700}]`}>
+          Kazeem{' '}
+        </Text>
+        <Text className={`text-xl font-[${fonts.font700}]`}>Quadri</Text>
       </View>
     </View>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 20,
-    paddingTop: 60,
-    paddingBottom: 30,
-    backgroundColor: colors.accent,
-  },
-  topSection: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  bottomSection: {
-    marginVertical: 5,
-  },
-  addItem: {
-    flexDirection: 'row',
-    backgroundColor: colors.accent2,
-    width: 90,
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    alignItems: 'center',
-  },
-  addItemIcon: {
-    marginRight: 5,
-    color: colors.white,
-  },
-  addItemText: {
-    fontFamily: fonts.primary,
-    fontSize: 10,
-    color: colors.white,
-  },
-  leftSection: {
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-  },
-  welcomText: {
-    fontSize: 10,
-    fontWeight: '300',
-    fontFamily: fonts.primary,
-    color: colors.gray,
-  },
-  rigthSection: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignContent: 'center',
-  },
-  nameText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    fontFamily: fonts.primary,
-  },
-  notificationIcon: {
-    marginRight: 5,
-    color: colors.dark,
-  },
-  profileImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 50,
-  },
-});
 export default UserBar;

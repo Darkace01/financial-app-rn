@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import TopBar from '../components/TopBar';
 import { colors } from '../constants/globalStyles';
 import Chart from '../components/Chart';
+import UserBar from '../components/UserBar';
 // get screenwidth
 const screenWidth = Dimensions.get('window').width;
 const HomeScreen = () => {
@@ -12,6 +13,7 @@ const HomeScreen = () => {
       className={`bg-[${colors.pageBackground}] h-full mx-auto px-5`}
     >
       <TopBar />
+      <UserBar />
       <View className='mt-5 mb-5 w-full'>
         <Chart />
       </View>

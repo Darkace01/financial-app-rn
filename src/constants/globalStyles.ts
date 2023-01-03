@@ -14,7 +14,7 @@ export const colors = {
 };
 
 export const fonts = {
-  primary: 'Montserrat_400Regular',
-  font600: 'Montserrat_600SemiBold',
-  font700: 'Montserrat_700Bold',
+  primary: 'Poppins_400Regular',
+  font600: 'Poppins_600SemiBold',
+  font700: 'Poppins_700Bold',
 };
