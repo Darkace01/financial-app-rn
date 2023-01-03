@@ -1,13 +1,6 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  SafeAreaView,
-  Dimensions,
-} from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
 import React from 'react';
-// import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import TopBar from '../components/TopBar';
 import { colors } from '../constants/globalStyles';
 import Chart from '../components/Chart';
@@ -15,9 +8,11 @@ import Chart from '../components/Chart';
 const screenWidth = Dimensions.get('window').width;
 const HomeScreen = () => {
   return (
-    <SafeAreaView className={`bg-[${colors.pageBackground}] h-full w-full`}>
+    <SafeAreaView
+      className={`bg-[${colors.pageBackground}] h-full mx-auto px-5`}
+    >
       <TopBar />
-      <View className='ml-auto mr-auto mt-5 mb-5 w-4/5'>
+      <View className='mt-5 mb-5 w-full'>
         <Chart />
       </View>
     </SafeAreaView>
