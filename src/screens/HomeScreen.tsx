@@ -17,8 +17,8 @@ const HomeScreen = () => {
       <UserBar />
       <View className='mt-5 mb-5 w-full'>
         <BalanceCard />
-        <View className='mt-2 flex flex-row justify-center'>
-          <ActionButton />
+        <View className='mt-2 flex flex-row justify-evenly px-4 py-3'>
+          <ActionButton moneyIn />
           <ActionButton />
         </View>
       </View>
