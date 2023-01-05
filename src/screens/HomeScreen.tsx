@@ -6,6 +6,7 @@ import { colors } from '../constants/globalStyles';
 import BalanceCard from '../components/BalanceCard';
 import UserBar from '../components/UserBar';
 import ActionButton from '../components/ActionButton';
+import TransactionMinList from '../components/TransactionMinList';
 // get screenwidth
 const screenWidth = Dimensions.get('window').width;
 const HomeScreen = () => {
@@ -21,6 +22,7 @@ const HomeScreen = () => {
           <ActionButton moneyIn />
           <ActionButton />
         </View>
+        <TransactionMinList />
       </View>
     </SafeAreaView>
   );
