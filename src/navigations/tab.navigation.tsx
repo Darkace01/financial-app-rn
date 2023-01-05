@@ -28,7 +28,7 @@ const TabNavigation = () => {
         tabBarShowLabel: false,
         tabBarHideOnKeyboard: true,
         tabBarStyle: {
-          backgroundColor: '#F6F6F9',
+          backgroundColor: '#FEFEFE',
           borderTopWidth: 0,
           position: 'absolute',
           bottom: 0,
@@ -93,7 +93,7 @@ const TabNavigation = () => {
 
 const styles = StyleSheet.create({
   iconStyle: {
-    position: 'absolute',
+    // position: 'absolute',
     top: Platform.select({
       ios: '30%',
       android: '15%',
