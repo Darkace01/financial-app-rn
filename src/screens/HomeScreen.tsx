@@ -3,8 +3,9 @@ import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import TopBar from '../components/TopBar';
 import { colors } from '../constants/globalStyles';
-import Chart from '../components/Chart';
+import BalanceCard from '../components/BalanceCard';
 import UserBar from '../components/UserBar';
+import ActionButton from '../components/ActionButton';
 // get screenwidth
 const screenWidth = Dimensions.get('window').width;
 const HomeScreen = () => {
@@ -15,7 +16,11 @@ const HomeScreen = () => {
       <TopBar />
       <UserBar />
       <View className='mt-5 mb-5 w-full'>
-        <Chart />
+        <BalanceCard />
+        <View className='mt-2 flex flex-row justify-center'>
+          <ActionButton />
+          <ActionButton />
+        </View>
       </View>
     </SafeAreaView>
   );
