@@ -3,7 +3,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import {
-  ANALYTICS_SCREEN,
+  TRANSACTION_SCREEN,
   HOME_SCREEN,
   PROFILE_SCREEN,
 } from '../constants/screenRoutes';
@@ -14,7 +14,7 @@ import {
   FontAwesome5,
 } from '@expo/vector-icons';
 import { colors, fonts } from '../constants/globalStyles';
-import AnalyticsScreen from '../screens/AnalyticsScreen';
+import TransactionScreen from '../screens/TransactionScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
@@ -58,8 +58,8 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name={ANALYTICS_SCREEN}
-        component={AnalyticsScreen}
+        name={TRANSACTION_SCREEN}
+        component={TransactionScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.iconStyle}>
