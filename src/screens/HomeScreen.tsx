@@ -11,9 +11,7 @@ import TransactionMinList from '../components/TransactionMinList';
 const screenWidth = Dimensions.get('window').width;
 const HomeScreen = () => {
   return (
-    <SafeAreaView
-      className={`bg-[${colors.pageBackground}] h-full mx-auto px-5`}
-    >
+    <SafeAreaView className={`bg-themeGrey h-full mx-auto px-5`}>
       <TopBar />
       <UserBar />
       <View className='mt-5 mb-5 w-full'>
@@ -22,7 +20,9 @@ const HomeScreen = () => {
           <ActionButton moneyIn />
           <ActionButton />
         </View>
-        <TransactionMinList />
+        <View className='mt-2'>
+          <TransactionMinList />
+        </View>
       </View>
     </SafeAreaView>
   );
