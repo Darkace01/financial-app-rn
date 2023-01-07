@@ -5,9 +5,10 @@ import { fonts } from '../constants/globalStyles';
 import { useNavigation } from '@react-navigation/native';
 type Props = {
   withFilter?: boolean;
+  text?: string;
   onclick?: () => void;
 };
-const NavigationTopBar = ({ withFilter, onclick }: Props) => {
+const NavigationTopBar = ({ withFilter, text, onclick }: Props) => {
   const navigation = useNavigation();
   return (
     <View className='flex flex-row justify-between mx-auto mb-4 items-center mt-2'>
@@ -16,7 +17,7 @@ const NavigationTopBar = ({ withFilter, onclick }: Props) => {
       </TouchableOpacity>
       <View>
         <Text className={`text-base font-[${fonts.font700}]`}>
-          Transactions
+          {text ? text : 'Transactions'}
         </Text>
       </View>
       {withFilter ? (

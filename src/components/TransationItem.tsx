@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { TRANSACTION_DETAIL_SCREEN } from '../constants/screenRoutes';
+import FirstLetterIcon from './FirstLetterIcon';
 
 const TransationItem = () => {
   const navigation = useNavigation();
@@ -14,9 +15,7 @@ const TransationItem = () => {
       onPress={handlePress}
     >
       <View>
-        <View className='bg-[#EEF2F8] bg-opacity-0 rounded-full flex h-12 w-12 items-center justify-center'>
-          <Text className='text-accent'>P</Text>
-        </View>
+        <FirstLetterIcon />
       </View>
       <View className='flex justify-around'>
         <Text className='text-sm'>Transfer to Phillip</Text>

@@ -7,7 +7,7 @@ import TransactionIcon from '../components/TransactionIcon';
 const TransactionDetailScreen = () => {
   return (
     <SafeAreaView className={`bg-themeGrey h-full mx-auto px-5`}>
-      <NavigationTopBar withFilter={false} />
+      <NavigationTopBar withFilter={false} text='Transactions Details' />
       <View>
         <TransactionIcon />
       </View>
