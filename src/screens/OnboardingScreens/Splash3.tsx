@@ -12,7 +12,8 @@ const Splash3 = () => {
       </Pressable>
       <View className='rounded-lg'>
         <Modal 
-            title="You ought to know where your money goes"
+            title="Gain total
+            control of your money"
             body="Track your transaction easily, with categories and financial report"
             screen='Splash4'
             image='second'

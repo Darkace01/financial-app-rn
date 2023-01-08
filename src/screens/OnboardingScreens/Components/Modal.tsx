@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 const Modal = ({title, body, screen, image}) => {
   const navigation = useNavigation();
   return (
-    <View className='w-full flex items-center bg-white rounded-[40px] p-4 space-y-6 max-w-[95%]'>
+    <View className='w-[335px] flex items-center bg-white rounded-[40px] p-4 space-y-6'>
       <Text className='text-center text-[#13085E] text-[25px] font-bold'>{title}</Text>
       <Text className='text-center text-[#13085E] max-w-[70%]'>{body}</Text>
       <View className='flex flex-row items-center space-x-1'>
