@@ -17,7 +17,7 @@ export const HttpHelper  = (authToken : string = null) : any => {
     const getJson = async (url : string) : Promise<apiResponse> => {
         
         try {
-            const result  = await api.get(url,)
+            const result  = await api.get(url)
             return responseMapper(result)
         }
         catch(error){
