@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Test = () => {
+const Splash5 = () => {
   return (
     <View>
-      <Text className="text-white text-xl">test</Text>
+      <Text>Splash5</Text>
     </View>
   )
 }
 
-export default Test
+export default Splash5
