@@ -10,7 +10,7 @@ const Splash = () => {
     },3000)
   })
   return (
-    <SafeAreaView className='flex-1 flex justify-center items-center bg-[#4D2DEC]'>
+    <SafeAreaView className='flex-1 flex justify-center items-center bg-accent'>
       <StatusBar/>
       <View className='flex items-center'>
         <Image
