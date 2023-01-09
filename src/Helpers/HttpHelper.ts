@@ -28,9 +28,6 @@ export const HttpHelper  = (authToken : string = null) : any => {
     const postJson = async (url : string, data : any) : Promise<apiResponse> => {
         
         try{
-            const api = wretch(baseUrl, { myHeaders,  mode: "cors" })
-                        .errorType("json")
-                        .resolve(r => r.json())
             const result = await api.url(url).post(data)
             return responseMapper(result)
         }
