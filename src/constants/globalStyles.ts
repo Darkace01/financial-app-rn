@@ -11,6 +11,7 @@ export const colors = {
   accent2: '#A57FF4',
   pageBackground: '#F5F7FF',
   boldPrimary: '#051448',
+  inputGray:'#F7F8F9'
 };
 
 export const fonts = {

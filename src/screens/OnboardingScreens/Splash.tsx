@@ -2,11 +2,12 @@ import { View, Text, SafeAreaView, Image, StatusBar } from 'react-native';
 import React, { useLayoutEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import assetsObject from '../../constants/assets';
+import { SPLASH2 } from '../../constants/screenRoutes';
 const Splash = () => {
   const navigation = useNavigation();
   useLayoutEffect(() => {
     setTimeout(() => {
-      navigation.navigate('Splash2');
+      navigation.navigate(SPLASH2);
     }, 3000);
   });
   return (

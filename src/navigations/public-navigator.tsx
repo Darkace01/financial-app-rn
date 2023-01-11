@@ -6,6 +6,7 @@ import Splash2 from '../screens/OnboardingScreens/Splash2';
 import Splash3 from '../screens/OnboardingScreens/Splash3';
 import Splash4 from '../screens/OnboardingScreens/Splash4';
 import Splash5 from '../screens/OnboardingScreens/Splash5';
+import RegisterScreen from '../screens/AuthScreens/RegisterScreen';
 
 const OnboardingStack = createNativeStackNavigator();
 
@@ -44,6 +45,13 @@ const PublicNavigator = () => {
       <OnboardingStack.Screen
         name="Splash5"
         component={Splash5}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <OnboardingStack.Screen
+        name="Register"
+        component={RegisterScreen}
         options={{
           headerShown: false,
         }}
