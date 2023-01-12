@@ -2,7 +2,7 @@ import { View, Text, SafeAreaView, Pressable } from 'react-native'
 import React from 'react'
 import Modal from './Components/Modal'
 import { useNavigation } from '@react-navigation/native'
-import { SPLASH5 } from '../../constants/screenRoutes'
+import { SPLASH5, SPLASH3 } from '../../constants/screenRoutes'
 
 const Splash2 = () => {
   const navigation = useNavigation();
@@ -16,7 +16,7 @@ const Splash2 = () => {
         <Modal 
             title="You ought to know where your money goes"
             body="Get an overview of how you are performing and motivate yourself to achieve even more."
-            screen='Splash3'
+            screen={SPLASH3}
             image="first"
         />
       </View>
