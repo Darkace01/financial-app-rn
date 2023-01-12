@@ -10,6 +10,11 @@ const TransactionDetailScreen = () => {
       <NavigationTopBar withFilter={false} text='Transactions Details' />
       <View>
         <TransactionIcon />
+        <View className='flex justify-center'>
+          <View className='bg-[#EEF2F8] p-3 rounded-full flex items-center justify-center '>
+            <Text className='text-accent'> 🍔 Eating Out</Text>
+          </View>
+        </View>
       </View>
     </SafeAreaView>
   );
