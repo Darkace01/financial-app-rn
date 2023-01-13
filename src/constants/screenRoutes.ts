@@ -10,4 +10,7 @@ export const SPLASH3 = 'Splash3';
 export const SPLASH4 = 'Splash4';
 export const SPLASH5 = 'Splash5';
 export const REGISTER = 'Register';
+export const LOGIN = 'Login'
+export const FOGORTPASSWORD = 'ForgotPassword'
+export const OTPSCREEN = 'OtpScreen'
 

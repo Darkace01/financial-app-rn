@@ -1,8 +1,10 @@
-import { View, Text, SafeAreaView, Pressable, TextInput, Image } from 'react-native'
+import { View, Text, SafeAreaView, Pressable, TextInput, Image, TouchableWithoutFeedback,Keyboard } from 'react-native'
 import React, {useState} from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import assetsObject from '../../constants/assets'
+import { LOGIN } from '../../constants/screenRoutes';
+import BigBlueButton from './Components/BigBlueButton';
 
 const RegisterScreen = () => {
   const navigation = useNavigation();
@@ -26,8 +28,12 @@ const RegisterScreen = () => {
   const Register = () =>{
 
   }
+  const GotoLogin = () =>{
+    navigation.navigate(LOGIN)
+  }
   return (
-    <SafeAreaView className='mx-4 mt-10'>
+    <TouchableWithoutFeedback onPress={()=>{Keyboard.dismiss()}}>
+    <SafeAreaView className='flex-1 mx-4 mt-10'>
       <Pressable onPress={()=>{navigation.goBack()}} className='border border-gray-400 rounded-md p-2 w-[40px]'>
         <Ionicons name="chevron-back" size={24} color="black" />
       </Pressable>
@@ -64,38 +70,46 @@ const RegisterScreen = () => {
             />
         </View>
         <View className='space-y-5'>
-          <Pressable 
-              className='bg-accent h-[56px] flex justify-center rounded-md'
-              onPress={Register}
-            >
-            <Text className='text-center font-semibold text-white'>Register</Text>
-          </Pressable>
-          <Text className='text-gray-900 text-center font-semibold'>Or Register with</Text>
+          <BigBlueButton action={Register} buttonName="Register"/>
+          <View className='flex flex-row justify-around'>
+            <Image
+              source={assetsObject.line}
+              className="w-[105px] mt-2"
+            />
+            <Text className='text-gray-900 text-center font-semibold'>Or Register with</Text>
+            <Image
+              source={assetsObject.line}
+              className="w-[105px] mt-2"
+            />
+          </View>  
         </View>
-        <View className='flex flex-row'>
-          <Pressable className='border border-gray-400 rounded-md p-2 w-[33%] flex items-center'>
+        <View className='flex flex-row space-x-2'>
+          <Pressable className='border border-gray-400 rounded-md p-2 w-[32%] flex items-center'>
             <Image
               source={assetsObject.facebook}
             />
           </Pressable>
-          <Pressable className='border border-gray-400 rounded-md p-2 w-[33%] flex items-center'>
+          <Pressable className='border border-gray-400 rounded-md p-2 w-[32%] flex items-center'>
             <Image
               source={assetsObject.google}
               className="w-5 h-5"
             />
           </Pressable>
-          <Pressable className='border border-gray-400 rounded-md p-2 w-[33%] flex items-center'>
+          <Pressable className='border border-gray-400 rounded-md p-2 w-[32%] flex items-center'>
             <Image
               source={assetsObject.apple}
             />
           </Pressable>
         </View>
       </View>
-      <View className='flex flex-row justify-center mt-10'>
+      <View className='flex flex-row w-full justify-center space-x-2 absolute bottom-8'>
         <Text className='font-normal text-lg'>Already have an account?</Text>
-        <Text className='font-semibold text-lg text-accent'>Login Now</Text>
+        <Pressable onPress={GotoLogin}>
+          <Text className='font-semibold text-lg text-accent'>Login Now</Text>
+        </Pressable>  
       </View>
     </SafeAreaView>
+    </TouchableWithoutFeedback>
   )
 }
 
