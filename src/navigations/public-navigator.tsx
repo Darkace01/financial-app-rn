@@ -7,13 +7,18 @@ import Splash3 from '../screens/OnboardingScreens/Splash3';
 import Splash4 from '../screens/OnboardingScreens/Splash4';
 import Splash5 from '../screens/OnboardingScreens/Splash5';
 import RegisterScreen from '../screens/AuthScreens/RegisterScreen';
+import LoginScreen from '../screens/AuthScreens/LoginScreen';
+import ForgotPassword from '../screens/AuthScreens/ForgotPassword';
+import OtpScreen from '../screens/AuthScreens/OtpScreen';
+import ResetPassword from '../screens/AuthScreens/ResetPassword';
+import PasswordChangeSuccessScreen from '../screens/AuthScreens/PasswordChangeSuccessScreen';
 
 const OnboardingStack = createNativeStackNavigator();
 
 const PublicNavigator = () => {
   
   return (
-    <OnboardingStack.Navigator>
+    <OnboardingStack.Navigator initialRouteName='LoginScreen'>
       <OnboardingStack.Screen
         name="Splash"
         component={Splash}
@@ -52,6 +57,41 @@ const PublicNavigator = () => {
       <OnboardingStack.Screen
         name="Register"
         component={RegisterScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <OnboardingStack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <OnboardingStack.Screen
+        name="ForgotPassword"
+        component={ForgotPassword}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <OnboardingStack.Screen
+        name="OtpScreen"
+        component={OtpScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <OnboardingStack.Screen
+        name="ResetPassword"
+        component={ResetPassword}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <OnboardingStack.Screen
+        name="PasswordChangeSuccessScreen"
+        component={PasswordChangeSuccessScreen}
         options={{
           headerShown: false,
         }}

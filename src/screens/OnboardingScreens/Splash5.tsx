@@ -2,7 +2,7 @@ import { View, Text, SafeAreaView, Image, Pressable } from 'react-native'
 import React from 'react'
 import assetsObject from '../../constants/assets';
 import { useNavigation } from '@react-navigation/native';
-import { REGISTER } from '../../constants/screenRoutes';
+import { REGISTER, LOGIN } from '../../constants/screenRoutes';
 
 const Splash5 = () => {
   const navigation = useNavigation();
@@ -11,7 +11,7 @@ const Splash5 = () => {
   }
 
   const Login = () =>{
-
+    navigation.navigate(LOGIN)
   }
   return (
     <SafeAreaView className='flex-1 flex items-center justify-center bg-accent'>
