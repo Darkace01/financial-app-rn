@@ -6,6 +6,7 @@ const assetsObject = {
   apple:require(`../../assets/images/apples.png`),
   facebook:require(`../../assets/images/facebook.png`),
   google:require(`../../assets/images/google.png`),
-  line:require(`../../assets/images/Line.png`)
+  line:require(`../../assets/images/Line.png`),
+  successMark:require(`../../assets/images/Successmark.png`)
 };
 module.exports = assetsObject;

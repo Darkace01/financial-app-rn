@@ -1,20 +1,26 @@
-import { View, Text, StyleSheet, TouchableWithoutFeedback, Keyboard, Pressable  } from 'react-native'
+import { View, Text, StyleSheet, TouchableWithoutFeedback, Keyboard, Pressable, ActivityIndicator  } from 'react-native'
 import React, {useState} from 'react'
 import OTPTextView from 'react-native-otp-textinput';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import BigBlueButton from './Components/BigBlueButton';
+import {RESETPASSWORD} from '../../constants/screenRoutes.ts'
 
 const OtpScreen = () => {
   const navigation = useNavigation();
   const [otpInput, setOtpInput] = useState("")
+  const [loading , setLoading] = useState(false)
+
   const handleText = (text) =>{
     setOtpInput(text)
     console.log(otpInput)
   }
   const Verify = () =>{
-
+    setLoading(true)
+    setTimeout(() => {
+      navigation.navigate(RESETPASSWORD)
+    }, 3000);
   }
   const Resend = () =>{
 
@@ -42,7 +48,13 @@ const OtpScreen = () => {
               />
           </View>
           <View>
-            <BigBlueButton action={Verify} buttonName="Verify"/>
+            {
+              loading === false ?
+              <BigBlueButton action={Verify} buttonName="Verify"/>
+              :
+              <BigBlueButton action={Verify} buttonName={<ActivityIndicator size="small" color="#fff" />}/>
+            }
+            
           </View>
         </View>
         <View className='flex flex-row w-full justify-center mt-10 space-x-2 absolute bottom-8'>

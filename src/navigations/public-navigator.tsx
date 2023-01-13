@@ -10,6 +10,8 @@ import RegisterScreen from '../screens/AuthScreens/RegisterScreen';
 import LoginScreen from '../screens/AuthScreens/LoginScreen';
 import ForgotPassword from '../screens/AuthScreens/ForgotPassword';
 import OtpScreen from '../screens/AuthScreens/OtpScreen';
+import ResetPassword from '../screens/AuthScreens/ResetPassword';
+import PasswordChangeSuccessScreen from '../screens/AuthScreens/PasswordChangeSuccessScreen';
 
 const OnboardingStack = createNativeStackNavigator();
 
@@ -76,6 +78,20 @@ const PublicNavigator = () => {
       <OnboardingStack.Screen
         name="OtpScreen"
         component={OtpScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <OnboardingStack.Screen
+        name="ResetPassword"
+        component={ResetPassword}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <OnboardingStack.Screen
+        name="PasswordChangeSuccessScreen"
+        component={PasswordChangeSuccessScreen}
         options={{
           headerShown: false,
         }}

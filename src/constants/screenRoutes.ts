@@ -13,4 +13,6 @@ export const REGISTER = 'Register';
 export const LOGIN = 'Login'
 export const FOGORTPASSWORD = 'ForgotPassword'
 export const OTPSCREEN = 'OtpScreen'
+export const RESETPASSWORD = 'ResetPassword'
+export const PASSWORDCHANGESUCCESSSCREEN = 'PasswordChangeSuccessScreen'
 

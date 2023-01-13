@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Pressable, TouchableWithoutFeedback, Keyboard, TextInput } from 'react-native'
+import { View, Text, SafeAreaView, Pressable, TouchableWithoutFeedback, Keyboard, TextInput, ActivityIndicator } from 'react-native'
 import React, {useState} from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -8,12 +8,16 @@ import { OTPSCREEN, LOGIN } from '../../constants/screenRoutes';
 const ForgotPassword = () => {
   const navigation = useNavigation();
   const [Email, setEmail] = useState("")
+  const [loading , setLoading] = useState(false)
 
   const handleEmail = (val) =>{
     setEmail(val)
   }
   const sendCode = () =>{
-    navigation.navigate(OTPSCREEN)
+    setLoading(true)
+    setTimeout(() => {
+      navigation.navigate(OTPSCREEN)
+    }, 3000);
   }
   const GotoLogin = () =>{
     navigation.navigate(LOGIN)
@@ -39,7 +43,12 @@ const ForgotPassword = () => {
                 className="text-sm border border-gray-400 h-[56px] pl-4 bg-[#E8ECF4] rounded-md"
             />
             <View>
+              {
+                loading === false ?
                 <BigBlueButton action={sendCode} buttonName="Send Code"/>
+                :
+                <BigBlueButton action={sendCode} buttonName={<ActivityIndicator size="small" color="#fff" />}/>
+              }
             </View>
           </View>
         </View>
