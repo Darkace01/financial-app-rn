@@ -16,7 +16,7 @@ const Splash4 = () => {
             title="Plan ahead and manage your money better"
             body="Setup your budget for each category
             so you in control. Track categories you spend the most money on."
-            screen='Splash5'
+            screen={SPLASH5}
             image="third"
         />
       </View>

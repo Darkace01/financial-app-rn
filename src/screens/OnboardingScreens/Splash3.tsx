@@ -3,7 +3,7 @@ import React from 'react'
 import Modal from './Components/Modal'
 import { useNavigation } from '@react-navigation/native'
 import { colors } from '../../constants/globalStyles'
-import { SPLASH5 } from '../../constants/screenRoutes'
+import { SPLASH5, SPLASH4 } from '../../constants/screenRoutes'
 
 const Splash3 = () => {
   const navigation = useNavigation();
@@ -17,7 +17,7 @@ const Splash3 = () => {
             title="Gain total
             control of your money"
             body="Track your transaction easily, with categories and financial report"
-            screen='Splash4'
+            screen={SPLASH4}
             image='second'
         />
       </View>
