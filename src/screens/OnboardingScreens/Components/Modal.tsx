@@ -2,8 +2,13 @@ import { View, Text, Image, Pressable } from 'react-native';
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import assetsObject from '../../../constants/assets';
-
-const Modal = ({ title, body, screen, image }) => {
+type Props = {
+  title: string;
+  body: string;
+  screen: string;
+  image: string;
+};
+const Modal = ({ title, body, screen, image }: Props) => {
   const navigation = useNavigation();
   return (
     <View className='w-[335px] flex items-center bg-white rounded-[40px] p-4 space-y-6'>

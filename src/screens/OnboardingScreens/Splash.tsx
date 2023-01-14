@@ -2,16 +2,18 @@ import { View, Text, SafeAreaView, Image, StatusBar } from 'react-native';
 import React, { useLayoutEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import assetsObject from '../../constants/assets';
+import { SPLASH2 } from '../../constants/screenRoutes';
 const Splash = () => {
   const navigation = useNavigation();
   useLayoutEffect(() => {
     setTimeout(() => {
-      navigation.navigate('Splash2');
+      navigation.navigate(SPLASH2);
     }, 3000);
   });
+  // regex for number
   return (
     <SafeAreaView className='flex-1 flex justify-center items-center bg-accent'>
-      <StatusBar/>
+      <StatusBar />
       <View className='flex items-center'>
         <Image
           source={assetsObject.defualtProfile}
