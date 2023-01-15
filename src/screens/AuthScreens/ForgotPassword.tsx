@@ -22,6 +22,9 @@ const ForgotPassword = () => {
   const GotoLogin = () =>{
     navigation.navigate(LOGIN)
   }
+  const CheckValidation = () =>{
+    console.log("hello")
+  }
   return (
     <TouchableWithoutFeedback onPress={()=>{Keyboard.dismiss()}}>
       <SafeAreaView className='flex-1 mx-4 mt-10'>
@@ -38,6 +41,7 @@ const ForgotPassword = () => {
           <View className='space-y-8'>
             <TextInput
                 onChangeText={(text)=>{handleEmail(text)}}
+                onEndEditing={CheckValidation}
                 value={Email}
                 placeholder="Enter your email"
                 className="text-sm border border-gray-400 h-[56px] pl-4 bg-[#E8ECF4] rounded-md"

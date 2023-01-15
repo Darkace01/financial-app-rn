@@ -1,5 +1,4 @@
 
-
 export interface apiResponse {
     hasError : boolean,
     message : string,
