@@ -9,6 +9,7 @@ import {
   Poppins_600SemiBold,
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
+import Toast from 'react-native-toast-message';
 
 export default function App() {
   const [fontLoaded] = useFonts({
@@ -25,6 +26,7 @@ export default function App() {
     <TailwindProvider>
       <StatusBar style='auto' />
       <AppNavigation />
+      <Toast />
     </TailwindProvider>
   );
 }

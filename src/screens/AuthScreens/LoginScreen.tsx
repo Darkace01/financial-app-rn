@@ -6,6 +6,8 @@ import { Feather } from '@expo/vector-icons';
 import {FOGORTPASSWORD, REGISTER} from '../../constants/screenRoutes';
 import assetsObject from "../../constants/assets.ts";
 import BigBlueButton from './Components/BigBlueButton';
+import validator from 'validator';
+import Toast from 'react-native-toast-message';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -13,16 +15,28 @@ const LoginScreen = () => {
   const [Password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(true)
   const [icon, setIcon] = useState("eye-off")
+  const [textinputBorder, setTextInputBorder] = useState("border-gray-400")
   
 
   const handleEmail = (val) =>{
+    setTextInputBorder("border-red-700")
     setEmail(val)
   }
   const handlePassword = (val) =>{
     setPassword(val)
   }
   const Login = () =>{
-    console.log("Login")
+    if(validator.isEmail(Email)){
+      console.log("Login")
+    }else{
+      Toast.show(
+        {
+          type: 'error',
+          text1: 'Validation Error',
+          text2: "Email must be valid"
+        })
+    }
+    
   }
   const ChangePasswordView = () => {
     setShowPassword(val => val = !showPassword)
@@ -30,6 +44,13 @@ const LoginScreen = () => {
   }
   const GotoRegister = () =>{
     navigation.navigate(REGISTER)
+  }
+
+  const CheckValidation = () =>{
+    if(validator.isEmail(Email))
+    {
+      setTextInputBorder("border-gray-400")
+    }
   }
 
   return (
@@ -46,8 +67,9 @@ const LoginScreen = () => {
               <TextInput
                   onChangeText={(text)=>{handleEmail(text)}}
                   value={Email}
+                  onEndEditing={CheckValidation}
                   placeholder="Email"
-                  className="text-sm border border-gray-400 h-[56px] pl-4 bg-[#E8ECF4] rounded-md"
+                  className={`text-sm border ${textinputBorder} h-[56px] pl-4 bg-[#E8ECF4] rounded-md`}
               />
               <View className="border border-[#596369] h-[56px] bg-[#E8ECF4]  rounded-md flex flex-row items-center justify-between space-x-2 pl-2 pr-2">
                 <TextInput
@@ -61,9 +83,11 @@ const LoginScreen = () => {
                   <Feather name={icon} size={20} color="black" />
                 </Pressable>
               </View>
-              <Pressable onPress={()=>{navigation.navigate(FOGORTPASSWORD)}}>
-                <Text className='text-right text-[#6A707C] font-semibold'>Forgot Password?</Text>
-              </Pressable>              
+              <View className='flex flex-row justify-end'>
+                <Pressable onPress={()=>{navigation.navigate(FOGORTPASSWORD)}} className='w-[40%]'>
+                  <Text className='text-right text-[#6A707C] font-semibold'>Forgot Password?</Text>
+                </Pressable>
+              </View>         
           </View>
           <View className='space-y-5'>
             <BigBlueButton action={Login} buttonName="Login"/>
