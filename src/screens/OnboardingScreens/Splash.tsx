@@ -10,9 +10,10 @@ const Splash = () => {
       navigation.navigate(SPLASH2);
     }, 3000);
   });
+  // regex for number
   return (
     <SafeAreaView className='flex-1 flex justify-center items-center bg-accent'>
-      <StatusBar/>
+      <StatusBar />
       <View className='flex items-center'>
         <Image
           source={assetsObject.defualtProfile}
