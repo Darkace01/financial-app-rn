@@ -7,15 +7,14 @@ import {
   FlatList,
 } from 'react-native';
 import React, { useRef, useState } from 'react';
-import Modal from './Components/Modal';
 import { useNavigation } from '@react-navigation/native';
-import { SPLASH5, SPLASH3 } from '../../constants/screenRoutes';
+import { LOGIN } from '../../constants/screenRoutes';
 import * as storage from '../../Helpers/Service/StorageService';
 import { INTRO_PAGE_VIEWED } from '../../constants/storageConstants';
 import slides from '../../../slides';
 import OnboardingItem from './OnboardingItem';
 
-const Splash2 = () => {
+const Onboarding = () => {
   //New Splash screen
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -30,11 +29,14 @@ const Splash2 = () => {
   const scrollTo = () => {
     if (currentIndex < slides.length - 1) {
       slidesRef.current.scrollToIndex({ index: currentIndex + 1 });
+    } else {
+      startApp();
     }
   };
 
   const startApp = async () => {
     storage.setItem(INTRO_PAGE_VIEWED, true);
+    navigation.navigate(LOGIN);
   };
 
   const navigation = useNavigation();
@@ -49,6 +51,8 @@ const Splash2 = () => {
               title={item.title}
               description={item.description}
               id={item.id}
+              nextStep={scrollTo}
+              skipStep={startApp}
             />
           )}
           horizontal
@@ -72,4 +76,4 @@ const Splash2 = () => {
   );
 };
 
-export default Splash2;
+export default Onboarding;

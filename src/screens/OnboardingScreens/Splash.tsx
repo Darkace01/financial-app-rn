@@ -2,12 +2,12 @@ import { View, Text, SafeAreaView, Image, StatusBar } from 'react-native';
 import React, { useLayoutEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import assetsObject from '../../constants/assets';
-import { SPLASH2 } from '../../constants/screenRoutes';
+import { ONBOARDING } from '../../constants/screenRoutes';
 const Splash = () => {
   const navigation = useNavigation();
   useLayoutEffect(() => {
     setTimeout(() => {
-      navigation.navigate(SPLASH2);
+      navigation.navigate(ONBOARDING);
     }, 3000);
   });
   // regex for number
