@@ -19,8 +19,8 @@ const Splash = () => {
   });
   // regex for number
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(ONBOARDING)}>
-      <SafeAreaView className='flex-1 flex justify-center items-center bg-accent'>
+    <SafeAreaView className='flex-1 flex justify-center items-center bg-accent'>
+      <TouchableOpacity onPress={() => navigation.navigate(ONBOARDING)}>
         <StatusBar />
         <View className='flex items-center'>
           <Image
@@ -35,8 +35,8 @@ const Splash = () => {
           <Text className='text-white font-bold text-3xl'>App Name</Text>
           <Text className='text-white'>Fast, Secure, Easy</Text>
         </View>
-      </SafeAreaView>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 };
 

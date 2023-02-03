@@ -26,7 +26,9 @@ const OnboardingItem = ({
     >
       <TouchableOpacity className='absolute top-10 right-4' onPress={skipStep}>
         <View className='bg-[#684cef] py-2 px-4 rounded-full'>
-          <Text className='text-white'>Skip</Text>
+          <Text className='text-white'>
+            {currentIndex === totalSlides - 1 ? 'Get Started' : 'Skip'}
+          </Text>
         </View>
       </TouchableOpacity>
       <View className='bg-white p-4 rounded-3xl items-center space-y-5 py-7 px-5 min-h-[100px]'>
