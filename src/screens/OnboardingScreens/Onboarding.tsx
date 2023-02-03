@@ -53,6 +53,8 @@ const Onboarding = () => {
               id={item.id}
               nextStep={scrollTo}
               skipStep={startApp}
+              currentIndex={currentIndex}
+              totalSlides={slides.length}
             />
           )}
           horizontal

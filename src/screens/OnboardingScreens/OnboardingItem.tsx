@@ -13,6 +13,8 @@ const OnboardingItem = ({
   description,
   nextStep,
   skipStep,
+  currentIndex,
+  totalSlides,
 }: SlideItem) => {
   // const { width } = useWindowDimensions();
   const itemWidth = Dimensions.get('window').width;
@@ -31,8 +33,26 @@ const OnboardingItem = ({
         <Text className='font-bold text-2xl text-center'>{title}</Text>
         <Text className='text-center text-base'>{description}</Text>
         <TouchableOpacity onPress={nextStep}>
+          <View className='flex flex-row justify-center items-center'>
+            {Array(totalSlides)
+              .fill(0)
+              .map((_, index) => (
+                <View
+                  key={index}
+                  className={`${
+                    currentIndex === index
+                      ? 'bg-accent' // active dot
+                      : 'bg-gray-300' // inactive dot
+                  } w-3 h-3 rounded-full mx-1`}
+                ></View>
+              ))}
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={nextStep}>
           <View className='bg-accent  py-4 px-20 rounded-full items-center'>
-            <Text className='text-white'>Next</Text>
+            <Text className='text-white'>
+              {currentIndex === totalSlides - 1 ? 'Get Started' : 'Next'}
+            </Text>
           </View>
         </TouchableOpacity>
       </View>
