@@ -4,7 +4,7 @@ import React from 'react'
 const BigBlueButton = ({action,buttonName}) => {
   return (
     <Pressable 
-        className='bg-accent h-[56px] flex justify-center rounded-md'
+        className='bg-accent h-[56px] flex justify-center items-center rounded-md'
         onPress={action}
         >
         <Text className='text-center font-semibold text-white'>{buttonName}</Text>

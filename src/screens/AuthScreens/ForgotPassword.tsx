@@ -4,23 +4,44 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import BigBlueButton from './Components/BigBlueButton';
 import { OTPSCREEN, LOGIN } from '../../constants/screenRoutes';
+import validator from 'validator';
+import Toast from 'react-native-toast-message';
 
 const ForgotPassword = () => {
   const navigation = useNavigation();
   const [Email, setEmail] = useState("")
   const [loading , setLoading] = useState(false)
+  const [textinputBorder, setTextInputBorder] = useState("border-gray-400")
+
 
   const handleEmail = (val) =>{
+    setTextInputBorder("border-red-700")
     setEmail(val)
   }
   const sendCode = () =>{
-    setLoading(true)
-    setTimeout(() => {
-      navigation.navigate(OTPSCREEN)
-    }, 3000);
+    if(validator.isEmail(Email)){
+      setLoading(true)
+      setTimeout(() => {
+        navigation.navigate(OTPSCREEN)
+      }, 3000);
+    }else{
+      Toast.show(
+        {
+          type: 'error',
+          text1: 'Validation Error',
+          text2: "Email must be valid"
+        })
+    }
+    
   }
   const GotoLogin = () =>{
     navigation.navigate(LOGIN)
+  }
+  const CheckValidation = () =>{
+    if(validator.isEmail(Email))
+    {
+      setTextInputBorder("border-gray-400")
+    }
   }
   return (
     <TouchableWithoutFeedback onPress={()=>{Keyboard.dismiss()}}>
@@ -38,9 +59,10 @@ const ForgotPassword = () => {
           <View className='space-y-8'>
             <TextInput
                 onChangeText={(text)=>{handleEmail(text)}}
+                onEndEditing={CheckValidation}
                 value={Email}
                 placeholder="Enter your email"
-                className="text-sm border border-gray-400 h-[56px] pl-4 bg-[#E8ECF4] rounded-md"
+                className={`text-sm border ${textinputBorder} h-[56px] pl-4 bg-[#E8ECF4] rounded-md`}
             />
             <View>
               {

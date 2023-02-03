@@ -5,6 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import assetsObject from '../../constants/assets'
 import { LOGIN } from '../../constants/screenRoutes';
 import BigBlueButton from './Components/BigBlueButton';
+import validator from 'validator';
+import Toast from 'react-native-toast-message';
 
 const RegisterScreen = () => {
   const navigation = useNavigation();
@@ -12,11 +14,13 @@ const RegisterScreen = () => {
   const [Email, setEmail] = useState("")
   const [Password, setPassword] = useState("")
   const [ConfirmPassword, setConfirmPassword] = useState("")
+  const [textinputBorder, setTextInputBorder] = useState("border-gray-400")
 
   const handleUsername = (val) =>{
     setUsername(val)
   }
   const handleEmail = (val) =>{
+    setTextInputBorder("border-red-700")
     setEmail(val)
   }
   const handlePassword = (val) =>{
@@ -26,10 +30,25 @@ const RegisterScreen = () => {
     setConfirmPassword(val)
   }
   const Register = () =>{
+    if(validator.isEmail(Email) && validator.equals(Password, ConfirmPassword)){
 
+    }else{
+      Toast.show(
+        {
+          type: 'error',
+          text1: 'Validation Error',
+          text2: "Email must be valid and passwords must match"
+        })
+    }
   }
   const GotoLogin = () =>{
     navigation.navigate(LOGIN)
+  }
+  const CheckValidation = () =>{
+    if(validator.isEmail(Email))
+    {
+      setTextInputBorder("border-gray-400")
+    }
   }
   return (
     <TouchableWithoutFeedback onPress={()=>{Keyboard.dismiss()}}>
@@ -51,8 +70,9 @@ const RegisterScreen = () => {
             <TextInput
                 onChangeText={(text)=>{handleEmail(text)}}
                 value={Email}
+                onEndEditing={CheckValidation}
                 placeholder="Email"
-                className="text-sm border border-gray-400 h-[56px] pl-4 bg-[#E8ECF4] rounded-md"
+                className={`text-sm border ${textinputBorder} h-[56px] pl-4 bg-[#E8ECF4] rounded-md`}
             />
             <TextInput
                 onChangeText={(text)=>{handlePassword(text)}}
