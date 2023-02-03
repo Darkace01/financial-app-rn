@@ -18,7 +18,7 @@ const HomeScreen = () => {
         <BalanceCard />
         <View className='mt-2 flex flex-row justify-evenly px-4 py-3'>
           <ActionButton moneyIn />
-          <ActionButton />
+          <ActionButton moneyIn={false} />
         </View>
         <View className='mt-2'>
           <TransactionMinList />

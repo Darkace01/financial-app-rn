@@ -10,9 +10,9 @@ const screenWidth = Dimensions.get('window').width;
 // 80% of screen width
 const width = screenWidth * 0.8;
 
-const TransactionDetailScreen = () => {
+const TransactionDetailModal = () => {
   return (
-    <SafeAreaView className={`bg-themeGrey h-full mx-auto px-5`}>
+    <SafeAreaView className='bg-themeGrey h-full mx-auto px-5'>
       <NavigationTopBar withFilter={false} text='Transactions Details' />
       <View className='px-4'>
         <TransactionIcon />
@@ -91,4 +91,4 @@ const TransactionDetailScreen = () => {
   );
 };
 
-export default TransactionDetailScreen;
+export default TransactionDetailModal;

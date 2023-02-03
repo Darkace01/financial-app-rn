@@ -3,10 +3,13 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
   DASHBOARD,
-  TRANSACTION_DETAIL_SCREEN,
+  TRANSACTION_CREATION_MODAL,
+  TRANSACTION_DETAIL_MODAL,
 } from '../constants/screenRoutes';
 import TabNavigation from './tab.navigation';
-import TransactionDetailScreen from '../screens/TransactionDetailScreen';
+// import TransactionDetailScreen from '../screens/TransactionDetailScreen';
+import TransactionDetailModal from '../modals/TransactionDetailModal';
+import TransactionModal from '../modals/TransactionModal';
 const AppStack = createNativeStackNavigator();
 
 const CoreNavigation = () => {
@@ -20,8 +23,13 @@ const CoreNavigation = () => {
         }}
       />
       <AppStack.Screen
-        name={TRANSACTION_DETAIL_SCREEN}
-        component={TransactionDetailScreen}
+        name={TRANSACTION_DETAIL_MODAL}
+        component={TransactionDetailModal}
+        options={{ presentation: 'modal', headerShown: false }}
+      />
+      <AppStack.Screen
+        name={TRANSACTION_CREATION_MODAL}
+        component={TransactionModal}
         options={{ presentation: 'modal', headerShown: false }}
       />
     </AppStack.Navigator>
