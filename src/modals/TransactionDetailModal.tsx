@@ -48,14 +48,6 @@ const TransactionDetailModal = () => {
             >
               <View className='flex flex-row justify-between '>
                 <View>
-                  <Text className='text-[#6C727F]'>Bank</Text>
-                </View>
-                <View className='text-right'>
-                  <Text className='text-right'>Guaranty Trust Bank</Text>
-                </View>
-              </View>
-              <View className='flex flex-row justify-between '>
-                <View>
                   <Text className='text-[#6C727F]'>Amount</Text>
                 </View>
                 <View className='text-right'>
