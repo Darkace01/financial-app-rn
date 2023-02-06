@@ -6,7 +6,7 @@ import PublicNavigator from './public-navigator';
 import Loading from '../components/Loading';
 
 const AppNavigation = () => {
-  const isLogged = false;
+  const isLogged = true;
   const [loading, setLoading] = useState(false);
 
   if (loading) {
