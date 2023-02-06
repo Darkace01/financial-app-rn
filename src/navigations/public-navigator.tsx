@@ -2,95 +2,72 @@ import { View, Text } from 'react-native';
 import React, { useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Splash from '../screens/OnboardingScreens/Splash';
-import Splash2 from '../screens/OnboardingScreens/Splash2';
-import Splash3 from '../screens/OnboardingScreens/Splash3';
-import Splash4 from '../screens/OnboardingScreens/Splash4';
-import Splash5 from '../screens/OnboardingScreens/Splash5';
+import Onboarding from '../screens/OnboardingScreens/Onboarding';
 import RegisterScreen from '../screens/AuthScreens/RegisterScreen';
 import LoginScreen from '../screens/AuthScreens/LoginScreen';
 import ForgotPassword from '../screens/AuthScreens/ForgotPassword';
 import OtpScreen from '../screens/AuthScreens/OtpScreen';
 import ResetPassword from '../screens/AuthScreens/ResetPassword';
 import PasswordChangeSuccessScreen from '../screens/AuthScreens/PasswordChangeSuccessScreen';
+import { ONBOARDING, SPLASH } from '../constants/screenRoutes';
 
 const OnboardingStack = createNativeStackNavigator();
 
 const PublicNavigator = () => {
-  
   return (
     <OnboardingStack.Navigator initialRouteName='LoginScreen'>
       <OnboardingStack.Screen
-        name="Splash"
+        name={SPLASH}
         component={Splash}
         options={{
           headerShown: false,
         }}
       />
       <OnboardingStack.Screen
-        name="Splash2"
-        component={Splash2}
+        name={ONBOARDING}
+        component={Onboarding}
         options={{
           headerShown: false,
         }}
       />
+
       <OnboardingStack.Screen
-        name="Splash3"
-        component={Splash3}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <OnboardingStack.Screen
-        name="Splash4"
-        component={Splash4}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <OnboardingStack.Screen
-        name="Splash5"
-        component={Splash5}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <OnboardingStack.Screen
-        name="Register"
+        name='Register'
         component={RegisterScreen}
         options={{
           headerShown: false,
         }}
       />
       <OnboardingStack.Screen
-        name="Login"
+        name='Login'
         component={LoginScreen}
         options={{
           headerShown: false,
         }}
       />
       <OnboardingStack.Screen
-        name="ForgotPassword"
+        name='ForgotPassword'
         component={ForgotPassword}
         options={{
           headerShown: false,
         }}
       />
       <OnboardingStack.Screen
-        name="OtpScreen"
+        name='OtpScreen'
         component={OtpScreen}
         options={{
           headerShown: false,
         }}
       />
       <OnboardingStack.Screen
-        name="ResetPassword"
+        name='ResetPassword'
         component={ResetPassword}
         options={{
           headerShown: false,
         }}
       />
       <OnboardingStack.Screen
-        name="PasswordChangeSuccessScreen"
+        name='PasswordChangeSuccessScreen'
         component={PasswordChangeSuccessScreen}
         options={{
           headerShown: false,

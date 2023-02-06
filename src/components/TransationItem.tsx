@@ -1,13 +1,13 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { TRANSACTION_DETAIL_SCREEN } from '../constants/screenRoutes';
+import { TRANSACTION_DETAIL_MODAL } from '../constants/screenRoutes';
 import FirstLetterIcon from './FirstLetterIcon';
 
 const TransationItem = () => {
   const navigation = useNavigation();
   const handlePress = () => {
-    navigation.navigate(TRANSACTION_DETAIL_SCREEN);
+    navigation.navigate(TRANSACTION_DETAIL_MODAL);
   };
   return (
     <TouchableOpacity
