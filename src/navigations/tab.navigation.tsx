@@ -50,9 +50,20 @@ const TabNavigation = () => {
             <View style={styles.iconStyle}>
               <Foundation
                 name='home'
-                size={20}
+                size={focused ? 16 : 18}
                 color={focused ? colors.primary : colors.gray}
               />
+              {focused && (
+                <Text
+                  style={{
+                    color: colors.primary,
+                    fontFamily: fonts.font600,
+                    fontSize: 12,
+                  }}
+                >
+                  Home
+                </Text>
+              )}
             </View>
           ),
         }}
@@ -65,9 +76,20 @@ const TabNavigation = () => {
             <View style={styles.iconStyle}>
               <Ionicons
                 name='stats-chart-sharp'
-                size={18}
+                size={focused ? 16 : 18}
                 color={focused ? colors.primary : colors.gray}
               />
+              {focused && (
+                <Text
+                  style={{
+                    color: colors.primary,
+                    fontFamily: fonts.font600,
+                    fontSize: 12,
+                  }}
+                >
+                  Transactions
+                </Text>
+              )}
             </View>
           ),
         }}
@@ -80,9 +102,20 @@ const TabNavigation = () => {
             <View style={styles.iconStyle}>
               <FontAwesome5
                 name='user-alt'
-                size={18}
+                size={focused ? 16 : 18}
                 color={focused ? colors.primary : colors.gray}
               />
+              {focused && (
+                <Text
+                  style={{
+                    color: colors.primary,
+                    fontFamily: fonts.font600,
+                    fontSize: 12,
+                  }}
+                >
+                  Profile
+                </Text>
+              )}
             </View>
           ),
         }}
@@ -98,6 +131,7 @@ const styles = StyleSheet.create({
       ios: '30%',
       android: '15%',
     }),
+    alignItems: 'center',
   },
 });
 
