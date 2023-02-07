@@ -1,4 +1,4 @@
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import NavigationTopBar from '../components/NavigationTopBar';
@@ -47,6 +47,36 @@ const TransactionModal = () => {
               }}
             />
           </View>
+        </View>
+        <View className='flex flex-col'>
+          <Text className={`text-base font-[${fonts.font700}]`}>
+            Decription
+          </Text>
+          <View className='flex flex-row bg-themeGrey  rounded-md items-start my-1'>
+            <TextInput
+              placeholder='What I really bought'
+              className='ml-2 px-1 w-full p-2'
+              multiline
+              numberOfLines={4}
+            />
+          </View>
+        </View>
+        <View className='flex flex-col'>
+          <Text className={`text-base font-[${fonts.font700}]`}>Amount</Text>
+          <View className='flex flex-row bg-themeGrey py-2 px-3 rounded-md items-center my-1'>
+            <TextInput
+              placeholder='₦ 0.00'
+              className='ml-1 px-1 w-full'
+              keyboardType='numeric'
+            />
+          </View>
+        </View>
+        <View className='flex flex-col'>
+          <TouchableOpacity className='bg-accent py-2 rounded-md mt-5'>
+            <Text className='text-center text-white font-[${fonts.font700}]'>
+              Save
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
