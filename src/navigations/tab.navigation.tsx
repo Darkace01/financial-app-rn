@@ -15,7 +15,7 @@ import {
 } from '@expo/vector-icons';
 import { colors, fonts } from '../constants/globalStyles';
 import TransactionScreen from '../screens/TransactionScreen';
-import ProfileScreen from '../screens/ProfileScreens/ProfileScreen';
+import ProfileStackNavigation from './ProfileStackNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -74,7 +74,7 @@ const TabNavigation = () => {
       />
       <Tab.Screen
         name={PROFILE_SCREEN}
-        component={ProfileScreen}
+        component={ProfileStackNavigation}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.iconStyle}>

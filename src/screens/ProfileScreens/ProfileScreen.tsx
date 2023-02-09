@@ -2,8 +2,11 @@ import { View, Text, SafeAreaView, Image, Pressable } from 'react-native';
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { ACCOUNT } from '../../constants/screenRoutes';
 
 const ProfileScreen = () => {
+  const navigation = useNavigation();
   return (
     <SafeAreaView className='flex-1 bg-accent'>
       <View className='flex flex-row items-center space-x-3 mx-4 h-[20%]'>
@@ -24,7 +27,11 @@ const ProfileScreen = () => {
         </View>
       </View>
       <View className='h-[80%] bg-white rounded-t-3xl pt-5 px-5 space-y-5'>
-            <Pressable className='flex flex-row items-center space-x-4'>
+            <Pressable 
+            onPress={()=>{
+              navigation.navigate(ACCOUNT)
+            }}
+            className='flex flex-row items-center space-x-4'>
               <View className='p-4 bg-gray-300 rounded-xl'>
                 <Ionicons name="person" size={24} color="#5b24cf" />
               </View>
@@ -40,7 +47,9 @@ const ProfileScreen = () => {
                 <Text className='font-semibold'>Settings</Text>
               </View>
             </Pressable>
-            <Pressable className='flex flex-row items-center space-x-4'>
+            <Pressable 
+            
+            className='flex flex-row items-center space-x-4'>
               <View className='p-4 bg-gray-300 rounded-xl'>
                 <AntDesign name="questioncircle" size={24} color="#5b24cf" />
               </View>
