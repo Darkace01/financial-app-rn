@@ -1,11 +1,23 @@
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
-import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
+import React, { useContext } from 'react';
 import { colors, fonts } from '../constants/globalStyles';
 import { Ionicons } from '@expo/vector-icons';
+import { UserContext } from '../contexts/user.context';
 // get screen height
 const screenHeight = Dimensions.get('window').height;
 const cardHeight = `${screenHeight / 4}px`;
 const BalanceCard = () => {
+  const { signOutUser } = useContext(UserContext);
+
+  const handleSignOut = async () => {
+    await signOutUser();
+  };
   return (
     <View
       className={`bg-accent w-full h-44 rounded-lg shadow-lg p-5 justify-between`}
@@ -19,7 +31,9 @@ const BalanceCard = () => {
             </Text>
           </View>
           <View>
-            <Ionicons name='ios-share-outline' size={18} color='white' />
+            <TouchableOpacity onPress={handleSignOut}>
+              <Ionicons name='ios-share-outline' size={18} color='white' />
+            </TouchableOpacity>
           </View>
         </View>
         <View>

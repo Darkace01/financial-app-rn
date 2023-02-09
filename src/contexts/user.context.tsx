@@ -1,5 +1,6 @@
 import React, { useState, createContext, useEffect } from 'react';
-import { SIGNED_IN } from '../constants/storageConstants';
+import { AUTH_TOKEN_KEY, SIGNED_IN } from '../constants/storageConstants';
+import { AuthResponse } from '../Helpers/Interfaces/apiResponse';
 import { getItem, setItem } from '../Helpers/Service/StorageService';
 
 export const UserContext = createContext(null);
@@ -19,13 +20,14 @@ export const UserProvider = ({ children }) => {
     checkSignedIn();
   }, []);
 
-  const signInUser = async (user) => {
+  const signInUser = async (user: AuthResponse) => {
     await setItem(SIGNED_IN, true);
+    await setItem(AUTH_TOKEN_KEY, user.accessToken);
     setSignedIn(true);
     setUser(user);
   };
 
-  const singOutUser = async () => {
+  const signOutUser = async () => {
     await setItem(SIGNED_IN, false);
     setSignedIn(false);
     setUser(null);
@@ -37,7 +39,7 @@ export const UserProvider = ({ children }) => {
     signInUser,
     signedIn,
     setSignedIn,
-    singOutUser,
+    signOutUser,
   };
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

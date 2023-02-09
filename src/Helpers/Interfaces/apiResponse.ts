@@ -5,3 +5,10 @@ export interface apiResponse<T> {
   statusCode: number;
   data: T;
 }
+
+export interface AuthResponse {
+  accessToken: string;
+  emailAddress: string;
+  fullName: string;
+  userId: string;
+}

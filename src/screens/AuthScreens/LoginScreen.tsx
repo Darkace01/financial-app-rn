@@ -18,6 +18,8 @@ import BigBlueButton from './Components/BigBlueButton';
 import validator from 'validator';
 import Toast from 'react-native-toast-message';
 import { UserContext } from '../../contexts/user.context';
+import { login } from '../../Helpers/Service/AuthService';
+import { AuthResponse } from '../../Helpers/Interfaces/apiResponse';
 
 const LoginScreen = () => {
   const { signInUser } = useContext(UserContext);
@@ -36,22 +38,40 @@ const LoginScreen = () => {
     setPassword(val);
   };
   const Login = async () => {
-    if (validator.isEmail(Email)) {
-      console.log('Login');
-      await saveUser();
-    } else {
-      Toast.show({
-        type: 'error',
-        text1: 'Validation Error',
-        text2: 'Email must be valid',
-      });
+    try {
+      login(Email, Password)
+        .then((res) => {
+          console.log('RESPONSE', res);
+          saveUser(res.data).then(() => {
+            Toast.show({
+              type: 'success',
+              text1: 'Login Success',
+              text2: 'Welcome to the app',
+            });
+          });
+        })
+        .catch((err) => {
+          Toast.show({
+            type: 'error',
+            text1: 'Unknown Error',
+            text2: 'Please try again',
+          });
+        });
+    } catch (error) {
+      console.log(error);
     }
   };
-  const saveUser = async () => {
+  const saveUser = async ({
+    fullName,
+    emailAddress,
+    accessToken,
+    userId,
+  }: AuthResponse) => {
     await signInUser({
-      email: Email,
-      password: Password,
-      FullName: 'Test User',
+      emailAddress,
+      accessToken,
+      userId,
+      fullName,
     });
   };
   const ChangePasswordView = () => {

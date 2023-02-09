@@ -1,10 +1,16 @@
 import { View, Text, Image } from 'react-native';
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { colors, fonts } from '../constants/globalStyles';
-import { AntDesign } from '@expo/vector-icons';
-import Test from './Test';
+import { UserContext } from '../contexts/user.context';
 
 const UserBar = () => {
+  const { user } = useContext(UserContext);
+  if (user === null) return null;
+  //split the name
+  const { fullName } = user;
+  const name = fullName.split(' ');
+  const firstName = name[0];
+  const lastName = name[1];
   return (
     <View className='flex flex-row space-x-3 items-center'>
       <View>
@@ -15,9 +21,9 @@ const UserBar = () => {
       </View>
       <View className='flex flex-row'>
         <Text className={`text-xl font-bold font-[${fonts.font700}]`}>
-          Kazeem{' '}
+          {firstName}{' '}
         </Text>
-        <Text className={`text-xl font-[${fonts.font700}]`}>Quadri</Text>
+        <Text className={`text-xl font-[${fonts.font700}]`}>{lastName}</Text>
       </View>
     </View>
   );
