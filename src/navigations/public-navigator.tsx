@@ -15,14 +15,14 @@ const OnboardingStack = createNativeStackNavigator();
 
 const PublicNavigator = () => {
   return (
-    <OnboardingStack.Navigator initialRouteName='LoginScreen'>
-      <OnboardingStack.Screen
-        name={SPLASH}
-        component={Splash}
-        options={{
-          headerShown: false,
-        }}
-      />
+    <OnboardingStack.Navigator
+      headerMode='float'
+      screenOptions={{
+        gestureEnabled: true,
+        gestureDirection: 'horizontal',
+        animation: 'slide_from_right',
+      }}
+    >
       <OnboardingStack.Screen
         name={ONBOARDING}
         component={Onboarding}
