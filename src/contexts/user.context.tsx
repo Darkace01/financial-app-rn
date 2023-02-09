@@ -31,6 +31,13 @@ export const UserProvider = ({ children }) => {
     setUser(null);
   };
 
-  const value = { user, setUser, signInUser, signedIn, setSignedIn };
+  const value = {
+    user,
+    setUser,
+    signInUser,
+    signedIn,
+    setSignedIn,
+    singOutUser,
+  };
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
