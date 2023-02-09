@@ -15,7 +15,7 @@ import {
 } from '@expo/vector-icons';
 import { colors, fonts } from '../constants/globalStyles';
 import TransactionScreen from '../screens/TransactionScreen';
-import ProfileScreen from '../screens/ProfileScreen';
+import ProfileScreen from '../screens/ProfileScreens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
