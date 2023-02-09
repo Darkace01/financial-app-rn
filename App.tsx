@@ -11,6 +11,9 @@ import {
 } from '@expo-google-fonts/poppins';
 import Toast from 'react-native-toast-message';
 
+//Context
+import { UserProvider } from './src/contexts/user.context';
+
 export default function App() {
   const [fontLoaded] = useFonts({
     Poppins_400Regular,
@@ -23,10 +26,12 @@ export default function App() {
   }
 
   return (
-    <TailwindProvider>
-      <StatusBar style='auto' />
-      <AppNavigation />
-      <Toast />
-    </TailwindProvider>
+    <UserProvider>
+      <TailwindProvider>
+        <StatusBar style='auto' />
+        <AppNavigation />
+        <Toast />
+      </TailwindProvider>
+    </UserProvider>
   );
 }
