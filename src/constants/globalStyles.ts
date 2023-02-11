@@ -12,6 +12,7 @@ export const colors = {
   pageBackground: '#F5F7FF',
   boldPrimary: '#051448',
   inputGray: '#B0BAD7',
+  shadowBg: '#3C366317',
 };
 
 export const fonts = {

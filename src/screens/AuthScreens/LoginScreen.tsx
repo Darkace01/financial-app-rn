@@ -7,6 +7,7 @@ import {
   Keyboard,
   TextInput,
   Image,
+  ScrollView,
 } from 'react-native';
 import React, { useState, useContext } from 'react';
 import { Ionicons } from '@expo/vector-icons';
@@ -20,6 +21,7 @@ import Toast from 'react-native-toast-message';
 import { UserContext } from '../../contexts/user.context';
 import { login } from '../../Helpers/Service/AuthService';
 import { AuthResponse } from '../../Helpers/Interfaces/apiResponse';
+import CustomLoadingComponent from '../../components/CustomLoadingComponent';
 
 const LoginScreen = () => {
   const { signInUser } = useContext(UserContext);
@@ -29,6 +31,7 @@ const LoginScreen = () => {
   const [showPassword, setShowPassword] = useState(true);
   const [icon, setIcon] = useState('eye-off');
   const [textinputBorder, setTextInputBorder] = useState('border-gray-400');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleEmail = (val) => {
     setTextInputBorder('border-red-700');
@@ -39,10 +42,12 @@ const LoginScreen = () => {
   };
   const Login = async () => {
     try {
+      setIsLoading(true);
       login(Email, Password)
         .then((res) => {
           console.log('RESPONSE', res);
           saveUser(res.data).then(() => {
+            setIsLoading(false);
             Toast.show({
               type: 'success',
               text1: 'Login Success',
@@ -51,6 +56,7 @@ const LoginScreen = () => {
           });
         })
         .catch((err) => {
+          setIsLoading(false);
           Toast.show({
             type: 'error',
             text1: 'Unknown Error',
@@ -58,6 +64,7 @@ const LoginScreen = () => {
           });
         });
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     }
   };
@@ -89,12 +96,8 @@ const LoginScreen = () => {
   };
 
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        Keyboard.dismiss();
-      }}
-    >
-      <SafeAreaView className='flex-1 mx-4 mt-10'>
+    <ScrollView>
+      <SafeAreaView className='flex-1 mx-4 mt-10 relative'>
         <Pressable
           onPress={() => {
             navigation.goBack();
@@ -166,7 +169,7 @@ const LoginScreen = () => {
             </View>
           </View>
         </View>
-        <View className='flex flex-row w-full justify-center mt-10 space-x-2 absolute bottom-8'>
+        <View className='flex flex-row w-full justify-center mt-10 space-x-2  bottom-8'>
           <Text className='font-normal text-lg'>Already have an account?</Text>
           <Pressable onPress={GotoRegister}>
             <Text className='font-semibold text-lg text-accent'>
@@ -174,8 +177,9 @@ const LoginScreen = () => {
             </Text>
           </Pressable>
         </View>
+        {isLoading ? <CustomLoadingComponent visible={isLoading} /> : null}
       </SafeAreaView>
-    </TouchableWithoutFeedback>
+    </ScrollView>
   );
 };
 
