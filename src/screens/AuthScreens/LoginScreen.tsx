@@ -20,7 +20,10 @@ import validator from 'validator';
 import Toast from 'react-native-toast-message';
 import { UserContext } from '../../contexts/user.context';
 import { login } from '../../Helpers/Service/AuthService';
-import { AuthResponse } from '../../Helpers/Interfaces/apiResponse';
+import {
+  apiResponse,
+  AuthResponse,
+} from '../../Helpers/Interfaces/apiResponse';
 import CustomLoadingComponent from '../../components/CustomLoadingComponent';
 
 const LoginScreen = () => {
@@ -44,8 +47,26 @@ const LoginScreen = () => {
     try {
       setIsLoading(true);
       login(Email, Password)
-        .then((res) => {
+        .then((res: apiResponse<AuthResponse>) => {
           console.log('RESPONSE', res);
+          if (res.hasError) {
+            setIsLoading(false);
+            Toast.show({
+              type: 'error',
+              text1: 'Login Error',
+              text2: res.message,
+            });
+            return;
+          }
+          if (!res.data) {
+            setIsLoading(false);
+            Toast.show({
+              type: 'error',
+              text1: 'Login Error',
+              text2: 'Please try again',
+            });
+            return;
+          }
           saveUser(res.data).then(() => {
             setIsLoading(false);
             Toast.show({
