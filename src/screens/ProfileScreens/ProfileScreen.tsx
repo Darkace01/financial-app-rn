@@ -3,7 +3,7 @@ import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { ACCOUNT } from '../../constants/screenRoutes';
+import { ACCOUNT, SETTINGS } from '../../constants/screenRoutes';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -39,7 +39,11 @@ const ProfileScreen = () => {
                 <Text className='font-semibold'>My Account</Text>
               </View>
             </Pressable>
-            <Pressable className='flex flex-row items-center space-x-4'>
+            <Pressable
+              onPress={()=>{
+                navigation.navigate(SETTINGS)
+              }}
+              className='flex flex-row items-center space-x-4'>
               <View className='p-4 bg-gray-300 rounded-xl'>
                 <Ionicons name="settings" size={24} color="#5b24cf" />
               </View>

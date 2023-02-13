@@ -3,6 +3,7 @@ import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProfileScreen from '../screens/ProfileScreens/ProfileScreen';
 import Account from '../screens/ProfileScreens/Account';
+import Settings from '../screens/ProfileScreens/Settings';
 
 const profileStack = createNativeStackNavigator();
 
@@ -19,6 +20,13 @@ const ProfileStackNavigation = () => {
         <profileStack.Screen
             name='Account'
             component={Account}
+            options={{
+                headerShown: false,
+            }}
+        />
+        <profileStack.Screen
+            name='Settings'
+            component={Settings}
             options={{
                 headerShown: false,
             }}
