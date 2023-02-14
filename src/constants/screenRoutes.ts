@@ -12,5 +12,7 @@ export const LOGIN: string = 'Login';
 export const FOGORTPASSWORD: string = 'ForgotPassword';
 export const OTPSCREEN: string = 'OtpScreen';
 export const RESETPASSWORD: string = 'ResetPassword';
-export const PASSWORDCHANGESUCCESSSCREEN: string =
-  'PasswordChangeSuccessScreen';
+export const PASSWORDCHANGESUCCESSSCREEN: string = 'PasswordChangeSuccessScreen';
+export const ACCOUNT: string = 'Account';
+export const SETTINGS: string = 'Settings'
+
