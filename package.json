@@ -22,9 +22,10 @@
     "@types/react-native": "~0.69.1",
     "axios": "^1.3.2",
     "expo": "~46.0.16",
-    "expo-image-picker": "~14.0.2",
     "expo-font": "~10.2.0",
+    "expo-image-picker": "~14.0.2",
     "expo-status-bar": "~1.4.0",
+    "nativewind": "^2.0.11",
     "react": "18.0.0",
     "react-native": "0.69.6",
     "react-native-dropdown-select-list": "^2.0.4",
@@ -32,16 +33,14 @@
     "react-native-safe-area-context": "^4.3.1",
     "react-native-screens": "~3.15.0",
     "react-native-toast-message": "^2.1.5",
-    "tailwindcss-react-native": "^1.7.10",
     "typescript": "^4.6.3",
-    "validator": "^13.7.0",
-    "wretch": "^2.3.1"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "concurrently": "^7.6.0",
     "postcss": "^8.4.19",
-    "tailwindcss": "^3.2.4"
+    "tailwindcss": "^3.2.6"
   },
   "private": true
 }
