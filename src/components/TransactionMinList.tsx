@@ -14,23 +14,32 @@ const screenHeight = Dimensions.get('window').height;
 const TransactionMinList = () => {
   const [refreshing, setRefreshing] = useState(false);
   const initialTransactionItems: Transaction[] = [];
-  const [transactionItems, setTransactionItems] = useState(
+  const [transactionItems, setTransactionItems] = useState<Transaction[]>(
     initialTransactionItems
   );
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    getUserTransactions().then((res: apiResponse<Transaction>) => {
-      if (res.hasError === false) {
-        setTransactionItems(res.data);
-      } else {
+    getUserTransactions()
+      .then((res: apiResponse<Transaction>) => {
+        if (res.hasError === false) {
+          setTransactionItems(res.data);
+        } else {
+          Toast.show({
+            type: 'error',
+            text1: 'Error',
+            text2: res.message,
+          });
+        }
+        setRefreshing(false);
+      })
+      .catch((error) => {
         Toast.show({
           type: 'error',
           text1: 'Error',
-          text2: res.message,
+          text2: 'Something went wrong',
         });
-      }
-    });
-    setRefreshing(false);
+        setRefreshing(false);
+      });
   }, []);
 
   useEffect(() => {
@@ -69,6 +78,7 @@ const TransactionMinList = () => {
           return (
             <TransationItem
               key={item.id}
+              title={item.title}
               amount={item.amount}
               categoryName={item.categoryName}
               dateAddedFormatted={item.dateAddedFormatted}

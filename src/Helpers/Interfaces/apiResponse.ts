@@ -36,6 +36,7 @@ export interface RegisterPayload {
 
 export interface Transaction {
   id: number;
+  title: string;
   description: string;
   amount: number;
   dateAdded: string;

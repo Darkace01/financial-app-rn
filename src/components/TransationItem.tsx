@@ -12,7 +12,7 @@ const TransationItem = (prop: Transaction) => {
   };
   return (
     <TouchableOpacity
-      className='flex flex-row justify-between my-3'
+      className='flex flex-row justify-between my-3 space-x-3'
       onPress={handlePress}
     >
       <View>
@@ -20,8 +20,8 @@ const TransationItem = (prop: Transaction) => {
           letter={prop.categoryName ? prop.categoryName[0] : ''}
         />
       </View>
-      <View className='flex justify-around'>
-        <Text className='text-sm'>{prop.description}</Text>
+      <View className='flex justify-around flex-1'>
+        <Text className='text-sm'>{prop.title}</Text>
         <Text className='text-xs text-slate-400'>
           {
             // TODO: format this later
