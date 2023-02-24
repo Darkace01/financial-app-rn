@@ -13,6 +13,7 @@ import Toast from 'react-native-toast-message';
 
 //Context
 import { UserProvider } from './src/contexts/user.context';
+import { AppProvider } from './src/contexts/app.context';
 
 export default function App() {
   const [fontLoaded] = useFonts({
@@ -24,14 +25,13 @@ export default function App() {
   if (!fontLoaded) {
     return null;
   }
-
-      // <TailwindProvider>
-      // </TailwindProvider>
   return (
-    <UserProvider>
+    <AppProvider>
+      <UserProvider>
         <StatusBar style='auto' />
         <AppNavigation />
         <Toast />
-    </UserProvider>
+      </UserProvider>
+    </AppProvider>
   );
 }

@@ -7,8 +7,8 @@ import Loading from '../components/Loading';
 import { UserContext } from '../contexts/user.context';
 
 const AppNavigation = () => {
-  const { signedIn } = useContext(UserContext);
-  const isLogged = signedIn;
+  const { signedIn, user } = useContext(UserContext);
+  const isLogged = signedIn && user !== null;
   const [loading, setLoading] = useState(false);
 
   if (loading) {

@@ -6,20 +6,21 @@ import {
   Animated,
   FlatList,
 } from 'react-native';
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { LOGIN } from '../../constants/screenRoutes';
 import * as storage from '../../Helpers/Service/StorageService';
 import { INTRO_PAGE_VIEWED } from '../../constants/storageConstants';
 import slides from '../../../slides';
 import OnboardingItem from './OnboardingItem';
+import { AppContext } from '../../contexts/app.context';
 
 const Onboarding = () => {
   //New Splash screen
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const slidesRef = useRef(null);
-
+  const { handleViewOnboarding } = useContext(AppContext);
   const viewableItemsChanged = useRef(({ viewableItems }) => {
     viewableItems[0] ? setCurrentIndex(viewableItems[0].index) : null;
   }).current;
@@ -35,7 +36,7 @@ const Onboarding = () => {
   };
 
   const startApp = async () => {
-    storage.setItem(INTRO_PAGE_VIEWED, true);
+    await handleViewOnboarding();
     navigation.navigate(LOGIN);
   };
 

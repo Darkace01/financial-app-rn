@@ -107,23 +107,17 @@ const LoginScreen = () => {
     navigation.navigate(REGISTER);
   };
 
-  const CheckValidation = () => {
-    if (validator.isEmail(userName)) {
-      setTextInputBorder('border-gray-400');
-    }
-  };
-
   return (
     <ScrollView>
       <SafeAreaView className='flex-1 mx-4 mt-10 relative'>
-        <Pressable
+        {/* <Pressable
           onPress={() => {
             navigation.goBack();
           }}
           className='border border-gray-400 rounded-md p-2 w-[40px]'
         >
           <Ionicons name='chevron-back' size={24} color='black' />
-        </Pressable>
+        </Pressable> */}
         <View className='mt-5 space-y-5'>
           <Text className='text-accent text-2xl font-bold max-w-[70%]'>
             Welcome back! Glad to see you, Again!
