@@ -21,10 +21,16 @@ const TransationItem = (prop: Transaction) => {
       <View className='flex justify-around'>
         <Text className='text-sm'>{prop.description}</Text>
         <Text className='text-xs text-slate-400'>
+          {
+            // TODO: format this later
+          }
           {prop.dateAddedFormatted}
         </Text>
       </View>
       <View className='flex justify-center'>
+        {
+          // TODO: format this later
+        }
         <Text>N{prop.amount}</Text>
       </View>
     </TouchableOpacity>
