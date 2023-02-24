@@ -6,7 +6,7 @@ import Test from './Test';
 
 const TopBar = () => {
   return (
-    <View className='flex flex-row justify-between mx-auto mb-4 items-center'>
+    <View className='flex flex-row justify-between mx-auto mb-4 items-center w-full'>
       <View className='flex space-x-2 flex-row'>
         <View>
           <Octicons name='dot-fill' size={30} color={colors.boldPrimary} />

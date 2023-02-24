@@ -37,8 +37,7 @@ const LoginScreen = () => {
   const [textinputBorder, setTextInputBorder] = useState('border-gray-400');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleEmail = (val) => {
-    setTextInputBorder('border-red-700');
+  const handleUserName = (val) => {
     setuserName(val);
   };
   const handlePassword = (val) => {
@@ -97,18 +96,8 @@ const LoginScreen = () => {
       });
     }
   };
-  const saveUser = async ({
-    fullName,
-    emailAddress,
-    accessToken,
-    userId,
-  }: AuthResponse) => {
-    await signInUser({
-      emailAddress,
-      accessToken,
-      userId,
-      fullName,
-    });
+  const saveUser = async (payload: AuthResponse) => {
+    await signInUser(payload);
   };
   const ChangePasswordView = () => {
     setShowPassword((val) => (val = !showPassword));
@@ -142,11 +131,10 @@ const LoginScreen = () => {
           <View className='space-y-4'>
             <TextInput
               onChangeText={(text) => {
-                handleEmail(text);
+                handleUserName(text);
               }}
               value={userName}
-              onEndEditing={CheckValidation}
-              placeholder='Email'
+              placeholder='Username or Email Address'
               className={`text-sm border ${textinputBorder} h-[56px] pl-4 bg-inputBackground rounded-md`}
             />
             <View className='border border-[#596369] h-[56px] bg-inputBackground  rounded-md flex flex-row items-center justify-between space-x-2 pl-2 pr-2'>

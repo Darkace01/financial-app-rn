@@ -10,7 +10,11 @@ export interface AuthResponse {
   accessToken: string;
   emailAddress: string;
   fullName: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
   userId: string;
+  profilePictureUrl: string;
 }
 
 export interface LoginPayload {

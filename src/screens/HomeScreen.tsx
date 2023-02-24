@@ -18,7 +18,7 @@ const HomeScreen = () => {
     navigation.navigate(TRANSACTION_CREATION_MODAL);
   };
   return (
-    <SafeAreaView className={`bg-themeGrey h-full mx-auto px-5`}>
+    <SafeAreaView className={`bg-themeGrey h-full w-full mx-auto px-5`}>
       <TopBar />
       <UserBar />
       <View className='mt-5 mb-5 w-full'>
