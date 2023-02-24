@@ -23,14 +23,15 @@ import { login } from '../../Helpers/Service/AuthService';
 import {
   apiResponse,
   AuthResponse,
+  LoginPayload,
 } from '../../Helpers/Interfaces/apiResponse';
 import CustomLoadingComponent from '../../components/CustomLoadingComponent';
 
 const LoginScreen = () => {
   const { signInUser } = useContext(UserContext);
   const navigation = useNavigation();
-  const [Email, setEmail] = useState('');
-  const [Password, setPassword] = useState('');
+  const [userName, setuserName] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(true);
   const [icon, setIcon] = useState('eye-off');
   const [textinputBorder, setTextInputBorder] = useState('border-gray-400');
@@ -38,7 +39,7 @@ const LoginScreen = () => {
 
   const handleEmail = (val) => {
     setTextInputBorder('border-red-700');
-    setEmail(val);
+    setuserName(val);
   };
   const handlePassword = (val) => {
     setPassword(val);
@@ -46,9 +47,12 @@ const LoginScreen = () => {
   const Login = async () => {
     try {
       setIsLoading(true);
-      login(Email, Password)
+      const payload: LoginPayload = {
+        username: userName,
+        password: password,
+      };
+      login(payload)
         .then((res: apiResponse<AuthResponse>) => {
-          console.log('RESPONSE', res);
           if (res.hasError) {
             setIsLoading(false);
             Toast.show({
@@ -86,7 +90,11 @@ const LoginScreen = () => {
         });
     } catch (error) {
       setIsLoading(false);
-      console.log(error);
+      Toast.show({
+        type: 'error',
+        text1: 'Unknown Error',
+        text2: 'Please try again',
+      });
     }
   };
   const saveUser = async ({
@@ -111,7 +119,7 @@ const LoginScreen = () => {
   };
 
   const CheckValidation = () => {
-    if (validator.isEmail(Email)) {
+    if (validator.isEmail(userName)) {
       setTextInputBorder('border-gray-400');
     }
   };
@@ -136,17 +144,17 @@ const LoginScreen = () => {
               onChangeText={(text) => {
                 handleEmail(text);
               }}
-              value={Email}
+              value={userName}
               onEndEditing={CheckValidation}
               placeholder='Email'
-              className={`text-sm border ${textinputBorder} h-[56px] pl-4 bg-[#E8ECF4] rounded-md`}
+              className={`text-sm border ${textinputBorder} h-[56px] pl-4 bg-inputBackground rounded-md`}
             />
-            <View className='border border-[#596369] h-[56px] bg-[#E8ECF4]  rounded-md flex flex-row items-center justify-between space-x-2 pl-2 pr-2'>
+            <View className='border border-[#596369] h-[56px] bg-inputBackground  rounded-md flex flex-row items-center justify-between space-x-2 pl-2 pr-2'>
               <TextInput
                 onChangeText={(text) => {
                   handlePassword(text);
                 }}
-                value={Password}
+                value={password}
                 placeholder='Password'
                 className='w-[70%] text-sm'
                 secureTextEntry={showPassword}

@@ -14,6 +14,7 @@ module.exports = {
         themeGreen: '#1A8F5A',
         themeRed: '#DB0000',
         themeGrey: '#F5F7FF',
+        inputBackground: '#E8ECF4',
       },
     },
   },
