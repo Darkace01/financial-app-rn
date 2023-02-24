@@ -39,7 +39,11 @@ const TransactionMinList = () => {
         if (res.hasError === false) {
           setTransactionItems(res.data);
         } else {
-          console.log(res.message);
+          Toast.show({
+            type: 'error',
+            text1: 'Error',
+            text2: 'Something went wrong',
+          });
         }
       });
     } catch (error) {
