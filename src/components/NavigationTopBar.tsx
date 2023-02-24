@@ -11,7 +11,7 @@ type Props = {
 const NavigationTopBar = ({ withFilter, text, onclick }: Props) => {
   const navigation = useNavigation();
   return (
-    <View className='flex flex-row justify-between mx-auto mb-4 items-center mt-2'>
+    <View className='flex flex-row justify-between mb-4 items-center mt-2 w-full py-2'>
       <TouchableOpacity onPress={navigation.goBack}>
         <Ionicons name='chevron-back' size={20} color='black' />
       </TouchableOpacity>
