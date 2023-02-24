@@ -3,8 +3,9 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { TRANSACTION_DETAIL_MODAL } from '../constants/screenRoutes';
 import FirstLetterIcon from './FirstLetterIcon';
+import { Transaction } from '../Helpers/Interfaces/apiResponse';
 
-const TransationItem = () => {
+const TransationItem = (prop: Transaction) => {
   const navigation = useNavigation();
   const handlePress = () => {
     navigation.navigate(TRANSACTION_DETAIL_MODAL);
@@ -15,14 +16,16 @@ const TransationItem = () => {
       onPress={handlePress}
     >
       <View>
-        <FirstLetterIcon />
+        <FirstLetterIcon letter={prop?.categoryName[0]} />
       </View>
       <View className='flex justify-around'>
-        <Text className='text-sm'>Transfer to Phillip</Text>
-        <Text className='text-xs text-slate-400'>12:03 AM</Text>
+        <Text className='text-sm'>{prop.description}</Text>
+        <Text className='text-xs text-slate-400'>
+          {prop.dateAddedFormatted}
+        </Text>
       </View>
       <View className='flex justify-center'>
-        <Text>+N42,209</Text>
+        <Text>N{prop.amount}</Text>
       </View>
     </TouchableOpacity>
   );

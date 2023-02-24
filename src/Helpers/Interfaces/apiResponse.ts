@@ -6,8 +6,7 @@ export interface apiResponse<T> {
   data: T;
 }
 
-export interface AuthResponse {
-  accessToken: string;
+export interface BasicUser {
   emailAddress: string;
   fullName: string;
   firstName: string;
@@ -15,6 +14,10 @@ export interface AuthResponse {
   phoneNumber: string;
   userId: string;
   profilePictureUrl: string;
+}
+
+export interface AuthResponse extends BasicUser {
+  accessToken: string;
 }
 
 export interface LoginPayload {
@@ -29,4 +32,15 @@ export interface RegisterPayload {
   password: string;
   userName: string;
   phoneNumber: string;
+}
+
+export interface Transaction {
+  id: number;
+  description: string;
+  amount: number;
+  dateAdded: string;
+  dateAddedFormatted: string;
+  categoryId: number;
+  categoryName: string;
+  userId: string;
 }
