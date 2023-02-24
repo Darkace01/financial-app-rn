@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import TopBar from '../components/TopBar';
@@ -34,16 +34,5 @@ const HomeScreen = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    // paddingHorizontal: 20,
-    backgroundColor: colors.pageBackground,
-    height: '100%',
-  },
-  chartSection: {
-    width: screenWidth / 1.1,
-  },
-});
 
 export default HomeScreen;

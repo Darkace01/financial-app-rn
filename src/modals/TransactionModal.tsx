@@ -18,7 +18,7 @@ const TransactionModal = () => {
     { key: '7', value: 'Drinks' },
   ];
   return (
-    <SafeAreaView className='bg-white h-full mx-auto px-5'>
+    <SafeAreaView className='bg-white h-full mx-auto px-5 w-full'>
       <NavigationTopBar withFilter={false} text='Money In' />
       <View className='space-y-5'>
         <View>

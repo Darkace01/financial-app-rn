@@ -8,7 +8,7 @@ import TransactionList from '../components/TransactionList';
 
 const TransactionScreen = () => {
   return (
-    <SafeAreaView className={`bg-themeGrey h-full mx-auto px-5`}>
+    <SafeAreaView className={`bg-themeGrey h-full mx-auto px-5 w-full`}>
       <NavigationTopBar withFilter />
       <View className='flex flex-row justify-between my-4'>
         <ToolipButton text='Today' />

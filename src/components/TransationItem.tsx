@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { TRANSACTION_DETAIL_MODAL } from '../constants/screenRoutes';
 import FirstLetterIcon from './FirstLetterIcon';
@@ -16,7 +16,9 @@ const TransationItem = (prop: Transaction) => {
       onPress={handlePress}
     >
       <View>
-        <FirstLetterIcon letter={prop?.categoryName[0]} />
+        <FirstLetterIcon
+          letter={prop.categoryName ? prop.categoryName[0] : ''}
+        />
       </View>
       <View className='flex justify-around'>
         <Text className='text-sm'>{prop.description}</Text>
