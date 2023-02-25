@@ -10,9 +10,11 @@ import TransationItem from './TransationItem';
 import { apiResponse, Transaction } from '../Helpers/Interfaces/apiResponse';
 import { getUserTransactions } from '../Helpers/Service/TransactionService';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
+import Loading from './Loading';
 const screenHeight = Dimensions.get('window').height;
 const TransactionMinList = () => {
   const [refreshing, setRefreshing] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const initialTransactionItems: Transaction[] = [];
   const [transactionItems, setTransactionItems] = useState<Transaction[]>(
     initialTransactionItems
@@ -44,6 +46,7 @@ const TransactionMinList = () => {
 
   useEffect(() => {
     try {
+      setIsLoading(true);
       getUserTransactions().then((res: apiResponse<Transaction>) => {
         if (res.hasError === false) {
           setTransactionItems(res.data);
@@ -54,6 +57,7 @@ const TransactionMinList = () => {
             text2: 'Something went wrong',
           });
         }
+        setIsLoading(false);
       });
     } catch (error) {
       Toast.show({
@@ -61,6 +65,7 @@ const TransactionMinList = () => {
         text1: 'Error',
         text2: 'Something went wrong',
       });
+      setIsLoading(false);
     }
   }, []);
 
@@ -74,22 +79,26 @@ const TransactionMinList = () => {
     >
       <Text className='text-slate-400 text-xs'>Today</Text>
       <View className='pb-10'>
-        {transactionItems?.map((item: Transaction) => {
-          return (
-            <TransationItem
-              key={item.id}
-              title={item.title}
-              amount={item.amount}
-              categoryName={item.categoryName}
-              dateAddedFormatted={item.dateAddedFormatted}
-              description={item.description}
-              id={item.id}
-              categoryId={item.categoryId}
-              dateAdded={item.dateAdded}
-              userId={item.userId}
-            />
-          );
-        })}
+        {isLoading === true ? (
+          <Loading />
+        ) : (
+          transactionItems?.map((item: Transaction) => {
+            return (
+              <TransationItem
+                key={item.id}
+                title={item.title}
+                amount={item.amount}
+                categoryName={item.categoryName}
+                dateAddedFormatted={item.dateAddedFormatted}
+                description={item.description}
+                id={item.id}
+                categoryId={item.categoryId}
+                dateAdded={item.dateAdded}
+                userId={item.userId}
+              />
+            );
+          })
+        )}
       </View>
     </ScrollView>
   );
