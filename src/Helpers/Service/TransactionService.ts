@@ -1,7 +1,23 @@
 import { GET_USER_TRANSACTIONS_URL } from '../../constants/apiUrls';
 import appAxios from '../AxiosInterceptor';
 
-export const getUserTransactions = async () => {
-  const response = await appAxios.get(GET_USER_TRANSACTIONS_URL);
-  return response.data;
+export const getUserTransactions = async (
+  searchTerm: string = '',
+  take: Number = 50
+) => {
+  try {
+    const response = await appAxios.get(GET_USER_TRANSACTIONS_URL, {
+      params: {
+        query: searchTerm,
+        take: take,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    if (error.response.status === 500) {
+      throw new Error('Internal server error');
+    } else {
+      throw JSON.stringify(error);
+    }
+  }
 };
