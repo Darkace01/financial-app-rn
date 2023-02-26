@@ -12,8 +12,8 @@ export const getUserTransactions = async (
       params: {
         query: searchTerm,
         take: take,
-        startDate: startDate,
-        endDate: endDate,
+        startDateStr: startDate,
+        endDateStr: endDate,
       },
     });
     return response.data;

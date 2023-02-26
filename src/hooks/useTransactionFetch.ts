@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { AppContext } from '../contexts/app.context';
 import { apiResponse, Transaction } from '../Helpers/Interfaces/apiResponse';
 import { getUserTransactions } from '../Helpers/Service/TransactionService';
 
@@ -14,6 +15,16 @@ export const useTransactionFetch = () => {
   const [transactionItems, setTransactionItems] = useState<Transaction[]>(
     initialTransactionItems
   );
+
+  //App Context
+  const { filterRangeStr, handleFilterRange } = useContext(AppContext);
+
+  useEffect(() => {
+    if (filterRangeStr) {
+      setStartDate(filterRangeStr.startDate);
+      setEndDate(filterRangeStr.endDate);
+    }
+  }, [filterRangeStr]);
 
   const fetchTransactions = async (
     searchTerm: string,
