@@ -50,7 +50,6 @@ const TransactionList = () => {
       setIsLoading(true);
       getUserTransactions().then((res: apiResponse<Transaction>) => {
         if (res.hasError === false) {
-          console.log('Done fetching', isLoading);
           setTransactionItems(res.data);
         } else {
           Toast.show({

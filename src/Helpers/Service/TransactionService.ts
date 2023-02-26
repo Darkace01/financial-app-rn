@@ -3,13 +3,17 @@ import appAxios from '../AxiosInterceptor';
 
 export const getUserTransactions = async (
   searchTerm: string = '',
-  take: Number = 50
+  take: Number = 50,
+  startDate: string = '',
+  endDate: string = ''
 ) => {
   try {
     const response = await appAxios.get(GET_USER_TRANSACTIONS_URL, {
       params: {
         query: searchTerm,
         take: take,
+        startDate: startDate,
+        endDate: endDate,
       },
     });
     return response.data;

@@ -11,62 +11,35 @@ import { apiResponse, Transaction } from '../Helpers/Interfaces/apiResponse';
 import { getUserTransactions } from '../Helpers/Service/TransactionService';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import Loading from './Loading';
+import { useTransactionFetch } from '../hooks/useTransactionFetch';
 const screenHeight = Dimensions.get('window').height;
 const TransactionMinList = () => {
   const [refreshing, setRefreshing] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const initialTransactionItems: Transaction[] = [];
-  const [transactionItems, setTransactionItems] = useState<Transaction[]>(
-    initialTransactionItems
-  );
+  const { transactionItems, isLoading, error } = useTransactionFetch();
   const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    getUserTransactions()
-      .then((res: apiResponse<Transaction>) => {
-        if (res.hasError === false) {
-          setTransactionItems(res.data);
-        } else {
-          Toast.show({
-            type: 'error',
-            text1: 'Error',
-            text2: res.message,
-          });
-        }
-        setRefreshing(false);
-      })
-      .catch((error) => {
-        Toast.show({
-          type: 'error',
-          text1: 'Error',
-          text2: 'Something went wrong',
-        });
-        setRefreshing(false);
-      });
-  }, []);
-
-  useEffect(() => {
-    try {
-      setIsLoading(true);
-      getUserTransactions().then((res: apiResponse<Transaction>) => {
-        if (res.hasError === false) {
-          setTransactionItems(res.data);
-        } else {
-          Toast.show({
-            type: 'error',
-            text1: 'Error',
-            text2: 'Something went wrong',
-          });
-        }
-        setIsLoading(false);
-      });
-    } catch (error) {
-      Toast.show({
-        type: 'error',
-        text1: 'Error',
-        text2: 'Something went wrong',
-      });
-      setIsLoading(false);
-    }
+    // setRefreshing(true);
+    // getUserTransactions()
+    //   .then((res: apiResponse<Transaction>) => {
+    //     if (res?.hasError === false) {
+    //       setTransactionItems(res?.data);
+    //     } else {
+    //       Toast.show({
+    //         type: 'error',
+    //         text1: 'Error',
+    //         text2: res?.message,
+    //       });
+    //     }
+    //     setRefreshing(false);
+    //   })
+    //   .catch((error) => {
+    //     console.log('Error', error);
+    //     Toast.show({
+    //       type: 'error',
+    //       text1: 'Error',
+    //       text2: 'Something went wrong',
+    //     });
+    //     setRefreshing(false);
+    //   });
   }, []);
 
   return (
@@ -77,7 +50,6 @@ const TransactionMinList = () => {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      <Text className='text-slate-400 text-xs'>Today</Text>
       <View className='pb-10'>
         {isLoading === true ? (
           <Loading />
