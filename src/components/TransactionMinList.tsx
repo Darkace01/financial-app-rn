@@ -10,11 +10,11 @@ import TransationItem from './TransationItem';
 import { Transaction } from '../Helpers/Interfaces/apiResponse';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import Loading from './Loading';
-import { useTransactionFetch } from '../hooks/useTransactionFetch';
+import { useHomeTransactionFetch } from '../hooks/useHomeTransactionFetch';
 const screenHeight = Dimensions.get('window').height;
 const TransactionMinList = () => {
   const { transactionItems, isLoading, error, setRefresh, refresh } =
-    useTransactionFetch();
+    useHomeTransactionFetch();
   const onRefresh = useCallback(() => {
     setRefresh(true);
   }, []);
