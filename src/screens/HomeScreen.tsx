@@ -12,9 +12,14 @@ import { TRANSACTION_CREATION_MODAL } from '../constants/screenRoutes';
 const HomeScreen = () => {
   const navigation = useNavigation();
 
-  const handleMoneyInandOut = () => {
+  const handleMoneyIn = () => {
     navigation.navigate(TRANSACTION_CREATION_MODAL, {
       moneyIn: true,
+    });
+  };
+  const handleMoneyOut = () => {
+    navigation.navigate(TRANSACTION_CREATION_MODAL, {
+      moneyIn: false,
     });
   };
   return (
@@ -24,8 +29,8 @@ const HomeScreen = () => {
       <View className='mt-5 mb-5 w-full'>
         <BalanceCard />
         <View className='mt-2 flex flex-row justify-evenly px-4 py-3'>
-          <ActionButton moneyIn action={handleMoneyInandOut} />
-          <ActionButton moneyIn={false} action={handleMoneyInandOut} />
+          <ActionButton moneyIn action={handleMoneyIn} />
+          <ActionButton moneyIn={false} action={handleMoneyOut} />
         </View>
         <View className='mt-2'>
           <TransactionMinList />

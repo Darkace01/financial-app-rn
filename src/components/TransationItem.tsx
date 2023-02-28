@@ -33,9 +33,9 @@ const TransationItem = (prop: Transaction) => {
         {
           // TODO: format this later
           prop.inFlow ? (
-            <Text className='text-green-500'>+N{prop.amount}</Text>
+            <Text className='text-green-500'>+₦{prop.amount}</Text>
           ) : (
-            <Text className='text-red-500'>-N{prop.amount}</Text>
+            <Text className='text-red-500'>-₦{prop.amount}</Text>
           )
         }
       </View>

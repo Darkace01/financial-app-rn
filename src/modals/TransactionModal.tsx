@@ -11,7 +11,7 @@ import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import { useTransactionSave } from '../hooks/useTransactionSave';
 import { useNavigation } from '@react-navigation/native';
 
-const TransactionModal = () => {
+const TransactionModal = ({ route, navigation }) => {
   const { categories, isLoading, error } = useCategoryFetch();
   const { handleSaveTransaction, isSaving, savingError, errorMessage } =
     useTransactionSave();
@@ -19,8 +19,7 @@ const TransactionModal = () => {
   const [title, setTitle] = React.useState('');
   const [description, setDescription] = React.useState('');
   const [amount, setAmount] = React.useState(0);
-
-  const navigation = useNavigation();
+  const { moneyIn } = route.params;
 
   const categoriesData = categories.map((category: Category) => {
     return { key: category.id, value: category.title };
@@ -47,7 +46,7 @@ const TransactionModal = () => {
       description,
       amount,
       categoryId: selectedCategory,
-      inFlow: false,
+      inFlow: moneyIn || false,
     } as Transaction;
     const isSaved = await handleSaveTransaction(data);
     if (isSaved) {
@@ -62,7 +61,10 @@ const TransactionModal = () => {
 
   return (
     <SafeAreaView className='bg-white h-full mx-auto px-5 w-full'>
-      <NavigationTopBar withFilter={false} text='Money In' />
+      <NavigationTopBar
+        withFilter={false}
+        text={moneyIn ? 'Money In' : 'Money Out'}
+      />
       <View className='space-y-5'>
         <View>
           <Text className={`text-base font-[${fonts.font700}]`}>Title</Text>
@@ -114,7 +116,7 @@ const TransactionModal = () => {
             <TextInput
               placeholder='₦ 0.00'
               className='ml-1 px-1 w-full'
-              keyboardType='numeric'
+              keyboardType='numbers-and-punctuation'
               onChangeText={(val) => setAmount(Number(val))}
               value={amount.toString()}
             />
