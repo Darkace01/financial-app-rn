@@ -1,23 +1,26 @@
 import React, { createContext, useState, useEffect, useMemo } from 'react';
-import { convertDate } from '../constants/commonHelpers';
+import { convertDate, getPrevious7DaysDate } from '../constants/commonHelpers';
 import { INTRO_PAGE_VIEWED } from '../constants/storageConstants';
-import { Transaction } from '../Helpers/Interfaces/apiResponse';
+import { Category, Transaction } from '../Helpers/Interfaces/apiResponse';
 import { getItem, setItem } from '../Helpers/Service/StorageService';
 export const AppContext = createContext(null);
 
 export const AppProvider = ({ children }) => {
   const [viewOnboarding, setViewOnboarding] = useState(false);
   const initialFilterRange = {
-    startDate: new Date(),
+    startDate: getPrevious7DaysDate(),
     endDate: new Date(),
   };
+  const initialTransactionItems: Transaction[] = [];
+  const initialCategories: Category[] = [];
+
   const [filterRange, setFilterRange] = useState(initialFilterRange);
   const [filterRangeStr, setFilterRangeStr] = useState({});
-  const initialTransactionItems: Transaction[] = [];
   const [transactionItems, setTransactionItems] = useState<Transaction[]>(
     initialTransactionItems
   );
   const [searchTerm, setSearchTerm] = useState('');
+  const [categories, setCategories] = useState<Category[]>(initialCategories);
 
   const handleViewOnboarding = async () => {
     await setItem(INTRO_PAGE_VIEWED, true);
@@ -64,6 +67,8 @@ export const AppProvider = ({ children }) => {
     setTransactionItems,
     searchTerm,
     setSearchTerm,
+    categories,
+    setCategories,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

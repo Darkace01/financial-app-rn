@@ -43,5 +43,15 @@ export interface Transaction {
   dateAddedFormatted: string;
   categoryId: number;
   categoryName: string;
+  inFlow: boolean;
+  userId: string;
+}
+
+export interface Category {
+  id: number;
+  title: string;
+  description: string;
+  icon: string;
+  isSubcategory: boolean;
   userId: string;
 }

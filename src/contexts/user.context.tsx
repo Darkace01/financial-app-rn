@@ -8,7 +8,6 @@ export const UserContext = createContext(null);
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [signedIn, setSignedIn] = useState(false);
-  const [introViewed, setIntroViewed] = useState(false);
 
   useEffect(() => {
     const checkSignedIn = async () => {

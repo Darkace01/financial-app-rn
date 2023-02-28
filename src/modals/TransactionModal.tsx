@@ -4,19 +4,25 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import NavigationTopBar from '../components/NavigationTopBar';
 import { fonts } from '../constants/globalStyles';
 import { SelectList } from 'react-native-dropdown-select-list';
+import { Category } from '../Helpers/Interfaces/apiResponse';
+import { useCategoryFetch } from '../hooks/useCategoryFetch';
+import CustomLoadingComponent from '../components/CustomLoadingComponent';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
 
 const TransactionModal = () => {
+  const { categories, isLoading, error } = useCategoryFetch();
   const [selected, setSelected] = React.useState('');
 
-  const data = [
-    { key: '1', value: 'Mobiles' },
-    { key: '2', value: 'Appliances' },
-    { key: '3', value: 'Cameras' },
-    { key: '4', value: 'Computers' },
-    { key: '5', value: 'Vegetables' },
-    { key: '6', value: 'Diary Products' },
-    { key: '7', value: 'Drinks' },
-  ];
+  const categoriesData = categories.map((category: Category) => {
+    return { key: category.id, value: category.title };
+  });
+  if (error) {
+    Toast.show({
+      type: 'error',
+      text1: 'Error',
+      text2: 'Something went wrong',
+    });
+  }
   return (
     <SafeAreaView className='bg-white h-full mx-auto px-5 w-full'>
       <NavigationTopBar withFilter={false} text='Money In' />
@@ -35,7 +41,7 @@ const TransactionModal = () => {
           <View>
             <SelectList
               setSelected={(val) => setSelected(val)}
-              data={data}
+              data={categoriesData}
               save='value'
               boxStyles={{
                 backgroundColor: '#F5F7FF',
@@ -72,13 +78,14 @@ const TransactionModal = () => {
           </View>
         </View>
         <View className='flex flex-col'>
-          <TouchableOpacity className='bg-accent py-2 rounded-md mt-5'>
+          <TouchableOpacity className='bg-accent py-3 rounded-md mt-5'>
             <Text className='text-center text-white font-[${fonts.font700}]'>
               Save
             </Text>
           </TouchableOpacity>
         </View>
       </View>
+      {isLoading ? <CustomLoadingComponent visible={isLoading} /> : null}
     </SafeAreaView>
   );
 };
