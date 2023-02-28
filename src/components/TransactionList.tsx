@@ -5,17 +5,18 @@ import {
   ScrollView,
   RefreshControl,
 } from 'react-native';
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import TransationItem from './TransationItem';
 import CustomSearchBar from './CustomSearchBar';
 import { Transaction } from '../Helpers/Interfaces/apiResponse';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import Loading from './Loading';
 import { useTransactionFetch } from '../hooks/useTransactionFetch';
+import { AppContext } from '../contexts/app.context';
 const screenHeight = Dimensions.get('window').height;
 const TransactionList = () => {
-  const { transactionItems, isLoading, error, setRefresh, refresh } =
-    useTransactionFetch();
+  const { transactionItems } = useContext(AppContext);
+  const { isLoading, error, setRefresh, refresh } = useTransactionFetch();
   const onRefresh = useCallback(() => {
     setRefresh(true);
   }, []);

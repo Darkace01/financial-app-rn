@@ -1,6 +1,7 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useMemo } from 'react';
 import { convertDate } from '../constants/commonHelpers';
 import { INTRO_PAGE_VIEWED } from '../constants/storageConstants';
+import { Transaction } from '../Helpers/Interfaces/apiResponse';
 import { getItem, setItem } from '../Helpers/Service/StorageService';
 export const AppContext = createContext(null);
 
@@ -12,6 +13,11 @@ export const AppProvider = ({ children }) => {
   };
   const [filterRange, setFilterRange] = useState(initialFilterRange);
   const [filterRangeStr, setFilterRangeStr] = useState({});
+  const initialTransactionItems: Transaction[] = [];
+  const [transactionItems, setTransactionItems] = useState<Transaction[]>(
+    initialTransactionItems
+  );
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleViewOnboarding = async () => {
     await setItem(INTRO_PAGE_VIEWED, true);
@@ -44,12 +50,20 @@ export const AppProvider = ({ children }) => {
     }
   }, [filterRange]);
 
+  const cachedTransactionItems = useMemo(() => {
+    return transactionItems;
+  }, [transactionItems]);
+
   const value = {
     viewOnboarding,
     handleViewOnboarding,
     filterRange,
     filterRangeStr,
     handleFilterRange,
+    transactionItems: cachedTransactionItems,
+    setTransactionItems,
+    searchTerm,
+    setSearchTerm,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

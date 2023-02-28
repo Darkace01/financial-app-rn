@@ -1,23 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useState, useEffect, useMemo, useContext } from 'react';
+import { convertDate } from '../constants/commonHelpers';
 import { AppContext } from '../contexts/app.context';
 import { apiResponse, Transaction } from '../Helpers/Interfaces/apiResponse';
 import { getUserTransactions } from '../Helpers/Service/TransactionService';
 
-const initialTransactionItems: Transaction[] = [];
+// const initialTransactionItems: Transaction[] = [];
+
 export const useTransactionFetch = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  // const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [refresh, setRefresh] = useState(false);
   const [take, setTake] = useState(50);
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [transactionItems, setTransactionItems] = useState<Transaction[]>(
-    initialTransactionItems
-  );
+  const dateString = convertDate(new Date());
+  const [startDate, setStartDate] = useState(dateString);
+  const [endDate, setEndDate] = useState(dateString);
 
-  //App Context
-  const { filterRangeStr, handleFilterRange } = useContext(AppContext);
+  const { filterRangeStr, setTransactionItems, searchTerm } =
+    useContext(AppContext);
 
   useEffect(() => {
     if (filterRangeStr) {
@@ -33,16 +33,19 @@ export const useTransactionFetch = () => {
     endDate: string
   ) => {
     try {
-      setError(false);
       setIsLoading(true);
+      setError(false);
+      console.log('searchTerm', searchTerm);
       const transactions: apiResponse<Transaction[]> =
         await getUserTransactions(searchTerm, take, startDate, endDate);
+      console.log('fetchTransactions', transactions.data.length);
       setTransactionItems(transactions.data);
     } catch (error) {
       setError(true);
     }
     setIsLoading(false);
   };
+
   useEffect(() => {
     fetchTransactions(searchTerm, take, startDate, endDate);
   }, [searchTerm, take, startDate, endDate]);
@@ -54,9 +57,14 @@ export const useTransactionFetch = () => {
     }
   }, [refresh]);
 
+  useEffect(() => {
+    return () => {
+      fetchTransactions(searchTerm, take, startDate, endDate);
+    };
+  }, []);
+
   return {
     searchTerm,
-    setSearchTerm,
     isLoading,
     error,
     take,
@@ -65,8 +73,7 @@ export const useTransactionFetch = () => {
     setStartDate,
     endDate,
     setEndDate,
-    transactionItems,
-    setTransactionItems,
+    // transactionItems,
     refresh,
     setRefresh,
   };

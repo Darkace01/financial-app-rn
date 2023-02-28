@@ -29,6 +29,7 @@ export const UserProvider = ({ children }) => {
 
   const signOutUser = async () => {
     await setItem(SIGNED_IN, false);
+    await setItem(AUTH_TOKEN_KEY, '');
     setSignedIn(false);
     setUser(null);
   };

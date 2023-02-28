@@ -10,7 +10,7 @@ export const getUserTransactions = async (
   try {
     const response = await appAxios.get(GET_USER_TRANSACTIONS_URL, {
       params: {
-        query: searchTerm,
+        searchTerm: searchTerm,
         take: take,
         startDateStr: startDate,
         endDateStr: endDate,
