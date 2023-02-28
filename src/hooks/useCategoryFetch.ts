@@ -10,9 +10,6 @@ export const useCategoryFetch = () => {
   const [refresh, setRefresh] = useState(false);
   const [categories, setCategories] = useState<Category[]>([]);
 
-  //   const { categories, setCategories } = useContext(AppContext);
-  //   const { signedIn } = useContext(UserContext);
-
   const fetchCategories = async () => {
     try {
       setError(false);

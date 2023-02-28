@@ -32,8 +32,12 @@ const TransationItem = (prop: Transaction) => {
       <View className='flex justify-center'>
         {
           // TODO: format this later
+          prop.inFlow ? (
+            <Text className='text-green-500'>+N{prop.amount}</Text>
+          ) : (
+            <Text className='text-red-500'>-N{prop.amount}</Text>
+          )
         }
-        <Text>N{prop.amount}</Text>
       </View>
     </TouchableOpacity>
   );

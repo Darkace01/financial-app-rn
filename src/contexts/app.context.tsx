@@ -53,17 +53,13 @@ export const AppProvider = ({ children }) => {
     }
   }, [filterRange]);
 
-  const cachedTransactionItems = useMemo(() => {
-    return transactionItems;
-  }, [transactionItems]);
-
   const value = {
     viewOnboarding,
     handleViewOnboarding,
     filterRange,
     filterRangeStr,
     handleFilterRange,
-    transactionItems: cachedTransactionItems,
+
     setTransactionItems,
     searchTerm,
     setSearchTerm,

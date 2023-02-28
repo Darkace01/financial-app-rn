@@ -4,7 +4,6 @@ import appAxios from '../AxiosInterceptor';
 export const getUserCategories = async () => {
   try {
     const response = await appAxios.get(GET_USER_CATEGORIES_URL);
-    console.log(response.data);
     return response.data;
   } catch (error) {
     if (error.response.status === 500) {

@@ -52,6 +52,7 @@ const TransactionMinList = () => {
                 categoryId={item.categoryId}
                 dateAdded={item.dateAdded}
                 userId={item.userId}
+                inFlow={item.inFlow}
               />
             );
           })

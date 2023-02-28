@@ -15,9 +15,12 @@ export const useTransactionFetch = () => {
   const dateString = convertDate(new Date());
   const [startDate, setStartDate] = useState(dateString);
   const [endDate, setEndDate] = useState(dateString);
+  const initialTransactionItems: Transaction[] = [];
+  const [transactionItems, setTransactionItems] = useState<Transaction[]>(
+    initialTransactionItems
+  );
 
-  const { filterRangeStr, setTransactionItems, searchTerm } =
-    useContext(AppContext);
+  const { filterRangeStr, searchTerm } = useContext(AppContext);
 
   useEffect(() => {
     if (filterRangeStr) {
@@ -61,6 +64,10 @@ export const useTransactionFetch = () => {
     };
   }, []);
 
+  const cachedTransactionItems = useMemo(() => {
+    return transactionItems;
+  }, [transactionItems]);
+
   return {
     searchTerm,
     isLoading,
@@ -71,7 +78,7 @@ export const useTransactionFetch = () => {
     setStartDate,
     endDate,
     setEndDate,
-    // transactionItems,
+    transactionItems: cachedTransactionItems,
     refresh,
     setRefresh,
   };

@@ -9,13 +9,13 @@ import ActionButton from '../components/ActionButton';
 import TransactionMinList from '../components/TransactionMinList';
 import { useNavigation } from '@react-navigation/native';
 import { TRANSACTION_CREATION_MODAL } from '../constants/screenRoutes';
-// get screenwidth
-const screenWidth = Dimensions.get('window').width;
 const HomeScreen = () => {
   const navigation = useNavigation();
 
   const handleMoneyInandOut = () => {
-    navigation.navigate(TRANSACTION_CREATION_MODAL);
+    navigation.navigate(TRANSACTION_CREATION_MODAL, {
+      moneyIn: true,
+    });
   };
   return (
     <SafeAreaView className={`bg-themeGrey h-full w-full mx-auto px-5`}>
