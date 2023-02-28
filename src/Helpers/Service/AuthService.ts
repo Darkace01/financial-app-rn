@@ -10,14 +10,11 @@ import appAxios from '../AxiosInterceptor';
 export const login = async (payload: LoginPayload) => {
   try {
     const response = await appAxios.post(LOGIN_URL, payload);
-    console.log('response', response);
     return response.data;
   } catch (error) {
-    console.log('error ->', JSON.stringify(error));
     if (error.response.status === 500) {
       throw new Error('Internal server error');
     } else {
-      console.log('error', error);
       throw JSON.stringify(error);
     }
   }

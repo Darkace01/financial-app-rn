@@ -8,19 +8,16 @@ import { AppContext } from '../contexts/app.context';
 import {
   getPrevious30DaysDate,
   getPrevious365DaysDate,
+  getPrevious6MonthsDate,
   getPrevious7DaysDate,
 } from '../constants/commonHelpers';
 
 const TransactionScreen = () => {
   const { handleFilterRange } = useContext(AppContext);
-  const [activeFilter, setActiveFilter] = React.useState('Today');
-  const filterList = ['Today', 'Week', 'Month', 'Year'];
+  const [activeFilter, setActiveFilter] = React.useState('Week');
+  const filterList = ['Week', 'Month', '6 Months', 'Year'];
   const handleFilterPress = (filter: string) => {
     switch (filter) {
-      case 'Today':
-        setActiveFilter(filter);
-        handleFilterRange(new Date(), new Date());
-        break;
       case 'Week':
         setActiveFilter(filter);
         handleFilterRange(getPrevious7DaysDate(), new Date());
@@ -28,6 +25,10 @@ const TransactionScreen = () => {
       case 'Month':
         setActiveFilter(filter);
         handleFilterRange(getPrevious30DaysDate(), new Date());
+        break;
+      case '6 Months':
+        setActiveFilter(filter);
+        handleFilterRange(getPrevious6MonthsDate(), new Date());
         break;
       case 'Year':
         setActiveFilter(filter);

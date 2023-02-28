@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Feather } from '@expo/vector-icons';
 import { useTransactionFetch } from '../hooks/useTransactionFetch';
 import { AppContext } from '../contexts/app.context';
+import { isStringNullOrEmptyOrWhiteSpace } from '../constants/commonHelpers';
 
 const CustomSearchBar = () => {
   const { setSearchTerm } = useContext(AppContext);

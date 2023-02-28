@@ -35,10 +35,8 @@ export const useTransactionFetch = () => {
     try {
       setIsLoading(true);
       setError(false);
-      console.log('searchTerm', searchTerm);
       const transactions: apiResponse<Transaction[]> =
         await getUserTransactions(searchTerm, take, startDate, endDate);
-      console.log('fetchTransactions', transactions.data.length);
       setTransactionItems(transactions.data);
     } catch (error) {
       setError(true);

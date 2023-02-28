@@ -22,7 +22,24 @@ export const getPrevious30DaysDate = () => {
   return new Date(date.getTime() - 30 * 24 * 60 * 60 * 1000);
 };
 
+export const getPrevious6MonthsDate = () => {
+  var date = new Date();
+  return new Date(date.getTime() - 6 * 30 * 24 * 60 * 60 * 1000);
+};
+
 export const getPrevious365DaysDate = () => {
   var date = new Date();
   return new Date(date.getTime() - 365 * 24 * 60 * 60 * 1000);
+};
+
+export const isStringNullOrEmptyOrWhiteSpace = (value: string) => {
+  if (value === null || value === undefined) {
+    return true;
+  }
+
+  if (value.trim() === '') {
+    return true;
+  }
+
+  return false;
 };
