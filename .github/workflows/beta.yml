@@ -2,7 +2,7 @@ name: Build Beta App On Push to Beta branch
 on:
   push:
     branches:
-      - main
+      - beta
 jobs:
   build:
     runs-on: ubuntu-latest
