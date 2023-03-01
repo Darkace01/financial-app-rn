@@ -21,7 +21,7 @@ const OnboardingItem = ({
 
   return (
     <View
-      className='p-7 mx-auto flex h-screen content-center flex-col justify-center relative'
+      className='px-9 mx-auto flex h-screen content-center flex-col justify-center relative'
       style={{ width: itemWidth }}
     >
       <TouchableOpacity className='absolute top-10 right-4' onPress={skipStep}>
@@ -32,7 +32,7 @@ const OnboardingItem = ({
         </View>
       </TouchableOpacity>
       <View className='bg-white p-4 rounded-3xl items-center space-y-5 py-7 px-5 min-h-[100px]'>
-        <Text className='font-bold text-2xl text-center'>{title}</Text>
+        <Text className='font-bold text-xl text-center'>{title}</Text>
         <Text className='text-center text-base'>{description}</Text>
         <TouchableOpacity onPress={nextStep}>
           <View className='flex flex-row justify-center items-center'>
@@ -45,7 +45,7 @@ const OnboardingItem = ({
                     currentIndex === index
                       ? 'bg-accent' // active dot
                       : 'bg-gray-300' // inactive dot
-                  } w-3 h-3 rounded-full mx-1`}
+                  } w-1 h-1 rounded-full mx-1`}
                 ></View>
               ))}
           </View>

@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
@@ -219,15 +220,15 @@ const RegisterScreen = () => {
               </Pressable>
             </View>
           </View>
-          <View className='flex flex-row w-full justify-center space-x-2'>
+          <View className='flex flex-row w-full justify-center space-x-2 mt-4'>
             <Text className='font-normal text-lg'>
               Already have an account?
             </Text>
-            <Pressable onPress={GotoLogin}>
+            <TouchableOpacity onPress={GotoLogin}>
               <Text className='font-semibold text-lg text-accent'>
                 Login Now
               </Text>
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </SafeAreaView>
       </TouchableWithoutFeedback>

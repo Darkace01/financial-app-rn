@@ -1,6 +1,7 @@
 export const HOME_SCREEN: string = 'Home';
 export const TRANSACTION_SCREEN: string = 'Transactions';
-export const PROFILE_SCREEN: string = 'Profile';
+export const PROFILE_SCREEN_TAB: string = 'UserProfileTab';
+export const PROFILE_SCREEN: string = 'UserProfile';
 export const LOGIN_SCREEN: string = 'Login';
 export const DASHBOARD: string = 'Dashboard';
 export const TRANSACTION_DETAIL_MODAL: string = 'TransactionDetail';
@@ -12,7 +13,7 @@ export const LOGIN: string = 'Login';
 export const FOGORTPASSWORD: string = 'ForgotPassword';
 export const OTPSCREEN: string = 'OtpScreen';
 export const RESETPASSWORD: string = 'ResetPassword';
-export const PASSWORDCHANGESUCCESSSCREEN: string = 'PasswordChangeSuccessScreen';
-export const ACCOUNT: string = 'Account';
-export const SETTINGS: string = 'Settings'
-
+export const PASSWORDCHANGESUCCESSSCREEN: string =
+  'PasswordChangeSuccessScreen';
+export const ACCOUNT_SCREEN: string = 'Account';
+export const SETTINGS_SCREEN: string = 'Settings';

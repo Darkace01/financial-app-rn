@@ -1,38 +1,43 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text } from 'react-native';
+import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProfileScreen from '../screens/ProfileScreens/ProfileScreen';
 import Account from '../screens/ProfileScreens/Account';
 import Settings from '../screens/ProfileScreens/Settings';
+import {
+  ACCOUNT_SCREEN,
+  PROFILE_SCREEN,
+  SETTINGS_SCREEN,
+} from '../constants/screenRoutes';
 
 const profileStack = createNativeStackNavigator();
 
 const ProfileStackNavigation = () => {
   return (
-    <profileStack.Navigator initialRouteName='Profile'>
-        <profileStack.Screen
-            name='Profile'
-            component={ProfileScreen}
-            options={{
-                headerShown: false,
-            }}
-        />
-        <profileStack.Screen
-            name='Account'
-            component={Account}
-            options={{
-                headerShown: false,
-            }}
-        />
-        <profileStack.Screen
-            name='Settings'
-            component={Settings}
-            options={{
-                headerShown: false,
-            }}
-        />
+    <profileStack.Navigator initialRouteName={PROFILE_SCREEN}>
+      <profileStack.Screen
+        name={PROFILE_SCREEN}
+        component={ProfileScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <profileStack.Screen
+        name={ACCOUNT_SCREEN}
+        component={Account}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <profileStack.Screen
+        name={SETTINGS_SCREEN}
+        component={Settings}
+        options={{
+          headerShown: false,
+        }}
+      />
     </profileStack.Navigator>
-  )
-}
+  );
+};
 
-export default ProfileStackNavigation
+export default ProfileStackNavigation;

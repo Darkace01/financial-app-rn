@@ -6,6 +6,7 @@ import {
   TRANSACTION_SCREEN,
   HOME_SCREEN,
   PROFILE_SCREEN,
+  PROFILE_SCREEN_TAB,
 } from '../constants/screenRoutes';
 import {
   FontAwesome,
@@ -32,10 +33,10 @@ const TabNavigation = () => {
           borderTopWidth: 0,
           position: 'absolute',
           bottom: 0,
-          height: 65,
-          paddingHorizontal: 20,
-          paddingBottom: 15,
-          paddingTop: 15,
+          height: 45,
+          paddingHorizontal: 15,
+          paddingBottom: 12,
+          paddingTop: 12,
         },
         tabBarVisibilityAnimationConfig: {
           //   animation: 'slide_from_right',
@@ -95,7 +96,7 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name={PROFILE_SCREEN}
+        name={PROFILE_SCREEN_TAB}
         component={ProfileStackNavigation}
         options={{
           tabBarIcon: ({ focused }) => (

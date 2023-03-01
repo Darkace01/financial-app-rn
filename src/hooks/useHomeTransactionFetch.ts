@@ -16,7 +16,7 @@ export const useHomeTransactionFetch = () => {
       setError(false);
       setIsLoading(true);
       const transactions: apiResponse<Transaction[]> =
-        await getUserTransactions();
+        await getUserTransactions('', 5);
       setTransactionItems(transactions.data);
     } catch (error) {
       setError(true);

@@ -13,11 +13,6 @@ import { UserContext } from '../contexts/user.context';
 const screenHeight = Dimensions.get('window').height;
 const cardHeight = `${screenHeight / 4}px`;
 const BalanceCard = () => {
-  const { signOutUser } = useContext(UserContext);
-
-  const handleSignOut = async () => {
-    await signOutUser();
-  };
   return (
     <View
       className={`bg-accent w-full h-44 rounded-lg shadow-lg p-5 justify-between`}
@@ -31,7 +26,7 @@ const BalanceCard = () => {
             </Text>
           </View>
           <View>
-            <TouchableOpacity onPress={handleSignOut}>
+            <TouchableOpacity>
               <Ionicons name='ios-share-outline' size={18} color='white' />
             </TouchableOpacity>
           </View>

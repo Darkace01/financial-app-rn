@@ -10,7 +10,7 @@ import {
   ScrollView,
 } from 'react-native';
 import React, { useState, useContext } from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { FOGORTPASSWORD, REGISTER } from '../../constants/screenRoutes';
@@ -75,7 +75,7 @@ const LoginScreen = () => {
             Toast.show({
               type: 'success',
               text1: 'Login Success',
-              text2: 'Welcome to the app',
+              text2: `Welcome back ${res?.data?.firstName}`,
             });
           });
         })
@@ -129,9 +129,9 @@ const LoginScreen = () => {
               }}
               value={userName}
               placeholder='Username or Email Address'
-              className={`text-sm border ${textinputBorder} h-[56px] pl-4 bg-inputBackground rounded-md`}
+              className={`text-sm border ${textinputBorder} h-14 pl-4 bg-inputBackground rounded-md`}
             />
-            <View className='border border-[#596369] h-[56px] bg-inputBackground  rounded-md flex flex-row items-center justify-between space-x-2 pl-2 pr-2'>
+            <View className='border ${textinputBorder} h-14 bg-inputBackground  rounded-md flex flex-row items-center justify-between space-x-2 pl-2 pr-2'>
               <TextInput
                 onChangeText={(text) => {
                   handlePassword(text);
@@ -160,22 +160,20 @@ const LoginScreen = () => {
           </View>
           <View className='space-y-5'>
             <BigBlueButton action={Login} buttonName='Login' />
-            <View className='flex flex-row justify-around'>
-              <Image source={assetsObject.line} className='w-[105px] mt-2' />
+            <View className='flex flex-row justify-center'>
               <Text className='text-gray-900 text-center font-semibold'>
                 Or Login with
               </Text>
-              <Image source={assetsObject.line} className='w-[105px] mt-2' />
             </View>
             <View className='flex flex-row space-x-2'>
               <Pressable className='border border-gray-400 rounded-md p-2 w-[32%] flex items-center'>
-                <Image source={assetsObject.facebook} />
+                <FontAwesome5 name='facebook-f' size={20} color='black' />
               </Pressable>
               <Pressable className='border border-gray-400 rounded-md p-2 w-[32%] flex items-center'>
-                <Image source={assetsObject.google} className='w-5 h-5' />
+                <FontAwesome5 name='google' size={20} color='black' />
               </Pressable>
               <Pressable className='border border-gray-400 rounded-md p-2 w-[32%] flex items-center'>
-                <Image source={assetsObject.apple} />
+                <FontAwesome5 name='apple' size={20} color='black' />
               </Pressable>
             </View>
           </View>
