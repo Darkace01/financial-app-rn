@@ -138,7 +138,7 @@ const LoginScreen = () => {
                 }}
                 value={password}
                 placeholder='Password'
-                className='w-[70%] text-sm'
+                className='w-[70%] text-sm pl-2'
                 secureTextEntry={showPassword}
               />
               <Pressable onPress={ChangePasswordView}>

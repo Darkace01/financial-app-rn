@@ -41,10 +41,11 @@ export const useTransactionFetch = () => {
       const transactions: apiResponse<Transaction[]> =
         await getUserTransactions(searchTerm, take, startDate, endDate);
       setTransactionItems(transactions.data);
+      setIsLoading(false);
     } catch (error) {
       setError(true);
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   useEffect(() => {

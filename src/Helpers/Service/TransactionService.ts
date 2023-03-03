@@ -45,3 +45,16 @@ export const saveUserTransaction = async (transaction: Transaction) => {
     }
   }
 };
+
+export const fetchUserTransactionById = async (id: Number) => {
+  try {
+    const response = await appAxios.get(`${GET_USER_TRANSACTIONS_URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    if (error.response.status === 500) {
+      throw new Error('Internal server error');
+    } else {
+      throw JSON.stringify(error);
+    }
+  }
+};

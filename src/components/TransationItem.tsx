@@ -8,7 +8,9 @@ import { Transaction } from '../Helpers/Interfaces/apiResponse';
 const TransationItem = (prop: Transaction) => {
   const navigation = useNavigation();
   const handlePress = () => {
-    navigation.navigate(TRANSACTION_DETAIL_MODAL);
+    navigation.navigate(TRANSACTION_DETAIL_MODAL, {
+      transactionId: prop.id,
+    });
   };
   return (
     <TouchableOpacity

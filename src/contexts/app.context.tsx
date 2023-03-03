@@ -11,14 +11,11 @@ export const AppProvider = ({ children }) => {
     startDate: getPrevious7DaysDate(),
     endDate: new Date(),
   };
-  const initialTransactionItems: Transaction[] = [];
   const initialCategories: Category[] = [];
 
   const [filterRange, setFilterRange] = useState(initialFilterRange);
   const [filterRangeStr, setFilterRangeStr] = useState({});
-  const [transactionItems, setTransactionItems] = useState<Transaction[]>(
-    initialTransactionItems
-  );
+
   const [searchTerm, setSearchTerm] = useState('');
   const [categories, setCategories] = useState<Category[]>(initialCategories);
 
@@ -59,8 +56,6 @@ export const AppProvider = ({ children }) => {
     filterRange,
     filterRangeStr,
     handleFilterRange,
-
-    setTransactionItems,
     searchTerm,
     setSearchTerm,
     categories,
