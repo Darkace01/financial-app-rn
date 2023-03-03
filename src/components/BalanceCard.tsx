@@ -16,8 +16,7 @@ const screenHeight = Dimensions.get('window').height;
 const cardHeight = `${screenHeight / 4}px`;
 const BalanceCard = () => {
   const { user } = useContext(UserContext);
-  const { clientBalance } = user as AuthResponse;
-  console.log(clientBalance?.percentage);
+  const { clientBalance, firstName } = user as AuthResponse;
   return (
     <View
       className={`bg-accent w-full h-44 rounded-lg shadow-lg p-5 justify-between`}
@@ -27,7 +26,7 @@ const BalanceCard = () => {
           <View>
             <Text className={`text-white text-lg font-[${fonts.font700}]`}>
               {' '}
-              Total Balance
+              {firstName}'s Balance
             </Text>
           </View>
           <View>
