@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { TRANSACTION_DETAIL_MODAL } from '../constants/screenRoutes';
 import FirstLetterIcon from './FirstLetterIcon';
 import { Transaction } from '../Helpers/Interfaces/apiResponse';
+import Currency from 'react-currency-formatter';
 
 const TransationItem = (prop: Transaction) => {
   const navigation = useNavigation();
@@ -35,9 +36,13 @@ const TransationItem = (prop: Transaction) => {
         {
           // TODO: format this later
           prop.inFlow ? (
-            <Text className='text-green-500'>+₦{prop.amount}</Text>
+            <Text className='text-green-500'>
+              +<Currency quantity={prop?.amount} currency='NGN' />{' '}
+            </Text>
           ) : (
-            <Text className='text-red-500'>-₦{prop.amount}</Text>
+            <Text className='text-red-500'>
+              -<Currency quantity={prop?.amount} currency='NGN' />
+            </Text>
           )
         }
       </View>

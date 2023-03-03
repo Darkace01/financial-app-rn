@@ -8,6 +8,7 @@ import { colors } from '../constants/globalStyles';
 import { useTransactionDetailFetch } from '../hooks/useTransactionDetailFetch';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import Loading from '../components/Loading';
+import Currency from 'react-currency-formatter';
 // screen width
 const screenWidth = Dimensions.get('window').width;
 // 80% of screen width
@@ -79,11 +80,19 @@ const TransactionDetailModal = ({ route, navigation }) => {
                     <View className='text-right'>
                       {transaction?.inFlow ? (
                         <Text className='text-green-500'>
-                          +₦{transaction?.amount}
+                          +
+                          <Currency
+                            quantity={transaction?.amount || 0}
+                            currency='NGN'
+                          />
                         </Text>
                       ) : (
                         <Text className='text-red-500'>
-                          -₦{transaction?.amount}
+                          -
+                          <Currency
+                            quantity={transaction?.amount || 0}
+                            currency='NGN'
+                          />
                         </Text>
                       )}
                     </View>

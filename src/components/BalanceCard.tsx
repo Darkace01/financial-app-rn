@@ -9,10 +9,15 @@ import React, { useContext } from 'react';
 import { colors, fonts } from '../constants/globalStyles';
 import { Ionicons } from '@expo/vector-icons';
 import { UserContext } from '../contexts/user.context';
+import { AuthResponse } from '../Helpers/Interfaces/apiResponse';
+import Currency from 'react-currency-formatter';
 // get screen height
 const screenHeight = Dimensions.get('window').height;
 const cardHeight = `${screenHeight / 4}px`;
 const BalanceCard = () => {
+  const { user } = useContext(UserContext);
+  const { clientBalance } = user as AuthResponse;
+  console.log(clientBalance?.percentage);
   return (
     <View
       className={`bg-accent w-full h-44 rounded-lg shadow-lg p-5 justify-between`}
@@ -36,14 +41,15 @@ const BalanceCard = () => {
             className={`text-white font-extrabold text-3xl font-[${fonts.font700}]`}
           >
             {' '}
-            #300,000.00
+            <Currency quantity={clientBalance?.balance} currency='NGN' />
+            {/* ₦{clientBalance?.balance} */}
           </Text>
         </View>
       </View>
       <View className='bottom-0'>
         <Text className={`text-slate-300 text-xs font-[${fonts.font700}]`}>
           {' '}
-          1.5% increase from last week
+          {clientBalance?.percentage}% increase from last month
         </Text>
       </View>
     </View>

@@ -10,6 +10,8 @@ import CustomLoadingComponent from '../components/CustomLoadingComponent';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import { useTransactionSave } from '../hooks/useTransactionSave';
 import { useNavigation } from '@react-navigation/native';
+import CurrencyInput from 'react-native-currency-input';
+import { getNumberFromString } from '../constants/commonHelpers';
 
 const TransactionModal = ({ route, navigation }) => {
   const { categories, isLoading, error } = useCategoryFetch();
@@ -18,7 +20,8 @@ const TransactionModal = ({ route, navigation }) => {
   const [selectedCategory, setSelectedCategory] = React.useState(0);
   const [title, setTitle] = React.useState('');
   const [description, setDescription] = React.useState('');
-  const [amount, setAmount] = React.useState(0);
+  const [fieldAmount, setfieldAmount] = React.useState(null);
+  const [amount, setAmount] = React.useState('');
   const { moneyIn } = route.params;
 
   const categoriesData = categories.map((category: Category) => {
@@ -41,21 +44,30 @@ const TransactionModal = ({ route, navigation }) => {
   }
 
   const handleSubmit = async () => {
-    const data = {
-      title,
-      description,
-      amount,
-      categoryId: selectedCategory,
-      inFlow: moneyIn || false,
-    } as Transaction;
-    const isSaved = await handleSaveTransaction(data);
-    if (isSaved) {
+    const formattedAmount = getNumberFromString(amount);
+    if (title && formattedAmount > 0 && selectedCategory > 0) {
+      const data = {
+        title,
+        description,
+        amount: formattedAmount,
+        categoryId: selectedCategory,
+        inFlow: moneyIn || false,
+      } as Transaction;
+      const isSaved = await handleSaveTransaction(data);
+      if (isSaved) {
+        Toast.show({
+          type: 'success',
+          text1: 'Success',
+          text2: 'Transaction saved successfully',
+        });
+        navigation.goBack();
+      }
+    } else {
       Toast.show({
-        type: 'success',
-        text1: 'Success',
-        text2: 'Transaction saved successfully',
+        type: 'error',
+        text1: 'Error',
+        text2: 'Please fill all fields',
       });
-      navigation.goBack();
     }
   };
 
@@ -113,15 +125,31 @@ const TransactionModal = ({ route, navigation }) => {
         <View className='flex flex-col'>
           <Text className={`text-base font-[${fonts.font700}]`}>Amount</Text>
           <View className='flex flex-row bg-themeGrey py-2 px-3 rounded-md items-center my-1'>
-            <TextInput
+            {/* <TextInput
               placeholder='₦ 0.00'
               className='ml-1 px-1 w-full'
               keyboardType='numbers-and-punctuation'
               onChangeText={(val) => setAmount(Number(val))}
               value={amount.toString()}
+            /> */}
+            <CurrencyInput
+              className='ml-1 px-1 w-full'
+              value={fieldAmount}
+              onChangeValue={setfieldAmount}
+              prefix='₦'
+              delimiter=','
+              separator='.'
+              precision={2}
+              onChangeText={(formattedValue) => {
+                // setAmountError("");
+                let tempAmt = formattedValue ?? '0';
+                setAmount(tempAmt);
+              }}
+              keyboardType='decimal-pad'
             />
           </View>
         </View>
+
         <View className='flex flex-col'>
           <TouchableOpacity
             className='bg-accent py-3 rounded-md mt-5'

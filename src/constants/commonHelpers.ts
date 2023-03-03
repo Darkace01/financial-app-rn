@@ -43,3 +43,14 @@ export const isStringNullOrEmptyOrWhiteSpace = (value: string) => {
 
   return false;
 };
+
+export const getNumberFromString = (val: string) => {
+  if (val) {
+    if (val.length > 1) {
+      const valFirst = val.replace('₦', '');
+      const formattedAmount = Number(valFirst.replace(/,/g, ''));
+      return formattedAmount;
+    }
+  }
+  return 0;
+};

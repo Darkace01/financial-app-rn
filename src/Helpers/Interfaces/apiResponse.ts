@@ -18,6 +18,7 @@ export interface BasicUser {
 
 export interface AuthResponse extends BasicUser {
   accessToken: string;
+  clientBalance: ClientTransactionBalance;
 }
 
 export interface LoginPayload {
@@ -54,4 +55,11 @@ export interface Category {
   icon: string;
   isSubcategory: boolean;
   userId: string;
+}
+
+export interface ClientTransactionBalance {
+  totalInflow: number;
+  totalOutflow: number;
+  balance: number;
+  percentage: number;
 }
