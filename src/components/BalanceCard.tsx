@@ -19,7 +19,7 @@ const BalanceCard = () => {
   const { clientBalance, firstName } = user as AuthResponse;
   return (
     <View
-      className={`bg-accent w-full h-44 rounded-lg shadow-lg p-5 justify-between`}
+      className={`bg-accent w-full h-36 rounded-lg shadow-lg p-5 justify-between`}
     >
       <View className='space-y-3'>
         <View className='flex flex-row justify-between align-middle items-center'>

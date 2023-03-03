@@ -39,7 +39,7 @@ const TransactionList = () => {
       <View className='my-2'>
         <CustomSearchBar />
       </View>
-      <View className='pb-10'>
+      <View className='pb-12'>
         {isLoading === true ? (
           <Loading />
         ) : (

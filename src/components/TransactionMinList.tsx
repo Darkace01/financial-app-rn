@@ -35,7 +35,7 @@ const TransactionMinList = () => {
         <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
       }
     >
-      <View className='pb-10'>
+      <View className='pb-12'>
         {isLoading === true ? (
           <Loading />
         ) : (

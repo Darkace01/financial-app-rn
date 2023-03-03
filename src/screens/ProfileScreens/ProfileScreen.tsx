@@ -21,10 +21,8 @@ const ProfileScreen = () => {
                 ? { uri: profilePictureUrl }
                 : require('../../../assets/images/profile.jpg')
             }
-            className='rounded-full'
+            className='rounded-full w-12 h-12'
             style={{
-              width: 65,
-              height: 67,
               resizeMode: 'contain',
             }}
           />
