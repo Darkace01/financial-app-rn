@@ -5,7 +5,6 @@ import { fetchUserTransactionById } from '../Helpers/Service/TransactionService'
 export const useTransactionDetailFetch = (id: number) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [refresh, setRefresh] = useState(false);
   const [transaction, setTransaction] = useState<Transaction>();
 
   const fetchTransaction = async () => {
@@ -27,15 +26,8 @@ export const useTransactionDetailFetch = (id: number) => {
   }, []);
 
   useEffect(() => {
-    if (refresh) {
-      fetchTransaction();
-      setRefresh(false);
-    }
-  }, [refresh]);
-
-  useEffect(() => {
     fetchTransaction();
   }, [id]);
 
-  return { transaction, isLoading, error, refresh };
+  return { transaction, isLoading, error };
 };

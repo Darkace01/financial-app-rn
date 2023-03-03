@@ -15,7 +15,7 @@ const width = screenWidth * 0.8;
 
 const TransactionDetailModal = ({ route, navigation }) => {
   const { transactionId } = route.params;
-  const { transaction, isLoading, error, refresh } =
+  const { transaction, isLoading, error } =
     useTransactionDetailFetch(transactionId);
   // useEffect(() => {
   //   handleFetchTransaction(transactionId);
