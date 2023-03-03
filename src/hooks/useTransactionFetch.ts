@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useContext } from 'react';
-import { convertDate } from '../constants/commonHelpers';
+import { convertDate, getPrevious7DaysDate } from '../constants/commonHelpers';
 import { AppContext } from '../contexts/app.context';
 import { apiResponse, Transaction } from '../Helpers/Interfaces/apiResponse';
 import { getUserTransactions } from '../Helpers/Service/TransactionService';
@@ -12,9 +12,10 @@ export const useTransactionFetch = () => {
   const [error, setError] = useState(false);
   const [refresh, setRefresh] = useState(false);
   const [take, setTake] = useState(50);
-  const dateString = convertDate(new Date());
-  const [startDate, setStartDate] = useState(dateString);
-  const [endDate, setEndDate] = useState(dateString);
+  const lastWeek = convertDate(getPrevious7DaysDate());
+  const today = convertDate(new Date());
+  const [startDate, setStartDate] = useState(lastWeek);
+  const [endDate, setEndDate] = useState(today);
   const initialTransactionItems: Transaction[] = [];
   const [transactionItems, setTransactionItems] = useState<Transaction[]>(
     initialTransactionItems
