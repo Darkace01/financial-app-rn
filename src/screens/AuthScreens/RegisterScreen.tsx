@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, { useState } from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import assetsObject from '../../constants/assets';
 import { LOGIN } from '../../constants/screenRoutes';
@@ -210,13 +210,13 @@ const RegisterScreen = () => {
             </View>
             <View className='flex flex-row space-x-2'>
               <Pressable className='border border-gray-400 rounded-md p-2 w-[32%] flex items-center'>
-                <Image source={assetsObject.facebook} />
+                <FontAwesome5 name='facebook-f' size={20} color='black' />
               </Pressable>
               <Pressable className='border border-gray-400 rounded-md p-2 w-[32%] flex items-center'>
-                <Image source={assetsObject.google} className='w-5 h-5' />
+                <FontAwesome5 name='google' size={20} color='black' />
               </Pressable>
               <Pressable className='border border-gray-400 rounded-md p-2 w-[32%] flex items-center'>
-                <Image source={assetsObject.apple} />
+                <FontAwesome5 name='apple' size={20} color='black' />
               </Pressable>
             </View>
           </View>
