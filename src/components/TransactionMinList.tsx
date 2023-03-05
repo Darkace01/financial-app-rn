@@ -12,28 +12,15 @@ import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import Loading from './Loading';
 import { useHomeTransactionFetch } from '../hooks/useHomeTransactionFetch';
 const screenHeight = Dimensions.get('window').height;
-const TransactionMinList = () => {
-  const { transactionItems, isLoading, error, setRefresh, refresh } =
-    useHomeTransactionFetch();
-  const onRefresh = useCallback(() => {
-    setRefresh(true);
-  }, []);
-
-  if (error) {
-    Toast.show({
-      type: 'error',
-      text1: 'Error',
-      text2: 'Something went wrong',
-    });
-  }
-
+interface Props {
+  isLoading: boolean;
+  transactionItems: Transaction[];
+}
+const TransactionMinList = ({ transactionItems, isLoading }: Props) => {
   return (
     <ScrollView
       className={`bg-white rounded-r-3xl rounded-l-3xl rounded-b-none pt-5 px-5 space-y-2 `}
       style={{ height: screenHeight / 1.9 }}
-      refreshControl={
-        <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
-      }
     >
       <View className='pb-12'>
         {isLoading === true ? (
