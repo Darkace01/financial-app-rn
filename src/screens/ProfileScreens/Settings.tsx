@@ -21,7 +21,7 @@ const Settings = () => {
   };
   return (
     <SafeAreaView className='mt-10 mx-4 space-y-10'>
-      <View className='w-[60%] flex flex-row justify-between items-center'>
+      <View className='w-3/5 flex flex-row justify-between items-center'>
         <Pressable
           onPress={() => {
             navigation.goBack();
@@ -61,7 +61,11 @@ const Settings = () => {
           <Text className='text-accent font-bold'>Logout</Text>
         </TouchableOpacity>
       </View>
-      <Text className='text-gray-300 text-center'>Crown 2023 v10</Text>
+      <View>
+        <Text className='text-gray-300 text-center'>Kazeem Quadri</Text>
+        <Text className='text-gray-300 text-center'>Damola Adekunle</Text>
+        <Text className='text-gray-300 text-center'>Nnemeka</Text>
+      </View>
     </SafeAreaView>
   );
 };
