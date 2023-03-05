@@ -9,15 +9,40 @@ import ForgotPassword from '../screens/AuthScreens/ForgotPassword';
 import OtpScreen from '../screens/AuthScreens/OtpScreen';
 import ResetPassword from '../screens/AuthScreens/ResetPassword';
 import PasswordChangeSuccessScreen from '../screens/AuthScreens/PasswordChangeSuccessScreen';
-import { ONBOARDING, SPLASH } from '../constants/screenRoutes';
+import {
+  FOGORTPASSWORD,
+  LOGIN_SCREEN,
+  ONBOARDING,
+  OTPSCREEN,
+  PASSWORDCHANGESUCCESSSCREEN,
+  REGISTER,
+  RESETPASSWORD,
+  SPLASH,
+} from '../constants/screenRoutes';
 import { AppContext } from '../contexts/app.context';
 import { getItem } from '../Helpers/Service/StorageService';
 import { INTRO_PAGE_VIEWED } from '../constants/storageConstants';
+import CustomLoadingComponent from '../components/CustomLoadingComponent';
 
 const OnboardingStack = createNativeStackNavigator();
 
 const PublicNavigator = () => {
-  const { viewOnboarding } = useContext(AppContext);
+  const [loading, setLoading] = React.useState(true);
+  const { setViewOnboarding, viewOnboarding } = useContext(AppContext);
+
+  useEffect(() => {
+    getItem(INTRO_PAGE_VIEWED)
+      .then((value) => {
+        setLoading(false);
+        if (value) {
+          setViewOnboarding(true);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  if (loading) return <CustomLoadingComponent visible={loading} />;
+
   return (
     <>
       {viewOnboarding === true ? (
@@ -30,42 +55,42 @@ const PublicNavigator = () => {
           }}
         >
           <OnboardingStack.Screen
-            name='Login'
+            name={LOGIN_SCREEN}
             component={LoginScreen}
             options={{
               headerShown: false,
             }}
           />
           <OnboardingStack.Screen
-            name='Register'
+            name={REGISTER}
             component={RegisterScreen}
             options={{
               headerShown: false,
             }}
           />
           <OnboardingStack.Screen
-            name='ForgotPassword'
+            name={FOGORTPASSWORD}
             component={ForgotPassword}
             options={{
               headerShown: false,
             }}
           />
           <OnboardingStack.Screen
-            name='OtpScreen'
+            name={OTPSCREEN}
             component={OtpScreen}
             options={{
               headerShown: false,
             }}
           />
           <OnboardingStack.Screen
-            name='ResetPassword'
+            name={RESETPASSWORD}
             component={ResetPassword}
             options={{
               headerShown: false,
             }}
           />
           <OnboardingStack.Screen
-            name='PasswordChangeSuccessScreen'
+            name={PASSWORDCHANGESUCCESSSCREEN}
             component={PasswordChangeSuccessScreen}
             options={{
               headerShown: false,

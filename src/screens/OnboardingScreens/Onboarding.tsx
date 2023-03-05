@@ -14,13 +14,14 @@ import { INTRO_PAGE_VIEWED } from '../../constants/storageConstants';
 import slides from '../../../slides';
 import OnboardingItem from './OnboardingItem';
 import { AppContext } from '../../contexts/app.context';
+import { setItem } from '../../Helpers/Service/StorageService';
 
 const Onboarding = () => {
   //New Splash screen
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const slidesRef = useRef(null);
-  const { handleViewOnboarding } = useContext(AppContext);
+  const { setViewOnboarding } = useContext(AppContext);
   const viewableItemsChanged = useRef(({ viewableItems }) => {
     viewableItems[0] ? setCurrentIndex(viewableItems[0].index) : null;
   }).current;
@@ -36,8 +37,10 @@ const Onboarding = () => {
   };
 
   const startApp = async () => {
-    await handleViewOnboarding();
-    navigation.navigate(LOGIN);
+    setItem(INTRO_PAGE_VIEWED, true).then(() => {
+      setViewOnboarding(true);
+    });
+    // navigation.navigate(LOGIN);
   };
 
   const navigation = useNavigation();

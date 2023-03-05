@@ -19,24 +19,6 @@ export const AppProvider = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [categories, setCategories] = useState<Category[]>(initialCategories);
 
-  const handleViewOnboarding = async () => {
-    await setItem(INTRO_PAGE_VIEWED, true);
-    setViewOnboarding(true);
-  };
-  const checkOnboarding = async () => {
-    const introPageViewed = await getItem(INTRO_PAGE_VIEWED);
-    if (viewOnboarding === true && introPageViewed === 'true') {
-      setViewOnboarding(true);
-    }
-  };
-  useEffect(() => {
-    checkOnboarding();
-  }, []);
-
-  useEffect(() => {
-    checkOnboarding();
-  }, [viewOnboarding]);
-
   const handleFilterRange = (startDate: Date, endDate: Date) => {
     setFilterRange({ startDate, endDate });
   };
@@ -52,7 +34,6 @@ export const AppProvider = ({ children }) => {
 
   const value = {
     viewOnboarding,
-    handleViewOnboarding,
     filterRange,
     filterRangeStr,
     handleFilterRange,
@@ -60,6 +41,7 @@ export const AppProvider = ({ children }) => {
     setSearchTerm,
     categories,
     setCategories,
+    setViewOnboarding,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
