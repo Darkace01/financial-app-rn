@@ -14,7 +14,11 @@ interface Props {
 const screenWidth = Dimensions.get('window').width;
 const CardContainer = ({ isLoading, clientBalance, monthlyData }: Props) => {
   return (
-    <ScrollView horizontal={true} snapToInterval={screenWidth / 1.13}>
+    <ScrollView
+      horizontal={true}
+      snapToInterval={screenWidth / 1.13}
+      showsHorizontalScrollIndicator={false}
+    >
       <BalanceCard isLoading={isLoading} clientBalance={clientBalance} />
       {isLoading === false ? (
         <ChartCard isLoading={isLoading} monthlyData={monthlyData} />
