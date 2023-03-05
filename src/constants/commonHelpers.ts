@@ -54,3 +54,17 @@ export const getNumberFromString = (val: string) => {
   }
   return 0;
 };
+
+export const getFirstTwoNumbers = (val: Number) => {
+  let valFirst = '0';
+  if (val) {
+    if (val.toString().length > 1) {
+      if (val.toString().startsWith('-')) {
+        valFirst = val.toString().substring(0, 3);
+      } else {
+        valFirst = val.toString().substring(0, 2);
+      }
+    }
+  }
+  return Number.parseInt(valFirst);
+};

@@ -3,7 +3,7 @@ import { apiResponse, DashboardModel } from '../Helpers/Interfaces/apiResponse';
 import { fetchUserDashboard } from '../Helpers/Service/TransactionService';
 
 export const useDashboardFetch = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const [refresh, setRefresh] = useState(false);
   const [dashboard, setDashboard] = useState<DashboardModel>();

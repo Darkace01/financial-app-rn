@@ -8,6 +8,7 @@ import Currency from 'react-currency-formatter';
 import Loading from './Loading';
 // get screen height
 const screenHeight = Dimensions.get('window').height;
+const screenWidth = Dimensions.get('window').width;
 interface Props {
   isLoading: boolean;
   clientBalance: ClientTransactionBalance;
@@ -18,9 +19,10 @@ const BalanceCard = ({ isLoading, clientBalance }: Props) => {
 
   return (
     <View
-      className={`bg-accent w-full rounded-lg shadow-lg p-5 justify-between`}
+      className={`bg-accent rounded-lg shadow-lg p-5 justify-between`}
       style={{
-        height: screenHeight / 5,
+        height: screenHeight / 4.4,
+        width: screenWidth / 1.13,
       }}
     >
       {isLoading === true ? (
@@ -46,7 +48,10 @@ const BalanceCard = ({ isLoading, clientBalance }: Props) => {
                 className={`text-white font-extrabold text-3xl font-[${fonts.font700}]`}
               >
                 {' '}
-                <Currency quantity={clientBalance?.balance} currency='NGN' />
+                <Currency
+                  quantity={clientBalance?.balance | 0}
+                  currency='NGN'
+                />
                 {/* ₦{clientBalance?.balance} */}
               </Text>
             </View>

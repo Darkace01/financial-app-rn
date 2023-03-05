@@ -69,7 +69,7 @@ export interface ClientTransactionBalance {
 export interface DashboardModel {
   transactions: Transaction[];
   balance: ClientTransactionBalance;
-  monthlyBalance: MonthlyBalance[];
+  monthlyBalance: MonthlyBalance[] | [];
 }
 
 export interface MonthlyBalance {
