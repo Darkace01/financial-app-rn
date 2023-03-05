@@ -8,7 +8,6 @@ import Currency from 'react-currency-formatter';
 import { timeSince } from '../constants/commonHelpers';
 
 const TransationItem = (prop: Transaction) => {
-  console.log(timeSince(prop.dateAdded));
   const navigation = useNavigation();
   const handlePress = () => {
     navigation.navigate(TRANSACTION_DETAIL_MODAL, {
