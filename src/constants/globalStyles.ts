@@ -1,5 +1,5 @@
 export const colors = {
-  primary: '#0a196e',
+  primary: '#4D2DEC',
   gray: '#cbcbdd',
   gray2: '#7a7a7a',
   lightBackground: '#FFFAEC',
@@ -7,7 +7,7 @@ export const colors = {
   white: '#FFFFFF',
   black: '#000000',
   dark: '#222222',
-  accent: '#5b24cf',
+  accent: '#4D2DEC',
   accent2: '#A57FF4',
   pageBackground: '#F5F7FF',
   boldPrimary: '#051448',

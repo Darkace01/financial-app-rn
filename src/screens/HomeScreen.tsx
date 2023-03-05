@@ -11,6 +11,7 @@ import { TRANSACTION_CREATION_MODAL } from '../constants/screenRoutes';
 import { useDashboardFetch } from '../hooks/useDashboardFetch';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import ChartCard from '../components/ChartCard';
+import CardContainer from '../components/CardContainer';
 const screenHeight = Dimensions.get('window').height;
 const HomeScreen = () => {
   const { dashboard, refresh, setRefresh, isLoading, error } =
@@ -57,18 +58,11 @@ const HomeScreen = () => {
         <TopBar />
         <UserBar />
         <View className='mt-5 mb-5 w-full'>
-          <BalanceCard
-            isLoading={isLoading}
+          <CardContainer
+            monthlyData={dashboard?.monthlyBalance}
             clientBalance={dashboard?.balance}
+            isLoading={isLoading}
           />
-          {isLoading === false ? (
-            <ChartCard
-              isLoading={isLoading}
-              monthlyData={dashboard?.monthlyBalance}
-            />
-          ) : (
-            <></>
-          )}
           <View className='mt-2 flex flex-row justify-evenly px-4 py-3'>
             <ActionButton moneyIn action={handleMoneyIn} />
             <ActionButton moneyIn={false} action={handleMoneyOut} />

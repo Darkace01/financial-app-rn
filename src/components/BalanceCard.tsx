@@ -19,10 +19,10 @@ const BalanceCard = ({ isLoading, clientBalance }: Props) => {
 
   return (
     <View
-      className={`bg-accent rounded-lg shadow-lg p-5 justify-between`}
+      className={`bg-accent rounded-lg shadow-lg p-5 justify-between mx-2`}
       style={{
         height: screenHeight / 4.4,
-        width: screenWidth / 1.13,
+        width: screenWidth / 1.2,
       }}
     >
       {isLoading === true ? (

@@ -13,7 +13,7 @@ const screenHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
 const ChartCard = ({ monthlyData, isLoading }: Props) => {
   const chartData = {
-    labels: monthlyData?.map((item) => item.month),
+    labels: monthlyData?.map((item) => item.month[0]),
     datasets: [
       {
         data: monthlyData?.map((item) => getFirstTwoNumbers(item.balance)),
@@ -30,14 +30,14 @@ const ChartCard = ({ monthlyData, isLoading }: Props) => {
             labels: chartData?.labels,
             datasets: chartData?.datasets,
           }}
-          width={screenWidth / 1.13} // from react-native
+          width={screenWidth / 1.2} // from react-native
           height={screenHeight / 4.4}
           yAxisLabel='₦'
           yAxisSuffix='k'
           yAxisInterval={1} // optional, defaults to 1
           chartConfig={{
-            backgroundColor: colors.accent,
-            backgroundGradientFrom: colors.accent,
+            backgroundColor: colors.primary,
+            backgroundGradientFrom: colors.primary,
             backgroundGradientTo: colors.accent2,
             decimalPlaces: 0, // optional, defaults to 2dp
             color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
