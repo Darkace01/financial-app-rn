@@ -31,12 +31,12 @@ const TabNavigation = () => {
         tabBarStyle: {
           backgroundColor: '#FEFEFE',
           borderTopWidth: 0,
-          position: 'absolute',
-          bottom: 0,
+          // position: 'absolute',
+          // bottom: 0,
           height: 45,
           paddingHorizontal: 15,
-          paddingBottom: 12,
-          paddingTop: 12,
+          paddingBottom: 10,
+          paddingTop: 8,
         },
         tabBarVisibilityAnimationConfig: {
           //   animation: 'slide_from_right',
@@ -51,10 +51,10 @@ const TabNavigation = () => {
             <View style={styles.iconStyle}>
               <Foundation
                 name='home'
-                size={focused ? 16 : 18}
+                size={20}
                 color={focused ? colors.primary : colors.gray}
               />
-              {focused && (
+              {/* {focused && (
                 <Text
                   style={{
                     color: colors.primary,
@@ -64,7 +64,7 @@ const TabNavigation = () => {
                 >
                   Home
                 </Text>
-              )}
+              )} */}
             </View>
           ),
         }}
@@ -75,12 +75,12 @@ const TabNavigation = () => {
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.iconStyle}>
-              <Ionicons
-                name='stats-chart-sharp'
-                size={focused ? 16 : 18}
+              <Foundation
+                name='graph-bar'
+                size={20}
                 color={focused ? colors.primary : colors.gray}
               />
-              {focused && (
+              {/* {focused && (
                 <Text
                   style={{
                     color: colors.primary,
@@ -90,7 +90,7 @@ const TabNavigation = () => {
                 >
                   Transactions
                 </Text>
-              )}
+              )} */}
             </View>
           ),
         }}
@@ -101,12 +101,12 @@ const TabNavigation = () => {
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.iconStyle}>
-              <FontAwesome5
-                name='user-alt'
-                size={focused ? 16 : 18}
+              <Foundation
+                name='torso'
+                size={20}
                 color={focused ? colors.primary : colors.gray}
               />
-              {focused && (
+              {/* {focused && (
                 <Text
                   style={{
                     color: colors.primary,
@@ -116,7 +116,7 @@ const TabNavigation = () => {
                 >
                   Profile
                 </Text>
-              )}
+              )} */}
             </View>
           ),
         }}

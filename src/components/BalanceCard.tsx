@@ -13,13 +13,15 @@ import { AuthResponse } from '../Helpers/Interfaces/apiResponse';
 import Currency from 'react-currency-formatter';
 // get screen height
 const screenHeight = Dimensions.get('window').height;
-const cardHeight = `${screenHeight / 4}px`;
 const BalanceCard = () => {
   const { user } = useContext(UserContext);
   const { clientBalance, firstName } = user as AuthResponse;
   return (
     <View
-      className={`bg-accent w-full h-36 rounded-lg shadow-lg p-5 justify-between`}
+      className={`bg-accent w-full rounded-lg shadow-lg p-5 justify-between`}
+      style={{
+        height: screenHeight / 5,
+      }}
     >
       <View className='space-y-3'>
         <View className='flex flex-row justify-between align-middle items-center'>
