@@ -18,6 +18,7 @@ const OnboardingItem = ({
 }: SlideItem) => {
   // const { width } = useWindowDimensions();
   const itemWidth = Dimensions.get('window').width;
+  const itemHeight = Dimensions.get('window').height;
 
   return (
     <View
@@ -31,7 +32,12 @@ const OnboardingItem = ({
           </Text>
         </View>
       </TouchableOpacity>
-      <View className='bg-white p-4 rounded-3xl items-center space-y-5 py-7 px-5 min-h-[100px]'>
+      <View
+        className='bg-white p-4 rounded-3xl items-center space-y-5 py-7 px-5 justify-center'
+        style={{
+          minHeight: itemHeight / 3,
+        }}
+      >
         <Text className='font-bold text-xl text-center'>{title}</Text>
         <Text className='text-center text-base'>{description}</Text>
         <TouchableOpacity onPress={nextStep}>
@@ -51,7 +57,10 @@ const OnboardingItem = ({
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={nextStep}>
-          <View className='bg-accent  py-4 px-20 rounded-full items-center'>
+          <View
+            className='bg-accent  py-4 px-5 rounded-full items-center flex-row justify-center'
+            style={{ width: itemWidth / 2 }}
+          >
             <Text className='text-white'>
               {currentIndex === totalSlides - 1 ? 'Get Started' : 'Next'}
             </Text>
