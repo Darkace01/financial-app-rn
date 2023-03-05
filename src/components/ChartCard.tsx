@@ -20,7 +20,6 @@ const ChartCard = ({ monthlyData, isLoading }: Props) => {
       },
     ],
   };
-  console.log(chartData?.datasets?.[0]?.data);
   return (
     <View>
       {isLoading ? (
