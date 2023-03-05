@@ -1,8 +1,7 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import React from 'react';
 import { colors, fonts } from '../constants/globalStyles';
 import { FontAwesome5, Octicons } from '@expo/vector-icons';
-import Test from './Test';
 
 const TopBar = () => {
   return (
@@ -19,9 +18,7 @@ const TopBar = () => {
           </Text>
         </View>
       </View>
-      <View>
-        <FontAwesome5 name='bars' size={24} color='black' />
-      </View>
+      <View>{/* <FontAwesome5 name='bars' size={24} color='black' /> */}</View>
     </View>
   );
 };
