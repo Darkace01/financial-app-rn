@@ -40,7 +40,10 @@ const TransactionDetailModal = ({ route, navigation }) => {
           <View className='px-4'>
             <TransactionIcon title={transaction?.title} />
             <View className='flex justify-center items-center'>
-              <TransactionDetailCategory title={transaction?.categoryName} />
+              <TransactionDetailCategory
+                title={transaction?.categoryName}
+                icon={transaction?.categoryIcon}
+              />
             </View>
             <View className='flex justify-center items-center my-4'>
               <View className='flex space-y-5'>

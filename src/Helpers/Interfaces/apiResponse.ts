@@ -44,6 +44,7 @@ export interface Transaction {
   dateAddedFormatted: string;
   categoryId: number;
   categoryName: string;
+  categoryIcon: string;
   inFlow: boolean;
   userId: string;
 }
@@ -55,6 +56,7 @@ export interface Category {
   icon: string;
   isSubcategory: boolean;
   userId: string;
+  dateAdded: string;
 }
 
 export interface ClientTransactionBalance {
