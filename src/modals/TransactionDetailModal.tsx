@@ -118,7 +118,7 @@ const TransactionDetailModal = ({ route, navigation }) => {
                     </View>
                     <View className='text-right'>
                       <Text className='text-right'>
-                        {transaction?.dateAdded}
+                        {new Date(transaction?.dateAdded).toTimeString()}
                       </Text>
                     </View>
                   </View>

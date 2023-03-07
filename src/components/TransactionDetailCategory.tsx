@@ -7,7 +7,7 @@ interface Props {
 }
 const TransactionDetailCategory = ({ title }: Props) => {
   return (
-    <View className='bg-[#EEF2F8] py-3 px-2 rounded-full flex flex-row space-x-2 items-center justify-center w-1/2'>
+    <View className='bg-[#EEF2F8] py-3 px-4 rounded-full flex flex-row space-x-2 items-center justify-center w-fit'>
       <Text>🍔</Text>
       <Text className='text-accent'> {title}</Text>
       <FontAwesome name='caret-down' size={24} color={colors.inputGray} />
