@@ -8,6 +8,7 @@ import {
   TextInput,
   Image,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import React, { useState, useContext } from 'react';
 import { FontAwesome5, Ionicons } from '@expo/vector-icons';
@@ -131,7 +132,9 @@ const LoginScreen = () => {
               placeholder='Username or Email Address'
               className={`text-sm border ${textinputBorder} h-14 pl-4 bg-inputBackground rounded-md`}
             />
-            <View className='border ${textinputBorder} h-14 bg-inputBackground  rounded-md flex flex-row items-center justify-between space-x-2 pl-2 pr-2'>
+            <View
+              className={`border ${textinputBorder} h-14 bg-inputBackground  rounded-md flex flex-row items-center justify-between space-x-2 pl-2 pr-2`}
+            >
               <TextInput
                 onChangeText={(text) => {
                   handlePassword(text);
@@ -166,22 +169,21 @@ const LoginScreen = () => {
               </Text>
             </View>
             <View className='flex flex-row space-x-2'>
-              <Pressable className='border border-gray-400 rounded-md p-2 w-[32%] flex items-center'>
-                <FontAwesome5 name='facebook-f' size={20} color='black' />
-              </Pressable>
-              <Pressable className='border border-gray-400 rounded-md p-2 w-[32%] flex items-center'>
+              <TouchableOpacity className='border border-gray-400 rounded-md p-2 flex flex-row justify-center items-center w-full space-x-2 h-12'>
                 <FontAwesome5 name='google' size={20} color='black' />
-              </Pressable>
-              <Pressable className='border border-gray-400 rounded-md p-2 w-[32%] flex items-center'>
-                <FontAwesome5 name='apple' size={20} color='black' />
-              </Pressable>
+                <Text className='text-gray-900 text-center font-semibold'>
+                  Login-In With Google
+                </Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
         <View className='flex flex-row w-full justify-center mt-10 space-x-2  bottom-8'>
-          <Text className='font-normal text-lg'>Already have an account?</Text>
+          <Text className='font-normal text-base'>
+            Already have an account?
+          </Text>
           <Pressable onPress={GotoRegister}>
-            <Text className='font-semibold text-lg text-accent'>
+            <Text className='font-semibold text-base text-accent'>
               Register Now
             </Text>
           </Pressable>

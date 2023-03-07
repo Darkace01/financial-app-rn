@@ -209,23 +209,20 @@ const RegisterScreen = () => {
               </View>
             </View>
             <View className='flex flex-row space-x-2'>
-              <Pressable className='border border-gray-400 rounded-md p-2 w-[32%] flex items-center'>
-                <FontAwesome5 name='facebook-f' size={20} color='black' />
-              </Pressable>
-              <Pressable className='border border-gray-400 rounded-md p-2 w-[32%] flex items-center'>
+              <TouchableOpacity className='border border-gray-400 rounded-md p-2 flex flex-row justify-center items-center w-full space-x-2 h-12'>
                 <FontAwesome5 name='google' size={20} color='black' />
-              </Pressable>
-              <Pressable className='border border-gray-400 rounded-md p-2 w-[32%] flex items-center'>
-                <FontAwesome5 name='apple' size={20} color='black' />
-              </Pressable>
+                <Text className='text-gray-900 text-center font-semibold'>
+                  Register With Google
+                </Text>
+              </TouchableOpacity>
             </View>
           </View>
           <View className='flex flex-row w-full justify-center space-x-2 mt-4'>
-            <Text className='font-normal text-lg'>
+            <Text className='font-normal text-base'>
               Already have an account?
             </Text>
             <TouchableOpacity onPress={GotoLogin}>
-              <Text className='font-semibold text-lg text-accent'>
+              <Text className='font-semibold text-base text-accent'>
                 Login Now
               </Text>
             </TouchableOpacity>

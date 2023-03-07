@@ -22,7 +22,7 @@ const TransactionMinList = ({ transactionItems, isLoading }: Props) => {
       className={`bg-white rounded-r-3xl rounded-l-3xl rounded-b-none pt-5 px-5 space-y-2 `}
       style={{ height: screenHeight / 1.9 }}
     >
-      <View className='pb-12'>
+      <View className='pb-16'>
         {isLoading === true ? (
           <Loading />
         ) : (

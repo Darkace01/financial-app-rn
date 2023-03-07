@@ -57,13 +57,13 @@ const HomeScreen = () => {
       >
         <TopBar />
         <UserBar />
-        <View className='mt-5 mb-5 w-full'>
+        <View className='mt-3 mb-5 w-full'>
           <CardContainer
             monthlyData={dashboard?.monthlyBalance}
             clientBalance={dashboard?.balance}
             isLoading={isLoading}
           />
-          <View className='mt-2 flex flex-row justify-evenly px-4 py-3'>
+          <View className='mt-2 flex flex-row justify-evenly px-4 py-2'>
             <ActionButton moneyIn action={handleMoneyIn} />
             <ActionButton moneyIn={false} action={handleMoneyOut} />
           </View>

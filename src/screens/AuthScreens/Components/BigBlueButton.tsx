@@ -1,15 +1,15 @@
-import { View, Text, Pressable } from 'react-native'
-import React from 'react'
+import { View, Text, Pressable } from 'react-native';
+import React from 'react';
 
-const BigBlueButton = ({action,buttonName}) => {
+const BigBlueButton = ({ action, buttonName }) => {
   return (
-    <Pressable 
-        className='bg-accent h-[56px] flex justify-center items-center rounded-md'
-        onPress={action}
-        >
-        <Text className='text-center font-semibold text-white'>{buttonName}</Text>
+    <Pressable
+      className='bg-accent h-12 flex justify-center items-center rounded-md'
+      onPress={action}
+    >
+      <Text className='text-center font-semibold text-white'>{buttonName}</Text>
     </Pressable>
-  )
-}
+  );
+};
 
-export default BigBlueButton
+export default BigBlueButton;

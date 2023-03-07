@@ -11,7 +11,7 @@ const ToolipButton = ({ text, active, onclick }: Props) => {
       <View
         className={`${
           active ? 'bg-accent' : 'bg-themeGrey'
-        } border-accent border-[1px] rounded-md px-5 py-1 flex items-center justify-center space-x-1 w-[10rem]`}
+        } border-accent border-[1px] rounded-md px-4 py-1 flex items-center justify-center space-x-1 w-[10rem]`}
       >
         <Text className={` ${active ? 'text-white font-bold' : 'text-accent'}`}>
           {text}
