@@ -1,4 +1,8 @@
-import { LOGIN_URL, REGISTER_URL } from '../../constants/apiUrls';
+import {
+  LOGIN_URL,
+  REGISTER_URL,
+  REQUEST_PASSWORD_RESET_URL,
+} from '../../constants/apiUrls';
 import {
   AuthResponse,
   LoginPayload,
@@ -23,6 +27,21 @@ export const login = async (payload: LoginPayload) => {
 export const register = async (payload: RegisterPayload) => {
   try {
     const response = await appAxios.post(REGISTER_URL, payload);
+    return response.data;
+  } catch (error) {
+    if (error.response.status === 500) {
+      throw new Error('Internal server error');
+    } else {
+      throw JSON.stringify(error);
+    }
+  }
+};
+
+export const requestPasswordReset = async (email: string) => {
+  try {
+    const response = await appAxios.post(REQUEST_PASSWORD_RESET_URL, {
+      email,
+    });
     return response.data;
   } catch (error) {
     if (error.response.status === 500) {

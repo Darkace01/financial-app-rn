@@ -15,6 +15,9 @@ import BigBlueButton from './Components/BigBlueButton';
 import { OTPSCREEN, LOGIN } from '../../constants/screenRoutes';
 import validator from 'validator';
 import Toast from 'react-native-toast-message';
+import CustomLoadingComponent from '../../components/CustomLoadingComponent';
+import { requestPasswordReset } from '../../Helpers/Service/AuthService';
+import { apiResponse } from '../../Helpers/Interfaces/apiResponse';
 
 const ForgotPassword = () => {
   const navigation = useNavigation();
@@ -29,9 +32,27 @@ const ForgotPassword = () => {
   const sendCode = () => {
     if (validator.isEmail(Email)) {
       setLoading(true);
-      setTimeout(() => {
-        navigation.navigate(OTPSCREEN);
-      }, 3000);
+      requestPasswordReset(Email)
+        .then((res: apiResponse<string>) => {
+          setLoading(false);
+          if (res.hasError) {
+            Toast.show({
+              type: 'error',
+              text1: 'Error',
+              text2: res.message,
+            });
+          } else {
+            navigation.navigate(OTPSCREEN);
+          }
+        })
+        .catch((err) => {
+          setLoading(false);
+          Toast.show({
+            type: 'error',
+            text1: 'Error',
+            text2: 'An error occured',
+          });
+        });
     } else {
       Toast.show({
         type: 'error',
@@ -99,6 +120,7 @@ const ForgotPassword = () => {
             <Text className='font-semibold text-lg text-accent'>Login</Text>
           </Pressable>
         </View>
+        {loading ? <CustomLoadingComponent visible={loading} /> : null}
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );
