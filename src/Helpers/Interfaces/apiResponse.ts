@@ -79,3 +79,9 @@ export interface MonthlyBalance {
   balance: number;
   percentage: number;
 }
+
+export interface PasswordResetPayload {
+  email: string;
+  code: string;
+  password: string;
+}

@@ -6,6 +6,7 @@ import {
 import {
   AuthResponse,
   LoginPayload,
+  PasswordResetPayload,
   RegisterPayload,
 } from '../Interfaces/apiResponse';
 
@@ -42,6 +43,19 @@ export const requestPasswordReset = async (email: string) => {
     const response = await appAxios.post(REQUEST_PASSWORD_RESET_URL, {
       email,
     });
+    return response.data;
+  } catch (error) {
+    if (error.response.status === 500) {
+      throw new Error('Internal server error');
+    } else {
+      throw JSON.stringify(error);
+    }
+  }
+};
+
+export const resetPassword = async (payload: PasswordResetPayload) => {
+  try {
+    const response = await appAxios.post(REQUEST_PASSWORD_RESET_URL, payload);
     return response.data;
   } catch (error) {
     if (error.response.status === 500) {

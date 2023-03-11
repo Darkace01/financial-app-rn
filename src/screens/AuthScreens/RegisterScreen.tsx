@@ -16,7 +16,6 @@ import { useNavigation } from '@react-navigation/native';
 import assetsObject from '../../constants/assets';
 import { LOGIN } from '../../constants/screenRoutes';
 import BigBlueButton from './Components/BigBlueButton';
-import validator from 'validator';
 import Toast from 'react-native-toast-message';
 import CustomLoadingComponent from '../../components/CustomLoadingComponent';
 import {
@@ -24,6 +23,7 @@ import {
   RegisterPayload,
 } from '../../Helpers/Interfaces/apiResponse';
 import { register } from '../../Helpers/Service/AuthService';
+import { isEqual, isValidEmail } from '../../constants/commonHelpers';
 
 const RegisterScreen = () => {
   const navigation = useNavigation();
@@ -55,10 +55,7 @@ const RegisterScreen = () => {
   };
 
   const handleRegister = () => {
-    if (
-      validator.isEmail(Email) &&
-      validator.equals(Password, ConfirmPassword)
-    ) {
+    if (isValidEmail(Email) && isEqual(Password, ConfirmPassword)) {
     } else {
       Toast.show({
         type: 'error',
@@ -113,7 +110,7 @@ const RegisterScreen = () => {
     }
   };
   const CheckValidation = () => {
-    if (validator.isEmail(Email)) {
+    if (isValidEmail(Email)) {
       setTextInputBorder('border-gray-400');
     }
   };

@@ -12,12 +12,12 @@ import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import BigBlueButton from './Components/BigBlueButton';
-import { OTPSCREEN, LOGIN } from '../../constants/screenRoutes';
-import validator from 'validator';
+import { LOGIN, RESETPASSWORD } from '../../constants/screenRoutes';
 import Toast from 'react-native-toast-message';
 import CustomLoadingComponent from '../../components/CustomLoadingComponent';
 import { requestPasswordReset } from '../../Helpers/Service/AuthService';
 import { apiResponse } from '../../Helpers/Interfaces/apiResponse';
+import { isValidEmail } from '../../constants/commonHelpers';
 
 const ForgotPassword = () => {
   const navigation = useNavigation();
@@ -30,7 +30,7 @@ const ForgotPassword = () => {
     setEmail(val);
   };
   const sendCode = () => {
-    if (validator.isEmail(Email)) {
+    if (isValidEmail(Email)) {
       setLoading(true);
       requestPasswordReset(Email)
         .then((res: apiResponse<string>) => {
@@ -42,7 +42,9 @@ const ForgotPassword = () => {
               text2: res.message,
             });
           } else {
-            navigation.navigate(OTPSCREEN);
+            navigation.navigate(RESETPASSWORD, {
+              resetEmail: Email,
+            });
           }
         })
         .catch((err) => {
@@ -65,7 +67,7 @@ const ForgotPassword = () => {
     navigation.navigate(LOGIN);
   };
   const CheckValidation = () => {
-    if (validator.isEmail(Email)) {
+    if (isValidEmail(Email)) {
       setTextInputBorder('border-gray-400');
     }
   };
