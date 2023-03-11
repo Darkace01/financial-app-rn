@@ -94,7 +94,18 @@ export const timeSince = (dateStr) => {
   if (interval > 1) {
     return Math.floor(interval) + ' minutes ago';
   }
-  return Math.floor(seconds) + ' seconds ago';
+  if (seconds < 1 && seconds > 0) {
+    return Math.floor(seconds) + ' seconds ago';
+  }
+
+  // if the time is in the future
+  if (seconds === 0) {
+    return 'Just now';
+  }
+
+  if (seconds < -1) {
+    return date.toDateString();
+  }
 };
 
 export const isValidEmail = (email: string) => {
