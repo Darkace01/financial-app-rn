@@ -15,6 +15,7 @@ export const useTransactionSave = () => {
         transaction
       );
       if (response.statusCode !== 200) {
+        setSavingError(true);
         setErrorMessage(response.message);
         return false;
       }

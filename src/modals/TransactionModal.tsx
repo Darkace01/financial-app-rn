@@ -11,7 +11,11 @@ import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import { useTransactionSave } from '../hooks/useTransactionSave';
 import { useNavigation } from '@react-navigation/native';
 import CurrencyInput from 'react-native-currency-input';
-import { getNumberFromString } from '../constants/commonHelpers';
+import { convertDate, getNumberFromString } from '../constants/commonHelpers';
+import DateTimePicker, {
+  DateTimePickerAndroid,
+  DateTimePickerEvent,
+} from '@react-native-community/datetimepicker';
 
 const TransactionModal = ({ route, navigation }) => {
   const { categories, isLoading, error } = useCategoryFetch();
@@ -22,26 +26,30 @@ const TransactionModal = ({ route, navigation }) => {
   const [description, setDescription] = React.useState('');
   const [fieldAmount, setfieldAmount] = React.useState(null);
   const [amount, setAmount] = React.useState('');
+  const [dateTime, setDateTime] = React.useState(new Date());
+  const [openDateTimePicker, setOpenDateTimePicker] = React.useState(false);
+  const [dateTimeString, setDateTimeString] = React.useState(
+    new Date().toDateString()
+  );
   const { moneyIn } = route.params;
 
   const categoriesData = categories.map((category: Category) => {
     return { key: category.id, value: category.title };
   });
-  if (error) {
-    Toast.show({
-      type: 'error',
-      text1: 'Error',
-      text2: 'Something went wrong',
-    });
-  }
 
-  if (savingError) {
-    Toast.show({
-      type: 'error',
-      text1: 'Error',
-      text2: errorMessage,
-    });
-  }
+  const handleShowDateTimePicker = () => {
+    setOpenDateTimePicker(true);
+  };
+
+  const handleDateChange = (event: DateTimePickerEvent, date?: Date) => {
+    if (event.type === 'dismissed') {
+      setOpenDateTimePicker(false);
+      return;
+    }
+    setDateTime(date);
+    setDateTimeString(date.toDateString());
+    setOpenDateTimePicker(false);
+  };
 
   const handleSubmit = async () => {
     const formattedAmount = getNumberFromString(amount);
@@ -52,6 +60,7 @@ const TransactionModal = ({ route, navigation }) => {
         amount: formattedAmount,
         categoryId: selectedCategory,
         inFlow: moneyIn || false,
+        dateAdded: convertDate(dateTime),
       } as Transaction;
       const isSaved = await handleSaveTransaction(data);
       if (isSaved) {
@@ -61,6 +70,14 @@ const TransactionModal = ({ route, navigation }) => {
           text2: 'Transaction saved successfully',
         });
         navigation.goBack();
+      } else {
+        if (savingError) {
+          Toast.show({
+            type: 'error',
+            text1: 'Error',
+            text2: errorMessage || 'Something went wrong',
+          });
+        }
       }
     } else {
       Toast.show({
@@ -105,6 +122,25 @@ const TransactionModal = ({ route, navigation }) => {
                 borderWidth: 0,
               }}
             />
+          </View>
+        </View>
+        <View className='flex flex-col'>
+          <Text className={`text-base font-[${fonts.font700}]`}>Date</Text>
+          <View className='flex flex-row bg-themeGrey py-2 px-3 rounded-md items-center my-1'>
+            <TouchableOpacity onPress={handleShowDateTimePicker}>
+              <View className='ml-1 px-1 w-full py-2'>
+                <Text className=''>{dateTimeString}</Text>
+              </View>
+            </TouchableOpacity>
+            {openDateTimePicker && (
+              <DateTimePicker
+                testID='dateTimePicker'
+                value={dateTime}
+                mode='date'
+                is24Hour={true}
+                onChange={handleDateChange}
+              />
+            )}
           </View>
         </View>
         <View className='flex flex-col'>
