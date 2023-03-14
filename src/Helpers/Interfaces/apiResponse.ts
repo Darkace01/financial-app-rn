@@ -85,3 +85,8 @@ export interface PasswordResetPayload {
   code: string;
   password: string;
 }
+
+export interface EmailConfirmationPayload {
+  username: string;
+  code: string;
+}

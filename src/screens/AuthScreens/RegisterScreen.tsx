@@ -14,7 +14,7 @@ import React, { useState } from 'react';
 import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import assetsObject from '../../constants/assets';
-import { LOGIN } from '../../constants/screenRoutes';
+import { LOGIN, OTPSCREEN } from '../../constants/screenRoutes';
 import BigBlueButton from './Components/BigBlueButton';
 import Toast from 'react-native-toast-message';
 import CustomLoadingComponent from '../../components/CustomLoadingComponent';
@@ -53,6 +53,11 @@ const RegisterScreen = () => {
   const GotoLogin = () => {
     navigation.navigate(LOGIN);
   };
+  const GotoOTP = () => {
+    navigation.navigate(OTPSCREEN, {
+      emailAddress: Email,
+    });
+  };
 
   const handleRegister = () => {
     if (isValidEmail(Email) && isEqual(Password, ConfirmPassword)) {
@@ -89,7 +94,7 @@ const RegisterScreen = () => {
               text1: 'Register Success',
               text2: res.message,
             });
-            GotoLogin();
+            GotoOTP();
           }
         })
         .catch((err) => {

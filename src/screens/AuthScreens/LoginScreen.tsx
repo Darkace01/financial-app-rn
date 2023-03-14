@@ -14,7 +14,11 @@ import React, { useState, useContext, useEffect } from 'react';
 import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
-import { FOGORTPASSWORD, REGISTER } from '../../constants/screenRoutes';
+import {
+  FOGORTPASSWORD,
+  OTPSCREEN,
+  REGISTER,
+} from '../../constants/screenRoutes';
 import assetsObject from '../../constants/assets.ts';
 import BigBlueButton from './Components/BigBlueButton';
 import validator from 'validator';
@@ -72,6 +76,10 @@ const LoginScreen = () => {
             text1: 'Login Error',
             text2: res.message,
           });
+
+          if (res.message === 'Email not confirmed') {
+            navigation.navigate(OTPSCREEN, { email: userName });
+          }
           return;
         }
         if (!res.data) {

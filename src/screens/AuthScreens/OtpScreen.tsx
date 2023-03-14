@@ -12,33 +12,100 @@ import React, { useEffect, useState } from 'react';
 import OTPTextView from 'react-native-otp-textinput';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
 import BigBlueButton from './Components/BigBlueButton';
-import { RESETPASSWORD } from '../../constants/screenRoutes.ts';
+import {
+  requestEmailConfirmationCode,
+  verifyEmailConfirmationCode,
+} from '../../Helpers/Service/AuthService';
+import {
+  apiResponse,
+  EmailConfirmationPayload,
+} from '../../Helpers/Interfaces/apiResponse';
+import CustomLoadingComponent from '../../components/CustomLoadingComponent';
+import Toast from 'react-native-toast-message';
+import { LOGIN_SCREEN } from '../../constants/screenRoutes';
 const width = Dimensions.get('window').width;
 
 const OtpScreen = ({ route, navigation }) => {
   const [otpInput, setOtpInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { resetEmail } = route.params;
+  const { emailAddress } = route.params;
 
   useEffect(() => {
-    setEmail(resetEmail || '');
-  }, [resetEmail]);
+    setEmail(emailAddress || '');
+  }, [emailAddress]);
 
   const handleText = (text) => {
     setOtpInput(text);
   };
+
+  const handleRequestForConfirmationCode = async () => {
+    setIsLoading(true);
+    requestEmailConfirmationCode(email)
+      .then((res: apiResponse<string>) => {
+        if (res.hasError) {
+          setIsLoading(false);
+          Toast.show({
+            type: 'error',
+            text1: 'OTP Request Error',
+            text2: res.message,
+          });
+        } else {
+          setIsLoading(false);
+          Toast.show({
+            type: 'success',
+            text1: 'Success',
+            text2: res.message,
+          });
+        }
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        Toast.show({
+          type: 'error',
+          text1: 'OTP Request Error',
+          text2: err.message,
+        });
+      });
+  };
   const Verify = () => {
     setLoading(true);
-    navigation.navigate(RESETPASSWORD, {
-      resetCode: otpInput,
-      resetEmail: email,
-    });
+
+    const payload = {
+      code: otpInput,
+      username: email,
+    } as EmailConfirmationPayload;
+    verifyEmailConfirmationCode(payload)
+      .then((res: apiResponse<string>) => {
+        if (res.hasError) {
+          setIsLoading(false);
+          Toast.show({
+            type: 'error',
+            text1: 'OTP Verification Error',
+            text2: res.message,
+          });
+        } else {
+          setIsLoading(false);
+          Toast.show({
+            type: 'success',
+            text1: 'OTP Verification Error',
+            text2: res.message,
+          });
+          navigation.navigate(LOGIN_SCREEN);
+        }
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        Toast.show({
+          type: 'error',
+          text1: 'OTP Verification Error',
+          text2: err.message,
+        });
+      });
   };
-  const Resend = () => {};
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -83,10 +150,11 @@ const OtpScreen = ({ route, navigation }) => {
         </View>
         <View className='flex flex-row w-full justify-center mt-10 space-x-2 absolute bottom-8'>
           <Text className='font-normal text-lg'>Didn’t received code? </Text>
-          <Pressable onPress={Resend}>
+          <Pressable onPress={handleRequestForConfirmationCode}>
             <Text className='font-semibold text-lg text-accent'>Resend</Text>
           </Pressable>
         </View>
+        {isLoading ? <CustomLoadingComponent visible={isLoading} /> : null}
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );

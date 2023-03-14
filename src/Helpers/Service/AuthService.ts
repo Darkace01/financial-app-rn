@@ -1,10 +1,13 @@
 import {
   LOGIN_URL,
   REGISTER_URL,
+  REQUEST_EMAIL_CONFIRMATION_CODE,
   REQUEST_PASSWORD_RESET_URL,
+  VERIFY_EMAIL_CONFIRMATION_CODE,
 } from '../../constants/apiUrls';
 import {
   AuthResponse,
+  EmailConfirmationPayload,
   LoginPayload,
   PasswordResetPayload,
   RegisterPayload,
@@ -56,6 +59,39 @@ export const requestPasswordReset = async (email: string) => {
 export const resetPassword = async (payload: PasswordResetPayload) => {
   try {
     const response = await appAxios.post(REQUEST_PASSWORD_RESET_URL, payload);
+    return response.data;
+  } catch (error) {
+    if (error.response.status === 500) {
+      throw new Error('Internal server error');
+    } else {
+      throw JSON.stringify(error);
+    }
+  }
+};
+
+export const requestEmailConfirmationCode = async (username: string) => {
+  try {
+    const response = await appAxios.post(REQUEST_EMAIL_CONFIRMATION_CODE, {
+      username,
+    });
+    return response.data;
+  } catch (error) {
+    if (error.response.status === 500) {
+      throw new Error('Internal server error');
+    } else {
+      throw JSON.stringify(error);
+    }
+  }
+};
+
+export const verifyEmailConfirmationCode = async (
+  payload: EmailConfirmationPayload
+) => {
+  try {
+    const response = await appAxios.post(
+      VERIFY_EMAIL_CONFIRMATION_CODE,
+      payload
+    );
     return response.data;
   } catch (error) {
     if (error.response.status === 500) {
