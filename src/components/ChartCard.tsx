@@ -12,6 +12,7 @@ interface Props {
 const screenHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
 const ChartCard = ({ monthlyData, isLoading }: Props) => {
+  if (!monthlyData) return null;
   const chartData = {
     labels: monthlyData?.map((item) => item.month[0]),
     datasets: [

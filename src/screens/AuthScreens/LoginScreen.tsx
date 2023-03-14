@@ -10,7 +10,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
@@ -27,6 +27,8 @@ import {
   LoginPayload,
 } from '../../Helpers/Interfaces/apiResponse';
 import CustomLoadingComponent from '../../components/CustomLoadingComponent';
+import { getItem } from '../../Helpers/Service/StorageService';
+import { SIGNED_IN_USER } from '../../constants/storageConstants';
 
 const LoginScreen = () => {
   const { signInUser } = useContext(UserContext);
@@ -37,11 +39,22 @@ const LoginScreen = () => {
   const [icon, setIcon] = useState('eye-off');
   const [textinputBorder, setTextInputBorder] = useState('border-gray-400');
   const [isLoading, setIsLoading] = useState(false);
+  const [firstName, setFirstName] = useState('');
 
-  const handleUserName = (val) => {
+  useEffect(() => {
+    const signedInUser = async () => {
+      const user = await getItem(SIGNED_IN_USER);
+      const { firstName, emailAddress } = user as AuthResponse;
+      setFirstName(firstName || '');
+      handleUserName(emailAddress || '');
+    };
+    signedInUser();
+  }, []);
+
+  const handleUserName = (val: string) => {
     setuserName(val);
   };
-  const handlePassword = (val) => {
+  const handlePassword = (val: string) => {
     setPassword(val);
   };
   const Login = async () => {
@@ -51,43 +64,34 @@ const LoginScreen = () => {
         username: userName,
         password: password,
       };
-      login(payload)
-        .then((res: apiResponse<AuthResponse>) => {
-          if (res.hasError) {
-            setIsLoading(false);
-            Toast.show({
-              type: 'error',
-              text1: 'Login Error',
-              text2: res.message,
-            });
-            return;
-          }
-          if (!res.data) {
-            setIsLoading(false);
-            Toast.show({
-              type: 'error',
-              text1: 'Login Error',
-              text2: 'Please try again',
-            });
-            return;
-          }
-          saveUser(res.data).then(() => {
-            setIsLoading(false);
-            Toast.show({
-              type: 'success',
-              text1: 'Login Success',
-              text2: `Welcome back ${res?.data?.firstName}`,
-            });
-          });
-        })
-        .catch((err) => {
+      login(payload).then((res: apiResponse<AuthResponse>) => {
+        if (res.hasError) {
           setIsLoading(false);
           Toast.show({
             type: 'error',
-            text1: 'Unknown Error',
+            text1: 'Login Error',
+            text2: res.message,
+          });
+          return;
+        }
+        if (!res.data) {
+          setIsLoading(false);
+          Toast.show({
+            type: 'error',
+            text1: 'Login Error',
             text2: 'Please try again',
           });
+          return;
+        }
+        saveUser(res.data).then(() => {
+          setIsLoading(false);
+          Toast.show({
+            type: 'success',
+            text1: 'Login Success',
+            text2: `Welcome back ${res?.data?.firstName}`,
+          });
         });
+      });
     } catch (error) {
       setIsLoading(false);
       Toast.show({
@@ -108,6 +112,14 @@ const LoginScreen = () => {
     navigation.navigate(REGISTER);
   };
 
+  const handleSignInWithGoogle = () => {
+    Toast.show({
+      type: 'info',
+      text1: 'Coming Soon',
+      text2: 'This feature is coming soon',
+    });
+  };
+
   return (
     <ScrollView>
       <SafeAreaView className='flex-1 mx-4 mt-10 relative'>
@@ -121,17 +133,34 @@ const LoginScreen = () => {
         </Pressable> */}
         <View className='mt-5 space-y-5'>
           <Text className='text-accent text-2xl font-bold max-w-[70%]'>
-            Welcome back! Glad to see you, Again!
+            Welcome back {firstName !== '' && firstName}! Glad to see you.
           </Text>
           <View className='space-y-4'>
-            <TextInput
-              onChangeText={(text) => {
-                handleUserName(text);
-              }}
-              value={userName}
-              placeholder='Username or Email Address'
-              className={`text-sm border ${textinputBorder} h-14 pl-4 bg-inputBackground rounded-md`}
-            />
+            {firstName === '' ? (
+              <TextInput
+                onChangeText={(text) => {
+                  handleUserName(text);
+                }}
+                value={userName}
+                placeholder='Username or Email Address'
+                className={`text-sm border ${textinputBorder} h-14 pl-4 bg-inputBackground rounded-md`}
+              />
+            ) : (
+              <View className='flex flex-row justify-between items-center'>
+                <Text className='text-sm font-semibold text-gray-900'>
+                  No, I am not {firstName}!
+                </Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    setFirstName('');
+                  }}
+                >
+                  <Text className='text-sm font-semibold text-accent'>
+                    Change
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            )}
             <View
               className={`border ${textinputBorder} h-14 bg-inputBackground  rounded-md flex flex-row items-center justify-between space-x-2 pl-2 pr-2`}
             >
@@ -169,7 +198,10 @@ const LoginScreen = () => {
               </Text>
             </View>
             <View className='flex flex-row space-x-2'>
-              <TouchableOpacity className='border border-gray-400 rounded-md p-2 flex flex-row justify-center items-center w-full space-x-2 h-12'>
+              <TouchableOpacity
+                className='border border-gray-400 rounded-md p-2 flex flex-row justify-center items-center w-full space-x-2 h-12'
+                onPress={handleSignInWithGoogle}
+              >
                 <FontAwesome5 name='google' size={20} color='black' />
                 <Text className='text-gray-900 text-center font-semibold'>
                   Login-In With Google

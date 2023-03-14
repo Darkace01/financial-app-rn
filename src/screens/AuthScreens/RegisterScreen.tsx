@@ -114,6 +114,14 @@ const RegisterScreen = () => {
       setTextInputBorder('border-gray-400');
     }
   };
+
+  const handleSignUpWithGoogle = () => {
+    Toast.show({
+      type: 'info',
+      text1: 'Coming Soon',
+      text2: 'This feature is coming soon',
+    });
+  };
   return (
     <ScrollView>
       <TouchableWithoutFeedback
@@ -131,7 +139,7 @@ const RegisterScreen = () => {
             <Ionicons name='chevron-back' size={24} color='black' />
           </Pressable>
           <View className='mt-5 space-y-5'>
-            <Text className='text-accent text-2xl font-bold max-w-[70%]'>
+            <Text className='text-accent text-2xl font-bold'>
               Hello! Register to get started
             </Text>
             <View className='space-y-4'>
@@ -206,7 +214,10 @@ const RegisterScreen = () => {
               </View>
             </View>
             <View className='flex flex-row space-x-2'>
-              <TouchableOpacity className='border border-gray-400 rounded-md p-2 flex flex-row justify-center items-center w-full space-x-2 h-12'>
+              <TouchableOpacity
+                className='border border-gray-400 rounded-md p-2 flex flex-row justify-center items-center w-full space-x-2 h-12'
+                onPress={handleSignUpWithGoogle}
+              >
                 <FontAwesome5 name='google' size={20} color='black' />
                 <Text className='text-gray-900 text-center font-semibold'>
                   Register With Google

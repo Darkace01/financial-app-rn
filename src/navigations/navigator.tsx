@@ -7,8 +7,7 @@ import Loading from '../components/Loading';
 import { UserContext } from '../contexts/user.context';
 
 const AppNavigation = () => {
-  const { signedIn, user } = useContext(UserContext);
-  const isLogged = signedIn && user !== null;
+  const { signedIn } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
 
   if (loading) {
@@ -16,7 +15,7 @@ const AppNavigation = () => {
   }
   return (
     <NavigationContainer>
-      {isLogged ? <CoreNavigation /> : <PublicNavigator />}
+      {signedIn ? <CoreNavigation /> : <PublicNavigator />}
     </NavigationContainer>
   );
 };
