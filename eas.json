@@ -8,15 +8,18 @@
       "android": {
         "buildType": "apk",
         "gradleCommand": ":app:assembleRelease"
-      }
+      },
+      "autoIncrement": true
     },
     "production": {
       "ios": {
         "resourceClass": "m1-medium"
-      }
+      },
+      "android": {
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleRelease"
+      },
+      "autoIncrement": true
     }
-  },
-  "production": {
-    "autoIncrement": true
   }
 }
