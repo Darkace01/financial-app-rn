@@ -16,7 +16,8 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const checkSignedIn = async () => {
       const isSignedIn = await getItem(SIGNED_IN);
-      if (isSignedIn) {
+      const token = await getItem(AUTH_TOKEN_KEY);
+      if (isSignedIn === true && token) {
         setSignedIn(true);
       }
     };
@@ -24,8 +25,6 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   const signInUser = async (user: AuthResponse) => {
-    console.log('user', user);
-    console.log('access code', user.accessToken);
     await setItem(SIGNED_IN, true);
     await setItem(AUTH_TOKEN_KEY, user.accessToken);
     await setItem(SIGNED_IN_USER, user);

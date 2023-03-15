@@ -24,14 +24,14 @@ import {
 import CustomLoadingComponent from '../../components/CustomLoadingComponent';
 import Toast from 'react-native-toast-message';
 import { LOGIN_SCREEN } from '../../constants/screenRoutes';
+import { colors } from '../../constants/globalStyles';
+import { isStringNullOrEmptyOrWhiteSpace } from '../../constants/commonHelpers';
 const width = Dimensions.get('window').width;
 
 const OtpScreen = ({ route, navigation }) => {
   const [otpInput, setOtpInput] = useState('');
-  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
   const { emailAddress } = route.params;
 
   useEffect(() => {
@@ -44,6 +44,13 @@ const OtpScreen = ({ route, navigation }) => {
 
   const handleRequestForConfirmationCode = async () => {
     setIsLoading(true);
+    if (isStringNullOrEmptyOrWhiteSpace(email)) {
+      Toast.show({
+        type: 'error',
+        text1: 'OTP Request Error',
+        text2: 'Please try again later.',
+      });
+    }
     requestEmailConfirmationCode(email)
       .then((res: apiResponse<string>) => {
         if (res.hasError) {
@@ -72,8 +79,18 @@ const OtpScreen = ({ route, navigation }) => {
       });
   };
   const Verify = () => {
-    setLoading(true);
-
+    setIsLoading(true);
+    if (
+      isStringNullOrEmptyOrWhiteSpace(email) ||
+      isStringNullOrEmptyOrWhiteSpace(otpInput)
+    ) {
+      Toast.show({
+        type: 'error',
+        text1: 'OTP Request Error',
+        text2: 'Please try again later.',
+      });
+      return;
+    }
     const payload = {
       code: otpInput,
       username: email,
@@ -91,7 +108,7 @@ const OtpScreen = ({ route, navigation }) => {
           setIsLoading(false);
           Toast.show({
             type: 'success',
-            text1: 'OTP Verification Error',
+            text1: 'OTP Verification Success',
             text2: res.message,
           });
           navigation.navigate(LOGIN_SCREEN);
@@ -135,17 +152,20 @@ const OtpScreen = ({ route, navigation }) => {
               containerStyle={styles.textInputContainer}
               inputCount={6}
               inputCellLength={1}
+              tintColor={colors.primary}
             />
           </View>
           <View>
-            {loading === false ? (
-              <BigBlueButton action={Verify} buttonName='Verify' />
-            ) : (
-              <BigBlueButton
-                action={Verify}
-                buttonName={<ActivityIndicator size='small' color='#fff' />}
-              />
-            )}
+            <BigBlueButton
+              action={Verify}
+              buttonName={
+                isLoading ? (
+                  <ActivityIndicator size='small' color='#fff' />
+                ) : (
+                  'Verify'
+                )
+              }
+            />
           </View>
         </View>
         <View className='flex flex-row w-full justify-center mt-10 space-x-2 absolute bottom-8'>
@@ -169,8 +189,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: '20%',
     height: 60,
-    borderWidth: 4,
+    borderWidth: 1,
     fontSize: 20,
+    color: colors.primary,
   },
 });
 

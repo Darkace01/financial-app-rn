@@ -1,27 +1,13 @@
 {
   "cli": {
-    "version": ">= 3.7.2"
+    "version": ">= 3.7.2",
+    "appVersionSource": "remote"
   },
   "build": {
-    "preview2": {
-      "android": {
-        "gradleCommand": ":app:assembleRelease"
-      }
-    },
-    "preview3": {
-      "developmentClient": true
-    },
-
-    "development": {
-      "developmentClient": true,
-      "distribution": "internal",
-      "ios": {
-        "resourceClass": "m1-medium"
-      }
-    },
     "preview": {
       "android": {
-        "buildType": "apk"
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleRelease"
       }
     },
     "production": {
@@ -30,7 +16,7 @@
       }
     }
   },
-  "submit": {
-    "production": {}
+  "production": {
+    "autoIncrement": true
   }
 }

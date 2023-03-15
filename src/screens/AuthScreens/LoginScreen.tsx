@@ -33,6 +33,7 @@ import {
 import CustomLoadingComponent from '../../components/CustomLoadingComponent';
 import { getItem } from '../../Helpers/Service/StorageService';
 import { SIGNED_IN_USER } from '../../constants/storageConstants';
+import { isStringNullOrEmptyOrWhiteSpace } from '../../constants/commonHelpers';
 
 const LoginScreen = () => {
   const { signInUser } = useContext(UserContext);
@@ -48,9 +49,9 @@ const LoginScreen = () => {
   useEffect(() => {
     const signedInUser = async () => {
       const user = await getItem(SIGNED_IN_USER);
-      const { firstName, emailAddress } = user as AuthResponse;
-      setFirstName(firstName || '');
-      handleUserName(emailAddress || '');
+      // const { firstName, emailAddress } = user as AuthResponse;
+      setFirstName(user?.firstName || '');
+      handleUserName(user?.emailAddress || '');
     };
     signedInUser();
   }, []);
@@ -60,6 +61,11 @@ const LoginScreen = () => {
   };
   const handlePassword = (val: string) => {
     setPassword(val);
+  };
+
+  const clearStates = () => {
+    setuserName('');
+    setPassword('');
   };
   const Login = async () => {
     try {
@@ -78,7 +84,8 @@ const LoginScreen = () => {
           });
 
           if (res.message === 'Email not confirmed') {
-            navigation.navigate(OTPSCREEN, { email: userName });
+            clearStates();
+            navigation.navigate(OTPSCREEN, { emailAddress: userName });
           }
           return;
         }
@@ -93,6 +100,7 @@ const LoginScreen = () => {
         }
         saveUser(res.data).then(() => {
           setIsLoading(false);
+          clearStates();
           Toast.show({
             type: 'success',
             text1: 'Login Success',
@@ -128,6 +136,16 @@ const LoginScreen = () => {
     });
   };
 
+  const checkUsernameAndPassword = () => {
+    if (
+      !isStringNullOrEmptyOrWhiteSpace(userName) &&
+      !isStringNullOrEmptyOrWhiteSpace(password)
+    ) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <ScrollView>
       <SafeAreaView className='flex-1 mx-4 mt-10 relative'>
@@ -141,10 +159,10 @@ const LoginScreen = () => {
         </Pressable> */}
         <View className='mt-5 space-y-5'>
           <Text className='text-accent text-2xl font-bold max-w-[70%]'>
-            Welcome back {firstName !== '' && firstName}! Glad to see you.
+            Welcome back {firstName}! Glad to see you.
           </Text>
           <View className='space-y-4'>
-            {firstName === '' ? (
+            {isStringNullOrEmptyOrWhiteSpace(firstName) ? (
               <TextInput
                 onChangeText={(text) => {
                   handleUserName(text);
@@ -222,7 +240,10 @@ const LoginScreen = () => {
           <Text className='font-normal text-base'>
             Already have an account?
           </Text>
-          <Pressable onPress={GotoRegister}>
+          <Pressable
+            onPress={GotoRegister}
+            disabled={checkUsernameAndPassword() === true}
+          >
             <Text className='font-semibold text-base text-accent'>
               Register Now
             </Text>

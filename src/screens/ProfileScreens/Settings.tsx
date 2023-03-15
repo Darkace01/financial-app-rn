@@ -10,10 +10,11 @@ import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { UserContext } from '../../contexts/user.context';
+import * as Application from 'expo-application';
 
 const Settings = () => {
   const navigation = useNavigation();
-
+  const appVersion = Application.nativeApplicationVersion;
   const { signOutUser } = useContext(UserContext);
 
   const handleSignOut = async () => {
@@ -65,6 +66,9 @@ const Settings = () => {
         <Text className='text-gray-300 text-center'>Kazeem Quadri</Text>
         <Text className='text-gray-300 text-center'>Damola Adekunle</Text>
         <Text className='text-gray-300 text-center'>Nnemeka</Text>
+      </View>
+      <View>
+        <Text className='text-gray-300 text-center'>V {appVersion}</Text>
       </View>
     </SafeAreaView>
   );
