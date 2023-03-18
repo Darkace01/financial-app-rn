@@ -14,6 +14,7 @@ export interface BasicUser {
   phoneNumber: string;
   userId: string;
   profilePictureUrl: string;
+  profilePictureId: string;
 }
 
 export interface AuthResponse extends BasicUser {

@@ -1,5 +1,5 @@
 import { View, Dimensions, RefreshControl, ScrollView } from 'react-native';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import TopBar from '../components/TopBar';
 import BalanceCard from '../components/BalanceCard';
@@ -12,11 +12,20 @@ import { useDashboardFetch } from '../hooks/useDashboardFetch';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import ChartCard from '../components/ChartCard';
 import CardContainer from '../components/CardContainer';
+import { UserContext } from '../contexts/user.context';
 const screenHeight = Dimensions.get('window').height;
 const HomeScreen = () => {
-  const { dashboard, refresh, setRefresh, isLoading, error } =
-    useDashboardFetch();
+  const {
+    dashboard,
+    refresh,
+    setRefresh,
+    isLoading,
+    error,
+    user,
+    errorMessage,
+  } = useDashboardFetch();
   const navigation = useNavigation();
+  const { setUser } = useContext(UserContext);
 
   const handleMoneyIn = () => {
     navigation.navigate(TRANSACTION_CREATION_MODAL, {
@@ -34,14 +43,23 @@ const HomeScreen = () => {
       Toast.show({
         type: 'error',
         text1: 'Error',
-        text2: 'Something went wrong',
+        text2: errorMessage,
       });
     }
   }, [error]);
 
+  useEffect(() => {
+    if (user) {
+      setUser(user);
+    }
+  }, [user]);
+
   const onRefresh = useCallback(() => {
     setRefresh(true);
-  }, []);
+    if (user) {
+      setUser(user);
+    }
+  }, [refresh]);
   return (
     <SafeAreaView className={`bg-themeGrey h-full w-full mx-auto px-5 flex-1`}>
       <ScrollView

@@ -13,10 +13,14 @@ import EmptyPicture from './Components/EmptyPicture';
 import * as ImagePicker from 'expo-image-picker';
 import FilledPicture from './Components/FilledPicture';
 import { UserContext } from '../../contexts/user.context';
+import { saveUserProfilePicture } from '../../Helpers/Service/UserService';
+import CustomLoadingComponent from '../../components/CustomLoadingComponent';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
 
 const Account = () => {
   const navigation = useNavigation();
   const [selectedImage, setSelectedImage] = useState(8);
+  const [isLoading, setIsLoading] = useState(false);
   const { user } = useContext(UserContext);
   if (user === null) return null;
   const { firstName, lastName, profilePictureUrl, emailAddress, phoneNumber } =
@@ -24,12 +28,40 @@ const Account = () => {
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       quality: 1,
     });
 
-    if (!result.canceled) {
-      setSelectedImage(result.assets[0].uri);
+    if (!result.cancelled) {
+      console.log(JSON.stringify(result));
+      setSelectedImage(result.uri);
+      var imageResult = result;
+      let arr = imageResult.uri.split('/');
+      let fileName = arr[arr.length - 1];
+      const file = new File([imageResult.uri], fileName, {
+        type: imageResult.type,
+      });
+      setIsLoading(true);
+      saveUserProfilePicture(file)
+        .then((res) => {
+          console.log(res);
+          Toast.show({
+            type: 'success',
+            text1: 'Success',
+            text2: 'Your profile picture was successfully uploaded',
+          });
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          console.log('error', err);
+          Toast.show({
+            type: 'error',
+            text1: 'Error',
+            text2: 'An error occured while uploading your profile picture',
+          });
+          setIsLoading(false);
+        });
     } else {
       Alert.alert('Note', 'No image was selected');
     }
@@ -73,6 +105,7 @@ const Account = () => {
       <View className='h-16 rounded-md justify-center items-center bg-gray-300'>
         <Text className='text-accent font-bold text-lg'>Save</Text>
       </View>
+      {isLoading ? <CustomLoadingComponent visible={isLoading} /> : null}
     </SafeAreaView>
   );
 };

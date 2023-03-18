@@ -1,13 +1,20 @@
 import { View, Text, Image } from 'react-native';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { colors, fonts } from '../constants/globalStyles';
 import { UserContext } from '../contexts/user.context';
 
 const UserBar = () => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [profilePictureUrl, setProfilePictureUrl] = useState('');
   const { user } = useContext(UserContext);
-  if (user === null) return null;
-  const { firstName, lastName, profilePictureUrl } = user;
-  //split the name
+  useEffect(() => {
+    if (user !== null) {
+      setFirstName(user.firstName);
+      setLastName(user.lastName);
+      setProfilePictureUrl(user.profilePictureUrl);
+    }
+  }, [user]);
   return (
     <View className='flex flex-row space-x-3 items-center'>
       <View>

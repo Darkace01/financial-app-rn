@@ -3,8 +3,10 @@ import {
   GET_USER_TRANSACTIONS_URL,
   SAVE_USER_TRANSACTIONS_URL,
 } from '../../constants/apiUrls';
+import { AUTH_TOKEN_KEY } from '../../constants/storageConstants';
 import appAxios from '../AxiosInterceptor';
 import { Transaction } from '../Interfaces/apiResponse';
+import { getItem, removeItem } from './StorageService';
 
 export const getUserTransactions = async (
   searchTerm: string = '',
