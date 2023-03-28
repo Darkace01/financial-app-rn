@@ -17,6 +17,7 @@ export const GET_USER_CATEGORIES_URL = 'categories';
 //User Urls
 export const GET_USER_BASIC_DETAILS_URL = 'users/basic';
 export const SAVE_USER_PROFILE_PICTURE_URL = 'users/profile-picture';
+export const UPDATE_USER_BASIC_DETAILS_URL = 'users/details';
 
 // Base Url
 export const BASE_URL = 'https://faapi.azurewebsites.net/api/v1.0/';

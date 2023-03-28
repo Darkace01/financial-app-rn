@@ -2,9 +2,11 @@ import {
   BASE_URL,
   GET_USER_BASIC_DETAILS_URL,
   SAVE_USER_PROFILE_PICTURE_URL,
+  UPDATE_USER_BASIC_DETAILS_URL,
 } from '../../constants/apiUrls';
 import { AUTH_TOKEN_KEY } from '../../constants/storageConstants';
 import appAxios from '../AxiosInterceptor';
+import { BasicUser } from '../Interfaces/apiResponse';
 import { getItem } from './StorageService';
 
 export const getUserBasicDetails = async () => {
@@ -43,6 +45,19 @@ export const saveUserProfilePicture = async (file: any) => {
     return response.data;
   } catch (error) {
     console.log('error fetch', JSON.stringify(error));
+    if (error.response.status === 500) {
+      throw new Error('Internal server error');
+    } else {
+      throw JSON.stringify(error);
+    }
+  }
+};
+
+export const updateUserDetails = async (user: BasicUser) => {
+  try {
+    const response = await appAxios.post(UPDATE_USER_BASIC_DETAILS_URL, user);
+    return response.data;
+  } catch (error) {
     if (error.response.status === 500) {
       throw new Error('Internal server error');
     } else {

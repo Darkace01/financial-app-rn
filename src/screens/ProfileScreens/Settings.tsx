@@ -36,7 +36,7 @@ const Settings = () => {
       <View className='space-y-4'>
         <Text className='text-gray-400 text-base'>General</Text>
         <View className='flex flex-row justify-between'>
-          <Text className='font-semibold text-base'>Reset Password</Text>
+          <Text className='font-semibold text-base'>Change Password</Text>
           <AntDesign name='right' size={20} color='black' />
         </View>
         <View className='flex flex-row justify-between'>

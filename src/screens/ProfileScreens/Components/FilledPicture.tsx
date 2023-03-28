@@ -24,7 +24,7 @@ const FilledPicture = ({ uri, pickImageAsync }) => {
         onPress={() => {
           pickImageAsync();
         }}
-        className='absolute left-20 top-16 bg-blue-400 rounded-full p-1 border-2 border-white'
+        className='absolute left-20 top-16 bg-accent rounded-full p-1 border-2 border-white'
       >
         <Ionicons name='md-camera-reverse' size={30} color='white' />
       </Pressable>
