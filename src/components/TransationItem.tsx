@@ -33,11 +33,11 @@ const TransationItem = (prop: Transaction) => {
       <View className='flex justify-center'>
         {prop.inFlow ? (
           <Text className='text-green-500'>
-            + <Currency quantity={prop?.amount} currency='NGN' />{' '}
+            +<Currency quantity={prop?.amount} currency='NGN' />{' '}
           </Text>
         ) : (
           <Text className='text-red-500'>
-            - <Currency quantity={prop?.amount} currency='NGN' />
+            -<Currency quantity={prop?.amount} currency='NGN' />
           </Text>
         )}
       </View>

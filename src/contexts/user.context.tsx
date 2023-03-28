@@ -6,13 +6,17 @@ import {
   SIGNED_IN,
   SIGNED_IN_USER,
 } from '../constants/storageConstants';
-import { AuthResponse } from '../Helpers/Interfaces/apiResponse';
+import {
+  AuthResponse,
+  BasicUser,
+  ProfilePictureResponse,
+} from '../Helpers/Interfaces/apiResponse';
 import { getItem, setItem } from '../Helpers/Service/StorageService';
 
 export const UserContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<BasicUser | null>(null);
   const [signedIn, setSignedIn] = useState(false);
 
   const signInUser = async (user: AuthResponse) => {
@@ -30,6 +34,16 @@ export const UserProvider = ({ children }) => {
     setUser(null);
   };
 
+  const updateUserProfilePicture = async (payload: ProfilePictureResponse) => {
+    const updatedUser = {
+      ...user,
+      profilePictureUrl: payload.fileUrl,
+      profilePictureId: payload.publicId,
+    } as BasicUser;
+    await setItem(SIGNED_IN_USER, updatedUser);
+    setUser(updatedUser);
+  };
+
   const value = {
     user,
     setUser,
@@ -37,6 +51,7 @@ export const UserProvider = ({ children }) => {
     signedIn,
     setSignedIn,
     signOutUser,
+    updateUserProfilePicture,
   };
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

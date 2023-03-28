@@ -16,12 +16,16 @@ import { UserContext } from '../../contexts/user.context';
 import { saveUserProfilePicture } from '../../Helpers/Service/UserService';
 import CustomLoadingComponent from '../../components/CustomLoadingComponent';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
+import {
+  apiResponse,
+  ProfilePictureResponse,
+} from '../../Helpers/Interfaces/apiResponse';
 
 const Account = () => {
   const navigation = useNavigation();
   const [selectedImage, setSelectedImage] = useState(8);
   const [isLoading, setIsLoading] = useState(false);
-  const { user } = useContext(UserContext);
+  const { user, updateUserProfilePicture } = useContext(UserContext);
   if (user === null) return null;
   const { firstName, lastName, profilePictureUrl, emailAddress, phoneNumber } =
     user;
@@ -34,18 +38,12 @@ const Account = () => {
     });
 
     if (!result.cancelled) {
-      console.log(JSON.stringify(result));
       setSelectedImage(result.uri);
       var imageResult = result;
-      let arr = imageResult.uri.split('/');
-      let fileName = arr[arr.length - 1];
-      const file = new File([imageResult.uri], fileName, {
-        type: imageResult.type,
-      });
       setIsLoading(true);
-      saveUserProfilePicture(file)
-        .then((res) => {
-          console.log(res);
+      saveUserProfilePicture(imageResult)
+        .then((res: apiResponse<ProfilePictureResponse>) => {
+          updateUserProfilePicture(res.data);
           Toast.show({
             type: 'success',
             text1: 'Success',
@@ -54,7 +52,6 @@ const Account = () => {
           setIsLoading(false);
         })
         .catch((err) => {
-          console.log('error', err);
           Toast.show({
             type: 'error',
             text1: 'Error',

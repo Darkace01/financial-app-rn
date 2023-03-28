@@ -47,7 +47,6 @@ appAxios.interceptors.response.use(
   (res) => res,
   (err) => {
     // Any HTTP Code which is not 2xx will be considered as error
-    console.log('Error AXIOS', JSON.stringify(err));
     if (err.response) {
       const statusCode = err.response.status;
       if (statusCode === 401 || statusCode === 403) {

@@ -20,33 +20,27 @@ export const getUserBasicDetails = async () => {
   }
 };
 
-export const saveUserProfilePicture = async (file: File) => {
+export const saveUserProfilePicture = async (file: any) => {
   try {
     const formData = new FormData();
-    formData.append('file', file);
-    // const response = await appAxios.postForm(
-    //   SAVE_USER_PROFILE_PICTURE_URL,
-    //   formData,
-    //   {
-    //     timeout: 200000,
-    //   }
-    // );
-    // return response.data;
-    const url = `${BASE_URL}${SAVE_USER_PROFILE_PICTURE_URL}`;
-    const token = await getItem(AUTH_TOKEN_KEY);
-    const config = {
-      method: 'POST',
-      body: formData,
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': `multipart/form-data`,
-        Accept: 'application/json',
-      },
-    };
-    console.log('url', url);
-    const response = await fetch(url, config);
-    console.log(response.json());
-    return response.json();
+    let arr = file.uri.split('/');
+    let fileName = arr[arr.length - 1];
+    formData.append('file', {
+      uri: file.uri,
+      type: `image/${fileName.split('.')[1]}`,
+      name: fileName,
+    });
+    const response = await appAxios.post(
+      SAVE_USER_PROFILE_PICTURE_URL,
+      formData,
+      {
+        timeout: 200000,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+    return response.data;
   } catch (error) {
     console.log('error fetch', JSON.stringify(error));
     if (error.response.status === 500) {
