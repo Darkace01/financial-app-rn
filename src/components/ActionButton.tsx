@@ -20,7 +20,7 @@ const ActionButton = ({ action, moneyIn }: Props) => {
           <FontAwesome5 name='minus-circle' size={12} color='#4D2DEC' />
         )}
         <Text className={`${moneyIn ? 'text-white' : 'text-accent'}  text-xs`}>
-          {moneyIn ? 'Money In' : 'Money Out'}
+          {moneyIn ? 'Income' : 'Expense'}
         </Text>
       </View>
     </TouchableOpacity>

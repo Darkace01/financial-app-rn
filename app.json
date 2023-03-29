@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "financial-app",
-    "slug": "financial-app",
+    "name": "Income",
+    "slug": "income",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,7 +25,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.kazeemquadri01.financialapp"
+      "package": "com.kazeemquadri01.income"
     },
     "web": {
       "favicon": "./assets/favicon.png"

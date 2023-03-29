@@ -92,7 +92,7 @@ const TransactionModal = ({ route, navigation }) => {
     <SafeAreaView className='bg-white h-full mx-auto px-5 w-full'>
       <NavigationTopBar
         withFilter={false}
-        text={moneyIn ? 'Money In' : 'Money Out'}
+        text={moneyIn ? 'Income' : 'Expense'}
       />
       <View className='space-y-5'>
         <View>

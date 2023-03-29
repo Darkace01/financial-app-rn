@@ -2,7 +2,6 @@ import { View, Dimensions, RefreshControl, ScrollView } from 'react-native';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import TopBar from '../components/TopBar';
-import BalanceCard from '../components/BalanceCard';
 import UserBar from '../components/UserBar';
 import ActionButton from '../components/ActionButton';
 import TransactionMinList from '../components/TransactionMinList';
@@ -11,8 +10,8 @@ import { TRANSACTION_CREATION_MODAL } from '../constants/screenRoutes';
 import { useDashboardFetch } from '../hooks/useDashboardFetch';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import CardContainer from '../components/CardContainer';
+import { useNotificationDisplay } from '../hooks/useNotificationDisplay';
 
-import notifee from '@notifee/react-native';
 import { UserContext } from '../contexts/user.context';
 const screenHeight = Dimensions.get('window').height;
 const HomeScreen = () => {
@@ -25,6 +24,7 @@ const HomeScreen = () => {
     user,
     errorMessage,
   } = useDashboardFetch();
+  const {} = useNotificationDisplay();
   const navigation = useNavigation();
   const { setUser } = useContext(UserContext);
 
@@ -58,35 +58,10 @@ const HomeScreen = () => {
   const onRefresh = useCallback(() => {
     setRefresh(true);
     console.log('hello');
-    onDisplayNotification();
     if (user) {
       setUser(user);
     }
   }, [refresh]);
-
-  async function onDisplayNotification() {
-    // Request permissions (required for iOS)
-    await notifee.requestPermission();
-
-    // Create a channel (required for Android)
-    const channelId = await notifee.createChannel({
-      id: 'default',
-      name: 'Default Channel',
-    });
-
-    // Display a notification
-    await notifee.displayNotification({
-      title: 'Expense For Today',
-      body: 'Insert your expense for today',
-      android: {
-        channelId,
-        // pressAction is needed if you want the notification to open the app when pressed
-        pressAction: {
-          id: 'default',
-        },
-      },
-    });
-  }
 
   return (
     <SafeAreaView className={`bg-themeGrey h-full w-full mx-auto px-5 flex-1`}>

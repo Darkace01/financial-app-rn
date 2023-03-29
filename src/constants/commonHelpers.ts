@@ -138,3 +138,23 @@ export const isEqual = (a, b) => {
   // are considered equivalent
   return true;
 };
+
+export const getAppName = () => {
+  return 'Invoice';
+};
+
+export const notificationTimes = [
+  '08:00:00', // 8:00 AM
+  '09:00:00', // 9:00 AM
+  '11:00:00', // 11:00 AM
+  '12:00:00', // 12:00 PM
+  '13:00:00', // 1:00 PM
+  '14:00:00', // 2:00 PM
+  '15:00:00', // 3:00 PM
+  '16:00:00', // 4:00 PM
+  '17:00:00', // 5:00 PM
+  '18:00:00', // 6:00 PM
+  '19:00:00', // 7:00 PM
+  '20:00:00', // 8:00 PM
+  '21:00:00', // 9:00 PM
+];
