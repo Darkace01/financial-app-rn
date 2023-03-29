@@ -25,14 +25,17 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.kazeemquadri01.income"
+      "package": "com.kazeemquadri01.income",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "f5d35567-ed27-4e33-a160-04b717779273"
+        "projectId": "600e3808-0a07-44a4-b359-ff90c1dffecf"
       }
     },
     "plugins": [
@@ -56,6 +59,7 @@
           }
         }
       ]
-    ]
+    ],
+    "owner": "kazeemquadri01"
   }
 }
