@@ -41,6 +41,20 @@
         {
           "photosPermission": "The app accesses your photos to update your profile picture."
         }
+      ],
+      "@notifee/react-native",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 33,
+            "targetSdkVersion": 33,
+            "buildToolsVersion": "31.0.0"
+          },
+          "ios": {
+            "deploymentTarget": "13.0"
+          }
+        }
       ]
     ]
   }

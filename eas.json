@@ -4,10 +4,19 @@
     "appVersionSource": "remote"
   },
   "build": {
+    "development": {
+      "android": {
+        "image": "ubuntu-18.04-jdk-11-ndk-r19c"
+      },
+      "autoIncrement": true,
+      "distribution": "internal",
+      "developmentClient": true
+    },
     "preview": {
       "android": {
         "buildType": "apk",
-        "gradleCommand": ":app:assembleRelease"
+        "gradleCommand": ":app:assembleRelease",
+        "image": "ubuntu-18.04-jdk-11-ndk-r19c"
       },
       "autoIncrement": true
     },
@@ -17,7 +26,8 @@
       },
       "android": {
         "buildType": "apk",
-        "gradleCommand": ":app:assembleRelease"
+        "gradleCommand": ":app:assembleRelease",
+        "image": "ubuntu-18.04-jdk-11-ndk-r19c"
       },
       "autoIncrement": true
     }
