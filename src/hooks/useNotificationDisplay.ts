@@ -42,9 +42,11 @@ export const useNotificationDisplay = async () => {
     const currentTimeInSeconds = currentHour * 60 * 60 + currentMinute * 60;
 
     // Loop through the notification times and schedule notifications for each one
-    for (const time of notificationTimes) {
+    for (const notificationTime of notificationTimes) {
       // Convert the time to seconds since midnight
-      const [hour, minute, second] = time.split(':').map(Number);
+      const [hour, minute, second] = notificationTime.time
+        .split(':')
+        .map(Number);
       const notificationTimeInSeconds = hour * 60 * 60 + minute * 60 + second;
 
       // Calculate the time until the next notification
@@ -78,8 +80,8 @@ export const useNotificationDisplay = async () => {
 
       await notifee.createTriggerNotification(
         {
-          title: 'Expense For Today',
-          body: `Insert your expense for today ${time}`,
+          title: notificationTime.time,
+          body: notificationTime.description,
           android: {
             channelId: NOTIFICATION_CHANNEL_ID,
             sound: 'hollow',
