@@ -36,6 +36,12 @@ const RegisterScreen = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [textinputBorder, setTextInputBorder] = useState('border-gray-400');
   const [isLoading, setIsLoading] = useState(false);
+  const [checklist, setChecklist] = useState([
+    { label: 'At least 6 characters', done: false },
+    { label: 'Contains a capital letter', done: false },
+    { label: 'Contains a number', done: false },
+    { label: 'Contains a special character', done: false },
+  ]);
 
   const handleUsername = (val) => {
     setUsername(val);
@@ -46,6 +52,14 @@ const RegisterScreen = () => {
   };
   const handlePassword = (val) => {
     setPassword(val);
+
+    // Update checklist
+    const updatedChecklist = [...checklist];
+    updatedChecklist[0].done = val.length >= 6;
+    updatedChecklist[1].done = /[A-Z]/.test(val);
+    updatedChecklist[2].done = /\d/.test(val);
+    updatedChecklist[3].done = /[@$!%*#?&]/.test(val);
+    setChecklist(updatedChecklist);
   };
   const handleConfirmPassword = (val) => {
     setConfirmPassword(val);
@@ -198,6 +212,26 @@ const RegisterScreen = () => {
                 className='text-sm border border-gray-400 h-[56px] pl-4 bg-inputBackground rounded-md'
                 secureTextEntry={true}
               />
+              <View className='flex-col flex-wrap items-start'>
+                {checklist.map((item, index) => (
+                  <View key={index} className='flex-row items-center my-2 mr-4'>
+                    <Text
+                      className={
+                        item.done
+                          ? `text-gray-400 line-through`
+                          : `text-gray-700`
+                      }
+                    >
+                      {item.label}
+                    </Text>
+                    {item.done ? (
+                      <View className='bg-accent rounded-full w-4 h-4 ml-2' />
+                    ) : (
+                      <View className='border border-gray-300 rounded-full w-4 h-4 ml-2' />
+                    )}
+                  </View>
+                ))}
+              </View>
               <TextInput
                 onChangeText={(text) => {
                   handleConfirmPassword(text);
@@ -230,7 +264,7 @@ const RegisterScreen = () => {
               </TouchableOpacity>
             </View>
           </View>
-          <View className='flex flex-row w-full justify-center space-x-2 mt-4'>
+          <View className='flex flex-row w-full justify-center space-x-2 my-4'>
             <Text className='font-normal text-base'>
               Already have an account?
             </Text>

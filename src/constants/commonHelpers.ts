@@ -242,3 +242,10 @@ export const notificationTimes: NotificationTime[] = [
       "Time to rest and recharge. Don't forget to log any expenses you had today before going to bed!",
   },
 ];
+
+export const truncate = (str: string, maxLength: number) => {
+  if (str.length > maxLength) {
+    str = str.substring(0, maxLength - 3) + '...';
+  }
+  return str;
+};

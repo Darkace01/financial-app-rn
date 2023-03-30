@@ -5,7 +5,7 @@ import { TRANSACTION_DETAIL_MODAL } from '../constants/screenRoutes';
 import FirstLetterIcon from './FirstLetterIcon';
 import { Transaction } from '../Helpers/Interfaces/apiResponse';
 import Currency from 'react-currency-formatter';
-import { timeSince } from '../constants/commonHelpers';
+import { timeSince, truncate } from '../constants/commonHelpers';
 
 const TransationItem = (prop: Transaction) => {
   const navigation = useNavigation();
@@ -25,7 +25,7 @@ const TransationItem = (prop: Transaction) => {
         />
       </View>
       <View className='flex justify-around flex-1'>
-        <Text className='text-sm'>{prop.title}</Text>
+        <Text className='text-sm'>{truncate(prop.title, 50)}</Text>
         <Text className='text-xs text-slate-400'>
           {timeSince(prop.dateAdded)}
         </Text>
