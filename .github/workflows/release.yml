@@ -1,0 +1,49 @@
+name: Build and Release APK
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Node.js and Expo CLI
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+        run: |
+          npm install -g expo-cli
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build APK
+        run: |
+          expo build:android --non-interactive --no-publish --no-wait | tee build.log
+          export APK_URL=$(grep -oP "(?<=🤖 Android app: )(.*)(?= 🤖)" build.log | tr -d '[:space:]')
+          echo "APK URL: $APK_URL"
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1.0.7
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ github.run_number }}
+          release_name: Release v${{ github.run_number }}
+          draft: false
+          prerelease: false
+
+      - name: Upload APK
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ env.APK_URL }}
+          asset_name: app-release.apk
+          asset_content_type: application/vnd.android.package-archive
