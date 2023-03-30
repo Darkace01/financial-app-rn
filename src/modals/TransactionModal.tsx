@@ -1,4 +1,10 @@
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import NavigationTopBar from '../components/NavigationTopBar';
@@ -90,116 +96,120 @@ const TransactionModal = ({ route, navigation }) => {
 
   return (
     <SafeAreaView className='bg-white h-full mx-auto px-5 w-full'>
-      <NavigationTopBar
-        withFilter={false}
-        text={moneyIn ? 'Income' : 'Expense'}
-      />
-      <View className='space-y-5'>
-        <View>
-          <Text className={`text-base font-[${fonts.font700}]`}>Title</Text>
-          <View className='flex flex-row bg-themeGrey py-2 px-3 rounded-md items-center my-1'>
-            <TextInput
-              placeholder='Food from bukka'
-              className='ml-1 px-1 w-full'
-              onChangeText={(val) => setTitle(val)}
-              value={title}
-            />
-          </View>
-        </View>
-        <View className='flex flex-col'>
-          <Text className={`text-base font-[${fonts.font700}]`}>Category</Text>
+      <ScrollView>
+        <NavigationTopBar
+          withFilter={false}
+          text={moneyIn ? 'Income' : 'Expense'}
+        />
+        <View className='space-y-5'>
           <View>
-            <SelectList
-              setSelected={(val) => setSelectedCategory(val)}
-              data={categoriesData}
-              save='key'
-              boxStyles={{
-                backgroundColor: '#F5F7FF',
-                borderRadius: 10,
-                height: 50,
-                width: '100%',
-                marginTop: 10,
-                borderWidth: 0,
-              }}
-            />
-          </View>
-        </View>
-        <View className='flex flex-col'>
-          <Text className={`text-base font-[${fonts.font700}]`}>Date</Text>
-          <View className='flex flex-row bg-themeGrey py-2 px-3 rounded-md items-center my-1'>
-            <TouchableOpacity onPress={handleShowDateTimePicker}>
-              <View className='ml-1 px-1 w-full py-2'>
-                <Text className=''>{dateTimeString}</Text>
-              </View>
-            </TouchableOpacity>
-            {openDateTimePicker && (
-              <DateTimePicker
-                testID='dateTimePicker'
-                value={dateTime}
-                mode='date'
-                is24Hour={true}
-                onChange={handleDateChange}
+            <Text className={`text-base font-[${fonts.font700}]`}>Title</Text>
+            <View className='flex flex-row bg-themeGrey py-2 px-3 rounded-md items-center my-1'>
+              <TextInput
+                placeholder='Food from bukka'
+                className='ml-1 px-1 w-full'
+                onChangeText={(val) => setTitle(val)}
+                value={title}
               />
-            )}
+            </View>
           </View>
-        </View>
-        <View className='flex flex-col'>
-          <Text className={`text-base font-[${fonts.font700}]`}>
-            Decription
-          </Text>
-          <View className='flex flex-row bg-themeGrey  rounded-md items-start my-1'>
-            <TextInput
-              placeholder='What I really bought'
-              className='ml-2 px-1 w-full p-2'
-              multiline
-              numberOfLines={4}
-              onChangeText={(val) => setDescription(val)}
-              value={description}
-            />
+          <View className='flex flex-col'>
+            <Text className={`text-base font-[${fonts.font700}]`}>
+              Category
+            </Text>
+            <View>
+              <SelectList
+                setSelected={(val) => setSelectedCategory(val)}
+                data={categoriesData}
+                save='key'
+                boxStyles={{
+                  backgroundColor: '#F5F7FF',
+                  borderRadius: 10,
+                  height: 50,
+                  width: '100%',
+                  marginTop: 10,
+                  borderWidth: 0,
+                }}
+              />
+            </View>
           </View>
-        </View>
-        <View className='flex flex-col'>
-          <Text className={`text-base font-[${fonts.font700}]`}>Amount</Text>
-          <View className='flex flex-row bg-themeGrey py-2 px-3 rounded-md items-center my-1'>
-            {/* <TextInput
+          <View className='flex flex-col'>
+            <Text className={`text-base font-[${fonts.font700}]`}>Date</Text>
+            <View className='flex flex-row bg-themeGrey py-2 px-3 rounded-md items-center my-1'>
+              <TouchableOpacity onPress={handleShowDateTimePicker}>
+                <View className='ml-1 px-1 w-full py-2'>
+                  <Text className=''>{dateTimeString}</Text>
+                </View>
+              </TouchableOpacity>
+              {openDateTimePicker && (
+                <DateTimePicker
+                  testID='dateTimePicker'
+                  value={dateTime}
+                  mode='date'
+                  is24Hour={true}
+                  onChange={handleDateChange}
+                />
+              )}
+            </View>
+          </View>
+          <View className='flex flex-col'>
+            <Text className={`text-base font-[${fonts.font700}]`}>
+              Decription
+            </Text>
+            <View className='flex flex-row bg-themeGrey  rounded-md items-start my-1'>
+              <TextInput
+                placeholder='What I really bought'
+                className='ml-2 px-1 w-full p-2'
+                multiline
+                numberOfLines={4}
+                onChangeText={(val) => setDescription(val)}
+                value={description}
+              />
+            </View>
+          </View>
+          <View className='flex flex-col'>
+            <Text className={`text-base font-[${fonts.font700}]`}>Amount</Text>
+            <View className='flex flex-row bg-themeGrey py-2 px-3 rounded-md items-center my-1'>
+              {/* <TextInput
               placeholder='₦ 0.00'
               className='ml-1 px-1 w-full'
               keyboardType='numbers-and-punctuation'
               onChangeText={(val) => setAmount(Number(val))}
               value={amount.toString()}
             /> */}
-            <CurrencyInput
-              className='ml-1 px-1 w-full'
-              value={fieldAmount}
-              onChangeValue={setfieldAmount}
-              prefix='₦'
-              delimiter=','
-              separator='.'
-              precision={2}
-              onChangeText={(formattedValue) => {
-                // setAmountError("");
-                let tempAmt = formattedValue ?? '0';
-                setAmount(tempAmt);
-              }}
-              keyboardType='decimal-pad'
-            />
+              <CurrencyInput
+                className='ml-1 px-1 w-full'
+                value={fieldAmount}
+                onChangeValue={setfieldAmount}
+                prefix='₦'
+                delimiter=','
+                separator='.'
+                precision={2}
+                onChangeText={(formattedValue) => {
+                  // setAmountError("");
+                  let tempAmt = formattedValue ?? '0';
+                  setAmount(tempAmt);
+                }}
+                keyboardType='decimal-pad'
+              />
+            </View>
+          </View>
+
+          <View className='flex flex-col'>
+            <TouchableOpacity
+              className='bg-accent py-3 rounded-md mt-5'
+              onPress={handleSubmit}
+            >
+              <Text className='text-center text-white font-[${fonts.font700}]'>
+                Save
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
-
-        <View className='flex flex-col'>
-          <TouchableOpacity
-            className='bg-accent py-3 rounded-md mt-5'
-            onPress={handleSubmit}
-          >
-            <Text className='text-center text-white font-[${fonts.font700}]'>
-              Save
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      {isLoading || isSaving ? (
-        <CustomLoadingComponent visible={isLoading || isSaving} />
-      ) : null}
+        {isLoading || isSaving ? (
+          <CustomLoadingComponent visible={isLoading || isSaving} />
+        ) : null}
+      </ScrollView>
     </SafeAreaView>
   );
 };
