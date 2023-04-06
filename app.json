@@ -11,7 +11,7 @@
       "resizeMode": "cover",
       "backgroundColor": "#4D2DEC"
     },
-    "scheme": "income",
+    "scheme": "com.kazeemquadri01.income",
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -19,7 +19,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.kazeemquadri01.income"
     },
     "android": {
       "adaptiveIcon": {

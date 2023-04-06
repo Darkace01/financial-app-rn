@@ -34,7 +34,8 @@ import { SIGNED_IN_USER } from '../../constants/storageConstants';
 import { isStringNullOrEmptyOrWhiteSpace } from '../../constants/commonHelpers';
 
 import * as Google from 'expo-auth-session/providers/google';
-
+import * as WebBrowser from 'expo-web-browser';
+WebBrowser.maybeCompleteAuthSession();
 const LoginScreen = () => {
   const { signInUser } = useContext(UserContext);
   const navigation = useNavigation();
@@ -45,6 +46,7 @@ const LoginScreen = () => {
   const [textinputBorder, setTextInputBorder] = useState('border-gray-400');
   const [isLoading, setIsLoading] = useState(false);
   const [firstName, setFirstName] = useState('');
+  const [accessToken, setAccessToken] = useState('');
 
   useEffect(() => {
     const signedInUser = async () => {
@@ -129,22 +131,22 @@ const LoginScreen = () => {
     navigation.navigate(REGISTER);
   };
   const [request, response, promptAsync] = Google.useAuthRequest({
-    androidClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
-    iosClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
+    androidClientId:
+      '916977843040-p1jbnk977smv09tjf6qg3kai1m6ilstj.apps.googleusercontent.com',
   });
   useEffect(() => {
     if (response?.type === 'success') {
       console.log('Token', response.authentication.accessToken);
-      getUserInfo(response.authentication.accessToken);
+      setAccessToken(response.authentication.accessToken);
     }
   }, [response]);
 
-  const getUserInfo = async (token: string) => {
+  const getUserInfo = async () => {
     try {
       const response = await fetch(
         'https://www.googleapis.com/userinfo/v2/me',
         {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { Authorization: `Bearer ${accessToken}` },
         }
       );
 
@@ -156,8 +158,8 @@ const LoginScreen = () => {
     }
   };
 
-  const handleSignInWithGoogle = () => {
-    promptAsync();
+  const handleSignInWithGoogle = async () => {
+    await promptAsync({ showInRecents: true });
     Toast.show({
       type: 'info',
       text1: 'Coming Soon',
