@@ -19,9 +19,7 @@ import {
   OTPSCREEN,
   REGISTER,
 } from '../../constants/screenRoutes';
-import assetsObject from '../../constants/assets.ts';
 import BigBlueButton from './Components/BigBlueButton';
-import validator from 'validator';
 import Toast from 'react-native-toast-message';
 import { UserContext } from '../../contexts/user.context';
 import { login } from '../../Helpers/Service/AuthService';
@@ -34,6 +32,8 @@ import CustomLoadingComponent from '../../components/CustomLoadingComponent';
 import { getItem } from '../../Helpers/Service/StorageService';
 import { SIGNED_IN_USER } from '../../constants/storageConstants';
 import { isStringNullOrEmptyOrWhiteSpace } from '../../constants/commonHelpers';
+
+import * as Google from 'expo-auth-session/providers/google';
 
 const LoginScreen = () => {
   const { signInUser } = useContext(UserContext);
@@ -67,6 +67,7 @@ const LoginScreen = () => {
     setuserName('');
     setPassword('');
   };
+
   const Login = async () => {
     try {
       setIsLoading(true);
@@ -127,8 +128,36 @@ const LoginScreen = () => {
   const GotoRegister = () => {
     navigation.navigate(REGISTER);
   };
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    androidClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
+    iosClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
+  });
+  useEffect(() => {
+    if (response?.type === 'success') {
+      console.log('Token', response.authentication.accessToken);
+      getUserInfo(response.authentication.accessToken);
+    }
+  }, [response]);
+
+  const getUserInfo = async (token: string) => {
+    try {
+      const response = await fetch(
+        'https://www.googleapis.com/userinfo/v2/me',
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      const user = await response.json();
+      console.log('User', user);
+      // setUserInfo(user);
+    } catch (error) {
+      // Add your own error handler here
+    }
+  };
 
   const handleSignInWithGoogle = () => {
+    promptAsync();
     Toast.show({
       type: 'info',
       text1: 'Coming Soon',
