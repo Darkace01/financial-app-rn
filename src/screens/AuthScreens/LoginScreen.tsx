@@ -135,6 +135,8 @@ const LoginScreen = () => {
     //TODO: Pick from .env file
     androidClientId:
       '916977843040-0e3demrf7vh0asnii1lpq4p2n7najpj4.apps.googleusercontent.com',
+    expoClientId:
+      '916977843040-nrncesmq80cl3kiv66ldgt5gk0s40942.apps.googleusercontent.com',
   });
   useEffect(() => {
     if (response?.type === 'success') {
