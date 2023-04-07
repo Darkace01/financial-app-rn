@@ -5,6 +5,7 @@ export const REQUEST_PASSWORD_RESET_URL = 'auth/reset-password-request';
 export const PASSWORD_RESET_URL = 'auth/reset-password';
 export const REQUEST_EMAIL_CONFIRMATION_CODE = 'auth/resend-confirmation-email';
 export const VERIFY_EMAIL_CONFIRMATION_CODE = 'auth/confirm-email';
+export const LOGIN_OR_REGISTER_WITH_GOOGLE = 'auth/external/google';
 
 // Transaction Urls
 export const GET_USER_TRANSACTIONS_URL = 'transactions/user';

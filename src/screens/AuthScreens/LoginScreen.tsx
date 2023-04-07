@@ -19,12 +19,13 @@ import {
   OTPSCREEN,
   REGISTER,
 } from '../../constants/screenRoutes';
-import assetsObject from '../../constants/assets.ts';
 import BigBlueButton from './Components/BigBlueButton';
-import validator from 'validator';
 import Toast from 'react-native-toast-message';
 import { UserContext } from '../../contexts/user.context';
-import { login } from '../../Helpers/Service/AuthService';
+import {
+  login,
+  loginOrRegisterWithGoogle,
+} from '../../Helpers/Service/AuthService';
 import {
   apiResponse,
   AuthResponse,
@@ -35,6 +36,7 @@ import { getItem } from '../../Helpers/Service/StorageService';
 import { SIGNED_IN_USER } from '../../constants/storageConstants';
 import { isStringNullOrEmptyOrWhiteSpace } from '../../constants/commonHelpers';
 
+import * as Google from 'expo-auth-session/providers/google';
 const LoginScreen = () => {
   const { signInUser } = useContext(UserContext);
   const navigation = useNavigation();
@@ -45,6 +47,7 @@ const LoginScreen = () => {
   const [textinputBorder, setTextInputBorder] = useState('border-gray-400');
   const [isLoading, setIsLoading] = useState(false);
   const [firstName, setFirstName] = useState('');
+  const [accessToken, setAccessToken] = useState('');
 
   useEffect(() => {
     const signedInUser = async () => {
@@ -67,6 +70,7 @@ const LoginScreen = () => {
     setuserName('');
     setPassword('');
   };
+
   const Login = async () => {
     try {
       setIsLoading(true);
@@ -127,13 +131,66 @@ const LoginScreen = () => {
   const GotoRegister = () => {
     navigation.navigate(REGISTER);
   };
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    //TODO: Pick from .env file
+    androidClientId:
+      '916977843040-0e3demrf7vh0asnii1lpq4p2n7najpj4.apps.googleusercontent.com',
+  });
+  useEffect(() => {
+    if (response?.type === 'success') {
+      setAccessToken('');
+      setAccessToken(response.authentication.idToken);
+      loginWithGoogle();
+    }
+  }, [response, accessToken]);
 
-  const handleSignInWithGoogle = () => {
-    Toast.show({
-      type: 'info',
-      text1: 'Coming Soon',
-      text2: 'This feature is coming soon',
-    });
+  const loginWithGoogle = async () => {
+    try {
+      if (isStringNullOrEmptyOrWhiteSpace(accessToken)) return;
+      setIsLoading(true);
+      loginOrRegisterWithGoogle(accessToken).then(
+        (res: apiResponse<AuthResponse>) => {
+          if (res.hasError) {
+            setIsLoading(false);
+            Toast.show({
+              type: 'error',
+              text1: 'Login Error',
+              text2: res.message,
+            });
+            return;
+          }
+          if (!res.data) {
+            setIsLoading(false);
+            Toast.show({
+              type: 'error',
+              text1: 'Login Error',
+              text2: 'Please try again',
+            });
+            return;
+          }
+          saveUser(res.data).then(() => {
+            setIsLoading(false);
+            clearStates();
+            Toast.show({
+              type: 'success',
+              text1: 'Login Success',
+              text2: `Welcome back ${res?.data?.firstName}`,
+            });
+          });
+        }
+      );
+    } catch (error) {
+      setIsLoading(false);
+      Toast.show({
+        type: 'error',
+        text1: 'Unknown Error',
+        text2: 'Please try again',
+      });
+    }
+  };
+
+  const handleSignInWithGoogle = async () => {
+    await promptAsync({ showInRecents: true });
   };
 
   const checkUsernameAndPassword = () => {
@@ -237,9 +294,7 @@ const LoginScreen = () => {
           </View>
         </View>
         <View className='flex flex-row w-full justify-center mt-10 space-x-2  bottom-8'>
-          <Text className='font-normal text-base'>
-            Already have an account?
-          </Text>
+          <Text className='font-normal text-base'>Don't have an account?</Text>
           <Pressable
             onPress={GotoRegister}
             disabled={checkUsernameAndPassword() === true}

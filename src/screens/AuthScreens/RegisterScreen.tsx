@@ -10,7 +10,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import assetsObject from '../../constants/assets';
@@ -20,11 +20,20 @@ import Toast from 'react-native-toast-message';
 import CustomLoadingComponent from '../../components/CustomLoadingComponent';
 import {
   apiResponse,
+  AuthResponse,
   RegisterPayload,
 } from '../../Helpers/Interfaces/apiResponse';
-import { register } from '../../Helpers/Service/AuthService';
-import { isEqual, isValidEmail } from '../../constants/commonHelpers';
-
+import {
+  loginOrRegisterWithGoogle,
+  register,
+} from '../../Helpers/Service/AuthService';
+import {
+  isEqual,
+  isStringNullOrEmptyOrWhiteSpace,
+  isValidEmail,
+} from '../../constants/commonHelpers';
+import { UserContext } from '../../contexts/user.context';
+import * as Google from 'expo-auth-session/providers/google';
 const RegisterScreen = () => {
   const navigation = useNavigation();
   const [username, setUsername] = useState('');
@@ -36,12 +45,15 @@ const RegisterScreen = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [textinputBorder, setTextInputBorder] = useState('border-gray-400');
   const [isLoading, setIsLoading] = useState(false);
+  const [accessToken, setAccessToken] = useState('');
   const [checklist, setChecklist] = useState([
     { label: 'At least 6 characters', done: false },
     { label: 'Contains a capital letter', done: false },
     { label: 'Contains a number', done: false },
     { label: 'Contains a special character', done: false },
   ]);
+
+  const { signInUser } = useContext(UserContext);
 
   const handleUsername = (val) => {
     setUsername(val);
@@ -133,13 +145,65 @@ const RegisterScreen = () => {
       setTextInputBorder('border-gray-400');
     }
   };
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    //TODO: Pick from .env file
+    androidClientId:
+      '916977843040-0e3demrf7vh0asnii1lpq4p2n7najpj4.apps.googleusercontent.com',
+  });
+  useEffect(() => {
+    if (response?.type === 'success') {
+      setAccessToken('');
+      setAccessToken(response.authentication.idToken);
+      registerWithGoogle();
+    }
+  }, [response, accessToken]);
 
-  const handleSignUpWithGoogle = () => {
-    Toast.show({
-      type: 'info',
-      text1: 'Coming Soon',
-      text2: 'This feature is coming soon',
-    });
+  const registerWithGoogle = async () => {
+    try {
+      if (isStringNullOrEmptyOrWhiteSpace(accessToken)) return;
+      setIsLoading(true);
+      loginOrRegisterWithGoogle(accessToken).then(
+        (res: apiResponse<AuthResponse>) => {
+          if (res.hasError) {
+            setIsLoading(false);
+            Toast.show({
+              type: 'error',
+              text1: 'Register Error',
+              text2: res.message,
+            });
+            return;
+          }
+          if (!res.data) {
+            setIsLoading(false);
+            Toast.show({
+              type: 'error',
+              text1: 'Register Error',
+              text2: 'Please try again',
+            });
+            return;
+          }
+          signInUser(res.data).then(() => {
+            setIsLoading(false);
+            Toast.show({
+              type: 'success',
+              text1: 'Register Success',
+              text2: `Welcome ${res?.data?.firstName}`,
+            });
+          });
+        }
+      );
+    } catch (error) {
+      setIsLoading(false);
+      Toast.show({
+        type: 'error',
+        text1: 'Unknown Error',
+        text2: 'Please try again',
+      });
+    }
+  };
+
+  const handleSignUpWithGoogle = async () => {
+    await promptAsync({ showInRecents: true });
   };
   return (
     <ScrollView>

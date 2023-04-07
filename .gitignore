@@ -72,3 +72,4 @@ android/app/src/main/res/values-night/colors.xml
 android/gradle/wrapper/gradle-wrapper.jar
 android/gradle/wrapper/gradle-wrapper.properties
 android/app/debug.keystore
+.env
