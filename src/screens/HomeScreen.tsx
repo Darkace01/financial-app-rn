@@ -10,7 +10,6 @@ import { TRANSACTION_CREATION_MODAL } from '../constants/screenRoutes';
 import { useDashboardFetch } from '../hooks/useDashboardFetch';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import CardContainer from '../components/CardContainer';
-import { useNotificationDisplay } from '../hooks/useNotificationDisplay';
 
 import { UserContext } from '../contexts/user.context';
 const screenHeight = Dimensions.get('window').height;
@@ -24,7 +23,6 @@ const HomeScreen = () => {
     user,
     errorMessage,
   } = useDashboardFetch();
-  const {} = useNotificationDisplay();
   const navigation = useNavigation();
   const { setUser } = useContext(UserContext);
 
