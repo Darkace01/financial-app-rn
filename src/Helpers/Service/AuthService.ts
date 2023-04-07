@@ -1,4 +1,5 @@
 import {
+  LOGIN_OR_REGISTER_WITH_GOOGLE,
   LOGIN_URL,
   REGISTER_URL,
   REQUEST_EMAIL_CONFIRMATION_CODE,
@@ -95,6 +96,21 @@ export const verifyEmailConfirmationCode = async (
     return response.data;
   } catch (error) {
     if (error.response.status === 500) {
+      throw new Error('Internal server error');
+    } else {
+      throw JSON.stringify(error);
+    }
+  }
+};
+
+export const loginOrRegisterWithGoogle = async (idToken: string) => {
+  try {
+    const response = await appAxios.post(LOGIN_OR_REGISTER_WITH_GOOGLE, {
+      token: idToken,
+    });
+    return response.data;
+  } catch (error) {
+    if (error?.response?.status === 500) {
       throw new Error('Internal server error');
     } else {
       throw JSON.stringify(error);
