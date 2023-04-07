@@ -6,8 +6,7 @@ An app to keep track of of your expenses and income. This app is built with Reac
 
 1. Clone the repo
 2. Install the Expo CLI
-3. Build the app with native EAS Build and run it on your device `npx eas build --profile development --platform android`
-4. Start the app by running `npx expo start --dev-client` in the root directory
+3. Start the app by running `npx expo start` in the root directory
 
 ## Contrbuting
 
