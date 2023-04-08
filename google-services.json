@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "916977843040",
+    "project_id": "financial-application-379911",
+    "storage_bucket": "financial-application-379911.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:916977843040:android:2c191cec822265d45cfc05",
+        "android_client_info": {
+          "package_name": "com.kazeemquadri01.income"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "916977843040-nrncesmq80cl3kiv66ldgt5gk0s40942.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCDOjmZor_wVTPthkFw8A_-Bpt7fKn3lA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "916977843040-nrncesmq80cl3kiv66ldgt5gk0s40942.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

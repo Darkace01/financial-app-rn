@@ -3,6 +3,7 @@ import React from 'react';
 import AppNavigation from './src/navigations/navigator';
 import * as WebBrowser from 'expo-web-browser';
 
+//External auth: sign in with google
 WebBrowser.maybeCompleteAuthSession();
 import {
   useFonts,
@@ -15,6 +16,17 @@ import Toast from 'react-native-toast-message';
 //Context
 import { UserProvider } from './src/contexts/user.context';
 import { AppProvider } from './src/contexts/app.context';
+
+//Expo Notification
+import * as Notifications from 'expo-notifications';
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
 
 export default function App() {
   const [fontLoaded] = useFonts({
