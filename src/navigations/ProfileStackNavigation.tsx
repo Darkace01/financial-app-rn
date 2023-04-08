@@ -4,10 +4,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProfileScreen from '../screens/ProfileScreens/ProfileScreen';
 import Account from '../screens/ProfileScreens/Account';
 import Settings from '../screens/ProfileScreens/Settings';
+import ResetPasswordProfile from '../screens/ProfileScreens/ResetPasswordProfile';
 import {
   ACCOUNT_SCREEN,
   PROFILE_SCREEN,
   SETTINGS_SCREEN,
+  RESET_PASSWORD_PROFILE
 } from '../constants/screenRoutes';
 
 const profileStack = createNativeStackNavigator();
@@ -32,6 +34,13 @@ const ProfileStackNavigation = () => {
       <profileStack.Screen
         name={SETTINGS_SCREEN}
         component={Settings}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <profileStack.Screen
+        name={RESET_PASSWORD_PROFILE}
+        component={ResetPasswordProfile}
         options={{
           headerShown: false,
         }}

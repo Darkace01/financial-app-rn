@@ -17,3 +17,4 @@ export const PASSWORDCHANGESUCCESSSCREEN: string =
   'PasswordChangeSuccessScreen';
 export const ACCOUNT_SCREEN: string = 'Account';
 export const SETTINGS_SCREEN: string = 'Settings';
+export const RESET_PASSWORD_PROFILE : string = 'ResetPasswordProfile'

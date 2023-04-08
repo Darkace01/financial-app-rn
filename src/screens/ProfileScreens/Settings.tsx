@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { UserContext } from '../../contexts/user.context';
+import { RESET_PASSWORD_PROFILE } from '../../constants/screenRoutes';
 import * as Application from 'expo-application';
 
 const Settings = () => {
@@ -35,10 +36,10 @@ const Settings = () => {
       </View>
       <View className='space-y-4'>
         <Text className='text-gray-400 text-base'>General</Text>
-        <View className='flex flex-row justify-between'>
-          <Text className='font-semibold text-base'>Change Password</Text>
+        <Pressable onPress={()=>{navigation.navigate(RESET_PASSWORD_PROFILE)}} className='flex flex-row justify-between'>
+          <Text className='font-semibold text-base'>Reset Password</Text>
           <AntDesign name='right' size={20} color='black' />
-        </View>
+        </Pressable>
         <View className='flex flex-row justify-between'>
           <Text className='font-semibold text-base'>Notifications</Text>
           <AntDesign name='right' size={20} color='black' />
