@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - beta
+env:
+  GITHUB_TOKEN: ${{ github.token }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -28,9 +31,8 @@ jobs:
       - name: Change Google API Key
         uses: restackio/update-json-values-action@v1.0.0
         with:
-          file-path: 'google-services.json'
+          file: 'google-services.json'
           values: '{"client": [{"api_key": [{"current_key": "${{ secrets.GOOGLE_API_KEY }}" }]}]}'
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🚀 Build app
         run: eas build -p android --profile preview  --non-interactive
