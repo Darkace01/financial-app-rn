@@ -44,7 +44,6 @@ export const saveUserProfilePicture = async (file: any) => {
     );
     return response.data;
   } catch (error) {
-    console.log('error fetch', JSON.stringify(error));
     if (error.response.status === 500) {
       throw new Error('Internal server error');
     } else {
