@@ -9,49 +9,49 @@ import {
   Keyboard,
   ScrollView,
   TouchableOpacity,
-} from "react-native";
-import React, { useContext, useEffect, useState } from "react";
-import { FontAwesome5, Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import assetsObject from "../../constants/assets";
-import { LOGIN, OTPSCREEN } from "../../constants/screenRoutes";
-import BigBlueButton from "./Components/BigBlueButton";
-import Toast from "react-native-toast-message";
-import CustomLoadingComponent from "../../components/CustomLoadingComponent";
+} from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { FontAwesome5, Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import assetsObject from '../../constants/assets';
+import { LOGIN, OTPSCREEN } from '../../constants/screenRoutes';
+import BigBlueButton from './Components/BigBlueButton';
+import Toast from 'react-native-toast-message';
+import CustomLoadingComponent from '../../components/CustomLoadingComponent';
 import {
   apiResponse,
   AuthResponse,
   RegisterPayload,
-} from "../../Helpers/Interfaces/apiResponse";
+} from '../../Helpers/Interfaces/apiResponse';
 import {
   loginOrRegisterWithGoogle,
   register,
-} from "../../Helpers/Service/AuthService";
+} from '../../Helpers/Service/AuthService';
 import {
   isEqual,
   isStringNullOrEmptyOrWhiteSpace,
   isValidEmail,
   isValidPassword,
-} from "../../constants/commonHelpers";
-import { UserContext } from "../../contexts/user.context";
-import * as Google from "expo-auth-session/providers/google";
+} from '../../constants/commonHelpers';
+import { UserContext } from '../../contexts/user.context';
+import * as Google from 'expo-auth-session/providers/google';
 const RegisterScreen = () => {
   const navigation = useNavigation();
-  const [username, setUsername] = useState("");
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
-  const [ConfirmPassword, setConfirmPassword] = useState("");
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [textinputBorder, setTextInputBorder] = useState("border-gray-400");
+  const [username, setUsername] = useState('');
+  const [Email, setEmail] = useState('');
+  const [Password, setPassword] = useState('');
+  const [ConfirmPassword, setConfirmPassword] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [textinputBorder, setTextInputBorder] = useState('border-gray-400');
   const [isLoading, setIsLoading] = useState(false);
-  const [accessToken, setAccessToken] = useState("");
+  const [accessToken, setAccessToken] = useState('');
   const [checklist, setChecklist] = useState([
-    { label: "At least 6 characters", done: false },
-    { label: "Contains a capital letter", done: false },
-    { label: "Contains a number", done: false },
-    { label: "Contains a special character", done: false },
+    { label: 'At least 6 characters', done: false },
+    { label: 'Contains a capital letter', done: false },
+    { label: 'Contains a number', done: false },
+    { label: 'Contains a special character', done: false },
   ]);
 
   const { signInUser } = useContext(UserContext);
@@ -60,7 +60,7 @@ const RegisterScreen = () => {
     setUsername(val);
   };
   const handleEmail = (val) => {
-    setTextInputBorder("border-red-700");
+    setTextInputBorder('border-red-700');
     setEmail(val);
   };
   const handlePassword = (val) => {
@@ -88,7 +88,13 @@ const RegisterScreen = () => {
 
   const handleRegister = () => {
     if (isValidEmail(Email) && isEqual(Password, ConfirmPassword)) {
-      if (isValidPassword(checklist)) {
+
+      const isValidPass = isValidPassword(Password)
+
+      console.log(isValidPass)
+
+      
+      if (isValidPass.isValid) {
         try {
           setIsLoading(true);
           const payload: RegisterPayload = {
@@ -104,15 +110,15 @@ const RegisterScreen = () => {
               if (res.hasError) {
                 setIsLoading(false);
                 Toast.show({
-                  type: "error",
-                  text1: "Register Error",
+                  type: 'error',
+                  text1: 'Register Error',
                   text2: res.message,
                 });
               } else {
                 setIsLoading(false);
                 Toast.show({
-                  type: "success",
-                  text1: "Register Success",
+                  type: 'success',
+                  text1: 'Register Success',
                   text2: res.message,
                 });
                 GotoOTP();
@@ -121,49 +127,49 @@ const RegisterScreen = () => {
             .catch((err) => {
               setIsLoading(false);
               Toast.show({
-                type: "error",
-                text1: "Register Error",
+                type: 'error',
+                text1: 'Register Error',
                 text2: err.message,
               });
             });
         } catch (error) {
           setIsLoading(false);
           Toast.show({
-            type: "error",
-            text1: "Register Error",
+            type: 'error',
+            text1: 'Register Error',
             text2: error.message,
           });
         }
       } else {
         Toast.show({
-          type: "error",
-          text1: "Validation Error",
-          text2: "All password conditions must be checked",
+          type: 'error',
+          text1: 'Validation Error',
+          text2: isValidPass.message,
         });
       }
     } else {
       Toast.show({
-        type: "error",
-        text1: "Validation Error",
-        text2: "Email must be valid and passwords must match",
+        type: 'error',
+        text1: 'Validation Error',
+        text2: 'Email must be valid and passwords must match',
       });
     }
   };
   const CheckValidation = () => {
     if (isValidEmail(Email)) {
-      setTextInputBorder("border-gray-400");
+      setTextInputBorder('border-gray-400');
     }
   };
   const [request, response, promptAsync] = Google.useAuthRequest({
     //TODO: Pick from .env file
     androidClientId:
-      "916977843040-0e3demrf7vh0asnii1lpq4p2n7najpj4.apps.googleusercontent.com",
+      '916977843040-0e3demrf7vh0asnii1lpq4p2n7najpj4.apps.googleusercontent.com',
     expoClientId:
-      "916977843040-nrncesmq80cl3kiv66ldgt5gk0s40942.apps.googleusercontent.com",
+      '916977843040-nrncesmq80cl3kiv66ldgt5gk0s40942.apps.googleusercontent.com',
   });
   useEffect(() => {
-    if (response?.type === "success") {
-      setAccessToken("");
+    if (response?.type === 'success') {
+      setAccessToken('');
       setAccessToken(response.authentication.idToken);
       registerWithGoogle();
     }
@@ -178,8 +184,8 @@ const RegisterScreen = () => {
           if (res.hasError) {
             setIsLoading(false);
             Toast.show({
-              type: "error",
-              text1: "Register Error",
+              type: 'error',
+              text1: 'Register Error',
               text2: res.message,
             });
             return;
@@ -187,17 +193,17 @@ const RegisterScreen = () => {
           if (!res.data) {
             setIsLoading(false);
             Toast.show({
-              type: "error",
-              text1: "Register Error",
-              text2: "Please try again",
+              type: 'error',
+              text1: 'Register Error',
+              text2: 'Please try again',
             });
             return;
           }
           signInUser(res.data).then(() => {
             setIsLoading(false);
             Toast.show({
-              type: "success",
-              text1: "Register Success",
+              type: 'success',
+              text1: 'Register Success',
               text2: `Welcome ${res?.data?.firstName}`,
             });
           });
@@ -206,9 +212,9 @@ const RegisterScreen = () => {
     } catch (error) {
       setIsLoading(false);
       Toast.show({
-        type: "error",
-        text1: "Unknown Error",
-        text2: "Please try again",
+        type: 'error',
+        text1: 'Unknown Error',
+        text2: 'Please try again',
       });
     }
   };
