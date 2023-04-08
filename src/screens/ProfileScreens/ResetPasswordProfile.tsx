@@ -1,4 +1,4 @@
-import { View, Text, TextInput } from 'react-native'
+import { View, Text, TextInput, Pressable } from 'react-native'
 import React, {useState} from 'react'
 import { AntDesign } from '@expo/vector-icons';
 
@@ -10,6 +10,9 @@ const ResetPasswordProfile = () => {
   const handleInput = (text: string, handler: any) =>{
     handler(prev => text)
     console.log(text)
+  }
+  const changePassword = () =>{
+    
   }
   return (
     <View className='flex-1 bg-[#F5F7FF] space-y-4'>
@@ -53,6 +56,14 @@ const ResetPasswordProfile = () => {
             placeholder='Retype new password'
           />
         </View>
+      </View>
+      <View className='h-[40%] flex flex-col justify-end mx-4'>
+          <Pressable 
+            className='h-[64px] bg-[#E9E9FF] items-center justify-center rounded-md'
+            onPress={changePassword}
+          >
+              <Text className='text-[#4A44C6] font-bold text-lg'>Save</Text>
+          </Pressable>
       </View>
     </View>
   )
