@@ -23,3 +23,8 @@ export const UPDATE_USER_BASIC_DETAILS_URL = 'users/details';
 
 // Base Url
 export const BASE_URL = 'https://faapi.azurewebsites.net/api/v1.0/';
+
+//Notification Urls
+export const SAVE_USER_NOTIFICATION_TOKEN_URL = 'notifications/token';
+export const TURN_ON_NOTIFICATIONS_URL = 'notifications/turn-on';
+export const TURN_OFF_NOTIFICATIONS_URL = 'notifications/turn-off';

@@ -140,7 +140,6 @@ const LoginScreen = () => {
   });
   useEffect(() => {
     if (response?.type === 'success') {
-      setAccessToken('');
       setAccessToken(response.authentication.idToken);
       loginWithGoogle();
     }

@@ -1,5 +1,11 @@
 import { View, Dimensions, RefreshControl, ScrollView } from 'react-native';
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import TopBar from '../components/TopBar';
 import UserBar from '../components/UserBar';
@@ -11,10 +17,15 @@ import { useDashboardFetch } from '../hooks/useDashboardFetch';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import CardContainer from '../components/CardContainer';
 import { UserContext } from '../contexts/user.context';
-
-
+import { registerForPushNotificationsAsync } from '../hooks/useNotificationDisplay';
+import * as Notifications from 'expo-notifications';
 const screenHeight = Dimensions.get('window').height;
 const HomeScreen = () => {
+  const [expoPushToken, setExpoPushToken] = useState('');
+  const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
+
   const {
     dashboard,
     refresh,
@@ -23,6 +34,7 @@ const HomeScreen = () => {
     error,
     user,
     errorMessage,
+    setIsLoading,
   } = useDashboardFetch();
   const navigation = useNavigation();
   const { setUser } = useContext(UserContext);
@@ -56,11 +68,33 @@ const HomeScreen = () => {
 
   const onRefresh = useCallback(() => {
     setRefresh(true);
-    console.log('hello');
     if (user) {
       setUser(user);
     }
   }, [refresh]);
+
+  //handle notification
+  useEffect(() => {
+    registerForPushNotificationsAsync().then((token) =>
+      setExpoPushToken(token)
+    );
+    notificationListener.current =
+      Notifications.addNotificationReceivedListener((notification) => {
+        setNotification(notification);
+      });
+
+    responseListener.current =
+      Notifications.addNotificationResponseReceivedListener((response) => {
+        // console.log(response);
+      });
+
+    return () => {
+      Notifications.removeNotificationSubscription(
+        notificationListener.current
+      );
+      Notifications.removeNotificationSubscription(responseListener.current);
+    };
+  }, []);
 
   return (
     <SafeAreaView className={`bg-themeGrey h-full w-full mx-auto px-5 flex-1`}>
