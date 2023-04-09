@@ -5,6 +5,7 @@ import {
   REQUEST_EMAIL_CONFIRMATION_CODE,
   REQUEST_PASSWORD_RESET_URL,
   VERIFY_EMAIL_CONFIRMATION_CODE,
+  CHANGE_PASSWORD
 } from '../../constants/apiUrls';
 import {
   AuthResponse,
@@ -12,6 +13,7 @@ import {
   LoginPayload,
   PasswordResetPayload,
   RegisterPayload,
+  ResetPasswordProfilePayload
 } from '../Interfaces/apiResponse';
 
 import appAxios from '../AxiosInterceptor';
@@ -117,3 +119,16 @@ export const loginOrRegisterWithGoogle = async (idToken: string) => {
     }
   }
 };
+
+export const changePassword = async (payload: ResetPasswordProfilePayload) => {
+  try {
+    const response = await appAxios.post(CHANGE_PASSWORD, payload)
+    return response.data
+  } catch (error) {
+    if (error.response.status === 500) {
+      throw new Error('Internal server error');
+    } else {
+      throw JSON.stringify(error);
+    }
+  }
+}
