@@ -64,7 +64,12 @@ const ResetPasswordProfile = () => {
         }
       })
     } catch (error) {
-      
+      setIsLoading(false);
+      Toast.show({
+        type: 'error',
+        text1: 'Unknown Error',
+        text2: 'Please try again',
+      });
     }
   }
 
