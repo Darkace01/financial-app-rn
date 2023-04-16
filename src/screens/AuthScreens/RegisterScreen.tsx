@@ -91,9 +91,22 @@ const RegisterScreen = () => {
       Toast.show({
         type: 'error',
         text1: 'Validation Error',
-        text2: 'Email must be valid and passwords must match',
+        text2: 'Email must be valid, confirm password and password input must match',
       });
+
+      return
     }
+
+    if(checklist.every(item => item.done === true) === false){
+      Toast.show({
+        type: 'error',
+        text1: 'Validation Error',
+        text2: 'passwords must be more secure',
+      });
+
+      return
+    }
+
     try {
       setIsLoading(true);
       const payload: RegisterPayload = {
