@@ -75,5 +75,6 @@ export const useDashboardFetch = () => {
     refresh,
     user,
     errorMessage,
+    setIsLoading,
   };
 };

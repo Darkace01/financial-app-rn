@@ -87,7 +87,7 @@ const RegisterScreen = () => {
   };
 
   const handleRegister = () => {
-    if (isValidEmail(Email) && isEqual(Password, ConfirmPassword)) {
+   if (isValidEmail(Email) && isEqual(Password, ConfirmPassword)) {
 
       const isValidPass = isValidPassword(Password)
 
