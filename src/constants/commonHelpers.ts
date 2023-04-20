@@ -113,6 +113,83 @@ export const isValidEmail = (email: string) => {
   return re.test(email);
 };
 
+export const isValidPassword = (
+  Password: string
+): { isValid: boolean; message: string } => {
+  // Define the criteria for a strong password
+  const minLength = 8;
+  const minLower = 1;
+  const minUpper = 1;
+  const minNumber = 1;
+  const minSpecial = 1;
+  let score = 0;
+
+  const levels = [
+    {
+      score: 0,
+      level: 'Weak',
+      message: '😢 Your password is too weak. Add more characters',
+      color: 'red',
+    },
+    {
+      score: 1,
+      level: 'Fair',
+      message: '😐 Your password is fair, but it could be stronger.',
+      color: 'orange',
+    },
+    {
+      score: 2,
+      level: 'Good',
+      message: '😊 Your password could be better.',
+      color: 'yellow',
+    },
+    {
+      score: 3,
+      level: 'Better',
+      message: '😍 Your password is almost there!',
+      color: 'green',
+    },
+    {
+      score: 4,
+      level: 'Strong',
+      message: '😍 Your password is strong! Just one more check!',
+      color: 'green',
+    },
+    // {
+    //   score: 5,
+    //   level: 'Passed',
+    //   message: "😍 Your password is strong! You're doing great!",
+    //   color: 'green',
+    // },
+  ];
+
+  // Check if the Password meets each criterion and increment the score accordingly
+  if (Password.length >= minLength) {
+    score++;
+  }
+  if (/[a-z]/.test(Password) && Password.length >= minLower) {
+    score++;
+  }
+  if (/[A-Z]/.test(Password) && Password.length >= minUpper) {
+    score++;
+  }
+  if (/[0-9]/.test(Password) && Password.length >= minNumber) {
+    score++;
+  }
+  if (/[!@#$%^&*]/.test(Password) && Password.length >= minSpecial) {
+    score++;
+  }
+
+  // Find the level that matches the score
+  let level = levels.find((level) => level.score === score);
+
+  let isValid: boolean = score > 4;
+
+  return !isValid
+    ? { isValid, message: level.message }
+    : { isValid, message: 'passed' };
+};
+
 export const isEqual = (a, b) => {
   // Create arrays of property names
   const aProps = Object.getOwnPropertyNames(a);
