@@ -86,6 +86,7 @@ const HomeScreen = () => {
     responseListener.current =
       Notifications.addNotificationResponseReceivedListener((response) => {
         // console.log(response);
+        // do something
       });
 
     return () => {
