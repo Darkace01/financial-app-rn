@@ -3,6 +3,7 @@ export const LOGIN_URL = 'auth/login';
 export const REGISTER_URL = 'auth/register';
 export const REQUEST_PASSWORD_RESET_URL = 'auth/reset-password-request';
 export const PASSWORD_RESET_URL = 'auth/reset-password';
+export const CHANGE_PASSWORD = 'auth/change-password';
 export const REQUEST_EMAIL_CONFIRMATION_CODE = 'auth/resend-confirmation-email';
 export const VERIFY_EMAIL_CONFIRMATION_CODE = 'auth/confirm-email';
 export const LOGIN_OR_REGISTER_WITH_GOOGLE = 'auth/external/google';

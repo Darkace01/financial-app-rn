@@ -98,3 +98,17 @@ export interface ProfilePictureResponse {
   fileUrl: string;
   publicId: string;
 }
+
+export interface ResetPasswordProfilePayload{
+  username: string,
+  currentPassword: string,
+  newPassword: string
+}
+
+
+export interface ResetPasswordProfileResponse {
+  hasError: boolean;
+  message: string;
+  statusCode: number;
+  data: string;
+}

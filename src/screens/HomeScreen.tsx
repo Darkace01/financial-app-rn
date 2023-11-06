@@ -16,7 +16,6 @@ import { TRANSACTION_CREATION_MODAL } from '../constants/screenRoutes';
 import { useDashboardFetch } from '../hooks/useDashboardFetch';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import CardContainer from '../components/CardContainer';
-
 import { UserContext } from '../contexts/user.context';
 import { registerForPushNotificationsAsync } from '../hooks/useNotificationDisplay';
 import * as Notifications from 'expo-notifications';
@@ -87,6 +86,7 @@ const HomeScreen = () => {
     responseListener.current =
       Notifications.addNotificationResponseReceivedListener((response) => {
         // console.log(response);
+        // do something
       });
 
     return () => {
